@@ -18,3 +18,10 @@ steps:
 
 - script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln
   displayName: 'dotnet test $(buildConfiguration)'
+
+- script: dotnet tool install --global GitVersion.Tool --version 5.1.3
+  displayName: 'install GitVersion.Tool --version 5.1.3'
+
+- script:  ~/.dotnet/tools/dotnet-gitversion /output buildserver
+  displayName: '~/.dotnet/tools/dotnet-gitversion /output buildserver'
+
