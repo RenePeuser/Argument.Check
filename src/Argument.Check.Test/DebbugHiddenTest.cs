@@ -1,0 +1,109 @@
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Text;
+using Argument.Check.Test.ThrowHelper;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Argument.Check.Test
+{
+    [TestClass]
+    public class DebbugHiddenTest
+    {
+        private static IEnumerable<CSharpFileInfo> cSharpFileInfos;
+
+        [ClassInitialize]
+        public static void ClassInit(TestContext testContext)
+        {
+            var directory = new DirectoryInfo(testContext.ResultsDirectory);
+            var testResultsFolder = FindTestResultsFolder(directory, "TestResults");
+            var argumentCheckDirectory = testResultsFolder.Parent.EnumerateDirectories("Argument.Check").Single();
+            var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
+            cSharpFileInfos = allCSharpFiles.Select(csharpFile =>
+            {
+                var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(csharpFile.FullName));
+                return new CSharpFileInfo(csharpFile, syntaxTree);
+            }).ToList();
+        }
+
+        [TestMethod]
+        public void All_Methods_Must_Be_Decorated_With_The_DebuggerHidden_Attribute()
+        {
+            var missingHiddenAttribute = from cSharpFileInfo in cSharpFileInfos
+                                         from @class in cSharpFileInfo.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
+                                         from method in @class.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                                         let attributeListSyntaxes = method.AttributeLists
+                                         where !attributeListSyntaxes.Any() || !attributeListSyntaxes.First().Attributes.Any() || !attributeListSyntaxes.First().Attributes.Any(a => a.Name.ToString().Contains("DebuggerHidden"))
+                                         select new AnalyzeResult(cSharpFileInfo.FileInfo, method.Identifier.ToString());
+
+            Assert.IsFalse(missingHiddenAttribute.Any(), ToMessage(missingHiddenAttribute));
+        }
+
+        private static DirectoryInfo FindTestResultsFolder(DirectoryInfo startDirectoryInfo, string name)
+        {
+            if (startDirectoryInfo == null)
+            {
+                return null;
+            }
+
+            if (startDirectoryInfo.Name == name)
+            {
+                return startDirectoryInfo;
+            }
+
+            return FindTestResultsFolder(startDirectoryInfo.Parent, name);
+        }
+
+        private string ToMessage(IEnumerable<AnalyzeResult> analyzeResults)
+        {
+            var groups = analyzeResults.GroupBy(result => result.CSharpFileInfo.FullName);
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.AppendLine($"Missing {nameof(DebuggerHiddenAttribute)} detected:");
+            stringBuilder.AppendLine();
+            foreach (var group in groups)
+            {
+                stringBuilder.AppendLine(group.Key);
+                foreach (var analyzeResult in group)
+                {
+                    stringBuilder.AppendLine($"- {analyzeResult.MethodName}");
+                }
+                stringBuilder.AppendLine();
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        [DebuggerDisplay("{CSharpFileInfo.Name}")]
+        private class AnalyzeResult
+        {
+            public AnalyzeResult(FileInfo cSharpFileInfo, string methodName)
+            {
+                CSharpFileInfo = cSharpFileInfo;
+                MethodName = methodName;
+            }
+
+            public FileInfo CSharpFileInfo { get; set; }
+
+            public string MethodName { get; set; }
+        }
+
+        [DebuggerDisplay("{FileInfo.Name}")]
+        private class CSharpFileInfo
+        {
+            public CSharpFileInfo(FileInfo fileInfo, SyntaxTree syntaxTree)
+            {
+                FileInfo = fileInfo;
+                SyntaxTree = syntaxTree;
+            }
+
+            public FileInfo FileInfo { get; }
+
+            public SyntaxTree SyntaxTree { get; }
+        }
+    }
+}

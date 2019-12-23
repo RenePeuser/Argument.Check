@@ -1,0 +1,67 @@
+﻿using System;
+using System.IO;
+using System.Linq;
+using Argument.Check.ThrowHelper;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Argument.Check.Test.ThrowHelper
+{
+    [TestClass]
+    public class ThrowIfExistsTest
+    {
+        private const string ArgumentFuncName = "argumentFunc";
+
+        private readonly DirectoryInfo _existingDirectoryInfo = new DirectoryInfo(Environment.CurrentDirectory);
+        private readonly FileInfo _existingFileInfo = new DirectoryInfo(Environment.CurrentDirectory).EnumerateFiles().First();
+        private readonly FileInfo _notExistingFileInfo = new FileInfo(@"s:\SonGoku.db");
+        private readonly FileSystemInfo _nullArgument = null;
+        private readonly Func<FileSystemInfo> _nullArgumentFunc = null;
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_If_DirectoryInfo_Exist()
+        {
+            Assert.ThrowsException<ArgumentException>(() => Throw.IfExists(() => _existingDirectoryInfo), nameof(_existingDirectoryInfo));
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_With_CorrectMessage_If_DirectoryInfo_Exist()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() => Throw.IfExists(() => _existingDirectoryInfo), nameof(_existingDirectoryInfo));
+
+            Assert.IsTrue(exception.Message.Contains($"The directory: '{_existingDirectoryInfo.FullName}' already exists."));
+        }
+
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_If_FileInfo_Exist()
+        {
+            Assert.ThrowsException<ArgumentException>(() => Throw.IfExists(() => _existingFileInfo), nameof(_existingFileInfo));
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_With_CorrectMessage_If_FileInfo_Exist()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() => Throw.IfExists(() => _existingFileInfo), nameof(_existingFileInfo));
+
+            Assert.IsTrue(exception.Message.Contains($"The file: '{_existingFileInfo.FullName}' already exists."));
+        }
+
+        [TestMethod]
+        public void Should_Not_Throw_An_Exception_If_SystemFileInfo_Not_Exists()
+        {
+            Throw.IfExists(() => _notExistingFileInfo);
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfExists(_nullArgumentFunc), ArgumentFuncName);
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_If_Argument_Is_Null()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfExists(() => _nullArgument), nameof(_nullArgument));
+        }
+    }
+}
