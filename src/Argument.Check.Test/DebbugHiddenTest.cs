@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -20,8 +21,7 @@ namespace Argument.Check.Test
         public static void ClassInit(TestContext testContext)
         {
             var directory = new DirectoryInfo(testContext.ResultsDirectory);
-            var testResultsFolder = FindTestResultsFolder(directory, "TestResults");
-            var argumentCheckDirectory = testResultsFolder.Parent.EnumerateDirectories("Argument.Check").Single();
+            var argumentCheckDirectory = FindTestResultsFolder(directory, "Argument.Check");
             var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
             cSharpFileInfos = allCSharpFiles.Select(csharpFile =>
             {
