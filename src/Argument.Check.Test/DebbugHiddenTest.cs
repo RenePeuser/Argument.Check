@@ -21,6 +21,9 @@ namespace Argument.Check.Test
         public static void ClassInit(TestContext testContext)
         {
             var directory = new DirectoryInfo(testContext.ResultsDirectory);
+
+            Assert.AreEqual("test", directory.FullName);
+
             var argumentCheckDirectory = FindTestResultsFolder(directory, "Argument.Check");
             var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
             cSharpFileInfos = allCSharpFiles.Select(csharpFile =>
