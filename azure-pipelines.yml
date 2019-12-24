@@ -13,15 +13,42 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: GitVersion@4
+  displayName: 'GitVersion'
+  inputs:
+    updateAssemblyInfo: true
+    preferBundledVersion: false
 
-- script: dotnet tool install --global GitVersion.Tool --version 5.1.3
-  displayName: 'dotnet tool install GitVersion.Tool'
+- script: echo %Action%%BuildVersion%
+  displayName: 'Set build version'
+  env:
+    Action: '##vso[build.updatebuildnumber]'
+    BuildVersion: $(GitVersion.SemVer)
 
-- script:  ~/.dotnet/tools/dotnet-gitversion /output buildserver
-  displayName: 'dotnet-gitversion'
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
 
-- script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln
+- task: DotNetCoreCLI@2
   displayName: 'dotnet build $(buildConfiguration)'
+  inputs:
+    command: 'build'
+    projects: './src/Argument.Check.sln'
+    arguments: '--configuration $(buildConfiguration)'
 
-- script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln
+- task: DotNetCoreCLI@2
   displayName: 'dotnet test $(buildConfiguration)'
+  inputs:
+    command: 'test'
+    projects: './src/Argument.Check.sln'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish $(buildConfiguration)'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+    zipAfterPublish: True
