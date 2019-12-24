@@ -25,3 +25,9 @@ steps:
 
 - script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln
   displayName: 'dotnet test $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: './src/Argument.Check/Argument.Check.csproj'
+    versioningScheme: 'off'
