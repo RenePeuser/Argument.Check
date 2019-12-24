@@ -12,13 +12,14 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
+steps:
+
 - script: dotnet tool install --global GitVersion.Tool --version 5.1.3
   displayName: 'dotnet tool install GitVersion.Tool'
 
 - script:  ~/.dotnet/tools/dotnet-gitversion /output buildserver
   displayName: 'dotnet-gitversion'
 
-steps:
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
