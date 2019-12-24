@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  name: Default
+  vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -20,42 +20,8 @@ steps:
 - script:  ~/.dotnet/tools/dotnet-gitversion /output buildserver
   displayName: 'dotnet-gitversion'
 
-- task: GitVersion@4
-  displayName: 'GitVersion'
-  inputs:
-    updateAssemblyInfo: true
-    preferBundledVersion: false
-
-- script: echo %Action%%BuildVersion%
-  displayName: 'Set build version'
-  env:
-    Action: '##vso[build.updatebuildnumber]'
-    BuildVersion: $(GitVersion.SemVer)
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet restore'
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-
-- task: DotNetCoreCLI@2
+- script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln
   displayName: 'dotnet build $(buildConfiguration)'
-  inputs:
-    command: 'build'
-    projects: './src/Argument.Check.sln'
-    arguments: '--configuration $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
+- script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln
   displayName: 'dotnet test $(buildConfiguration)'
-  inputs:
-    command: 'test'
-    projects: './src/Argument.Check.sln'
-    arguments: '--configuration $(buildConfiguration)'
-
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet publish $(buildConfiguration)'
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: True
