@@ -29,7 +29,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'donet pack Argument.Check'
   inputs:
-    command: 'pack'
+    command: 'pack'    
     packagesToPack: './src/Argument.Check/Argument.Check.csproj'
     includesymbols: true
     versioningScheme: 'byBuildNumber'
