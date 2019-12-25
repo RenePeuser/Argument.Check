@@ -33,12 +33,3 @@ steps:
     packagesToPack: '**/*.csproj'
     includesymbols: true
     versioningScheme: 'byBuildNumber'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Push to nuget-test'
-  inputs:
-    command: 'push'
-    includesymbols: false
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: '445b2d78-d8b7-46a4-9a0b-cb84f48e3178/0a086ad8-8e01-4ae2-91f0-16f85a115090'
