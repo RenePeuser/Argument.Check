@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Argument.Check.ThrowHelper;
 
 namespace Argument.Check.Extensions
 {

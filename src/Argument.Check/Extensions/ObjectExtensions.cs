@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using Argument.Check.ThrowHelper;
 
 namespace Argument.Check.Extensions
 {

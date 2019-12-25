@@ -1,5 +1,4 @@
 ﻿using System;
-using Argument.Check.ThrowHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.ThrowHelper

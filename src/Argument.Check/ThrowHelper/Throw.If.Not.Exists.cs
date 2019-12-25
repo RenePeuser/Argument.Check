@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Argument.Check.Extensions;
 
-namespace Argument.Check.ThrowHelper
+namespace Argument.Check
 {
     using static FormattableString;
 

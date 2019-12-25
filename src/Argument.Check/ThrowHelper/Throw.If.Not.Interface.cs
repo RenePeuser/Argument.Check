@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace Argument.Check.ThrowHelper
+namespace Argument.Check
 {
     public partial class Throw
     {

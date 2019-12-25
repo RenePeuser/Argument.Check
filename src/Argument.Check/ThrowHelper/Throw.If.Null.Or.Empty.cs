@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Argument.Check.ThrowHelper
+namespace Argument.Check
 {
     public static partial class Throw
     {

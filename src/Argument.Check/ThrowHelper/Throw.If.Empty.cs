@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Argument.Check.Extensions;
 
-namespace Argument.Check.ThrowHelper
+namespace Argument.Check
 {
     public static partial class Throw
     {

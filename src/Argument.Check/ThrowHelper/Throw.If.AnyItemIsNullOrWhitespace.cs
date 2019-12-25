@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Argument.Check.Extensions;
 
-namespace Argument.Check.ThrowHelper
+namespace Argument.Check
 {
     public partial class Throw
     {

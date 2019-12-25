@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Argument.Check.ThrowHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.ThrowHelper
