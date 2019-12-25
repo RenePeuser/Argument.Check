@@ -29,7 +29,7 @@ steps:
   displayName: dotnet pack
   inputs:
     command: pack
-    versionEnvVar: $(GitVersion.NuGetVersion)
+    versionEnvVar: '$(GitVersion.NuGetVersion)'
     packagesToPack: src/Argument.Check/Argument.Check.csproj
 
 - task: PublishBuildArtifacts@1
