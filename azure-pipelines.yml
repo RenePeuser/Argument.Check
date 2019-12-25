@@ -27,7 +27,7 @@ steps:
   displayName: 'dotnet test $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'donet pack Argument.Check $(BuildNumber)'
+  displayName: 'donet pack Argument.Check'
   inputs:
     command: 'pack'
     packagesToPack: './src/Argument.Check/Argument.Check.csproj'
