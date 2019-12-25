@@ -19,7 +19,7 @@ namespace Argument.Check.Test
         public static void ClassInit(TestContext testContext)
         {
             var directory = new DirectoryInfo(testContext.ResultsDirectory);
-            var argumentCheckDirectory = FindTestResultsFolder(directory, "Argument.Check");
+            var argumentCheckDirectory = FindFolderWithSources(directory, "argument.check");
             var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
             cSharpFileInfos = allCSharpFiles.Select(csharpFile =>
             {
@@ -41,14 +41,14 @@ namespace Argument.Check.Test
             Assert.IsFalse(missingHiddenAttribute.Any(), ToMessage(missingHiddenAttribute));
         }
 
-        private static DirectoryInfo FindTestResultsFolder(DirectoryInfo startDirectoryInfo, string name)
+        private static DirectoryInfo FindFolderWithSources(DirectoryInfo startDirectoryInfo, string name)
         {
             if (startDirectoryInfo == null)
             {
                 return null;
             }
 
-            if (startDirectoryInfo.Name == name)
+            if (startDirectoryInfo.Name.ToLower() == name)
             {
                 return startDirectoryInfo;
             }
@@ -59,7 +59,7 @@ namespace Argument.Check.Test
                 return directory;
             }
 
-            return FindTestResultsFolder(startDirectoryInfo.Parent, name);
+            return FindFolderWithSources(startDirectoryInfo.Parent, name);
         }
 
         private string ToMessage(IEnumerable<AnalyzeResult> analyzeResults)
