@@ -19,7 +19,7 @@ steps:
     runtime: 'core'
     updateAssemblyInfo: true
 
-- script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln
+- script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln  /p:Version='$(GitVersion.NuGetVersion)
   displayName: 'dotnet build $(buildConfiguration)'
 
 - script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln
@@ -29,8 +29,7 @@ steps:
   displayName: dotnet pack
   inputs:
     command: pack
-    packagesToPack: src/Argument.Check/Argument.Check.csproj
-    versioningScheme: 'byBuildNumber'
+    packagesToPack: src/Argument.Check/Argument.Check.csproj  
 
 - task: PublishBuildArtifacts@1
   displayName: 'publish artifacts'
