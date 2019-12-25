@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <PackageId>Argument.Check</PackageId>
-    <Version>0.1.0</Version>
     <Authors>Rene Peuser</Authors>
     <Company>Rene Peuser Softwaresolutions</Company>
     <Description>A library to check your arguments in a simple comfort way. This library do not use Expression or nameof. It is based on Func&lt;T&gt;. So no performance issue during positive argument check.</Description>
