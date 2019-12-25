@@ -27,9 +27,8 @@ steps:
   displayName: 'dotnet test $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Pack'
   inputs:
     command: 'pack'
     packagesToPack: '**/*.csproj'
-    includesymbols: true
+    packDirectory: '$(System.DefaultWorkingDirectory)/_Argument.Check'
     versioningScheme: 'byBuildNumber'
