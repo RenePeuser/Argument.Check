@@ -14,30 +14,21 @@ variables:
 
 steps:
 
-- script: dotnet tool install --global GitVersion.Tool --version 5.1.3
-  displayName: 'dotnet tool install GitVersion.Tool'
+- task: GitVersion@5
+  inputs:
+    runtime: 'core'
+    updateAssemblyInfo: true
 
-- script:  ~/.dotnet/tools/dotnet-gitversion /output buildserver
-  displayName: 'dotnet-gitversion'
-
-- script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln
+- script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln  /p:Version='$(GitVersion.NuGetVersion)'
   displayName: 'dotnet build $(buildConfiguration)'
 
 - script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln
   displayName: 'dotnet test $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Pack'
-  inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    includesymbols: true
-    versioningScheme: 'byBuildNumber'
+- script: dotnet pack ./src/Argument.Check/Argument.Check.csproj --output $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration) /p:Version='$(GitVersion.NuGetVersion)'
+  displayName: 'dotnet pack $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Push to nuget-test'
+- task: PublishBuildArtifacts@1
+  displayName: 'publish artifacts'
   inputs:
-    command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-    nuGetFeedType: 'internal'
-    publishVstsFeed: '445b2d78-d8b7-46a4-9a0b-cb84f48e3178/0a086ad8-8e01-4ae2-91f0-16f85a115090'
+    PathtoPublish: '$(build.artifactstagingdirectory)'
