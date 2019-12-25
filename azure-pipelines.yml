@@ -29,9 +29,8 @@ steps:
   displayName: dotnet pack
   inputs:
     command: pack
-    arguments: /p:Version='$(GitVersion.NuGetVersion)'
-    packagesToPack: src/Argument.Check/Argument.Check.csproj  
-    versioningScheme: 'byBuildNumber'
+    versionEnvVar: $(GitVersion.NuGetVersion)
+    packagesToPack: src/Argument.Check/Argument.Check.csproj
 
 - task: PublishBuildArtifacts@1
   displayName: 'publish artifacts'
