@@ -25,12 +25,15 @@ steps:
 - script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln
   displayName: 'dotnet test $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
+- script: dotnet pack ./src/Argument.Check/Argument.Check.csproj /p:Version='$(GitVersion.NuGetVersion)'
   displayName: dotnet pack
-  inputs:
-    command: pack
-    packagesToPack: src/Argument.Check/Argument.Check.csproj  
-    versioningScheme: 'byBuildNumber'
+
+#- task: DotNetCoreCLI@2
+#  displayName: dotnet pack
+#  inputs:
+#    command: pack
+#    packagesToPack: src/Argument.Check/Argument.Check.csproj  
+#    versioningScheme: 'byBuildNumber'
 
 - task: PublishBuildArtifacts@1
   displayName: 'publish artifacts'
