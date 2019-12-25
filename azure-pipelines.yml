@@ -19,18 +19,14 @@ steps:
     runtime: 'core'
     updateAssemblyInfo: true
 
-- script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln  /p:Version='$(GitVersion.NuGetVersion)';AssemblyVersion='$(GitVersion.NuGetVersion)'
+- script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln  /p:Version='$(GitVersion.NuGetVersion)'
   displayName: 'dotnet build $(buildConfiguration)'
 
 - script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln
   displayName: 'dotnet test $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: dotnet pack
-  inputs:
-    command: pack
-    versionEnvVar: '$(GitVersion.NuGetVersion)'
-    packagesToPack: src/Argument.Check/Argument.Check.csproj
+- script: dotnet pack ./src/Argument.Check/Argument.Check.csproj --output $(Build.ArtifactStagingDirectory)\Pack --configuration $(buildConfiguration) /p:Version='$(GitVersion.NuGetVersion)'
+  displayName: 'dotnet pack $(buildConfiguration)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'publish artifacts'
