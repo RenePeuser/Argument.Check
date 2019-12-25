@@ -19,7 +19,7 @@ namespace Argument.Check.Test
         public static void ClassInit(TestContext testContext)
         {
             var directory = new DirectoryInfo(testContext.ResultsDirectory);
-            var argumentCheckDirectory = FindFolderWithSources(directory, "argument.check");
+            var argumentCheckDirectory = FindFolderWithSources(directory, "Argument.Check");
             var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
             cSharpFileInfos = allCSharpFiles.Select(csharpFile =>
             {
@@ -48,7 +48,7 @@ namespace Argument.Check.Test
                 return null;
             }
 
-            if (startDirectoryInfo.Name.ToLower() == name)
+            if (startDirectoryInfo.Name == name)
             {
                 return startDirectoryInfo;
             }
