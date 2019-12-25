@@ -27,8 +27,13 @@ steps:
   displayName: 'dotnet test $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: dotnet pack
   inputs:
-    command: 'pack'
-    packagesToPack: '**/*.csproj'
-    packDirectory: '$(System.DefaultWorkingDirectory)/_Argument.Check'
+    command: pack
+    packagesToPack: src/Argument.Check/Argument.Check.csproj
     versioningScheme: 'byBuildNumber'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'publish artifacts'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
