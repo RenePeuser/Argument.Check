@@ -30,6 +30,7 @@ steps:
   inputs:
     command: pack
     packagesToPack: src/Argument.Check/Argument.Check.csproj  
+    versioningScheme: 'byBuildNumber'
 
 - task: PublishBuildArtifacts@1
   displayName: 'publish artifacts'
