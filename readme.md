@@ -39,7 +39,7 @@ public MyClass(object arg)
 
 ### Null check, like 'Throw Expressions'
 ```csharp
-public MyClass(object service)
+public MyClass(IService service)
 {
     _service = Throw.IfNull(() =>  arg);
 }
@@ -58,6 +58,30 @@ public MyClass(FileInfo fileInfo)
 public MyClass(DirectoryInfo directoryInfo)
 {
     Throw.IfExists(() =>  arg);
+}
+```
+
+### Value is greater than
+```csharp
+public MyClass(int value)
+{
+    Throw.IfGreaterThan(() =>  value, 10);
+}
+```
+
+### Value is less than
+```csharp
+public MyClass(int value)
+{
+    Throw.IfLessThan(() =>  value, 10);
+}
+```
+
+### Value is out of range
+```csharp
+public MyClass(int value)
+{
+    Throw.IfLessThan(() =>  value, 10, 100);
 }
 ```
 
