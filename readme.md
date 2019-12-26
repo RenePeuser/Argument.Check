@@ -22,7 +22,7 @@ Resharper settings.
 
 ![](./assets/resharper-settings.png)
 
-This setting has follwing effect:
+This setting has following effect:
 
 ![](./assets/resharper-agrument-null-check.gif)
 
