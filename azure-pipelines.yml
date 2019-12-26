@@ -22,7 +22,7 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln  /p:Version='$(GitVersion.NuGetVersion)'
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln
+- script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln --logger trx --results-directory $(System.DefaultWorkingDirectory)
   displayName: 'dotnet test $(buildConfiguration)'
 
 - script: dotnet pack ./src/Argument.Check/Argument.Check.csproj --output $(Build.ArtifactStagingDirectory) --configuration $(buildConfiguration) /p:Version='$(GitVersion.NuGetVersion)'
