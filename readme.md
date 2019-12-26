@@ -27,7 +27,13 @@ This setting has follwing effect:
 ![](./assets/resharper-agrument-null-check.gif)
 
 
+## The debugger will break where the exception happened
+![](./assets/exception-breaks.png)
+
+
 ## Samples
+
+Each Throw helper could also be used like a "Throw Expression".
 
 ### Null check
 ```csharp
@@ -89,7 +95,7 @@ public MyClass(int value)
 ```csharp
 public MyClass(string value)
 {
-    Throw.If(() => value, v => v.Length > 10 && a.Contains("abc"), "The given string must not be greater than 10, and must not contain 'abc'");
+    Throw.If(() => value, v => v.Length > 10 && v.Contains("abc"), "The given string must not be greater than 10, and must not contain 'abc'");
 }
 ```
 
