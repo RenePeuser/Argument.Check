@@ -7,12 +7,12 @@
     <Company>Rene Peuser Softwaresolutions</Company>
     <Description>A library to check your arguments in a simple comfort way. This library do not use Expression or nameof. It is based on Func&lt;T&gt;. So no performance issue during positive argument check.</Description>
     <Copyright>Copyright 2019 (c) Rene Peuser. All rights reserved.</Copyright>
-    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PackageLicenseFile></PackageLicenseFile>
     <PackageProjectUrl>https://renepeuser.visualstudio.com/Argument.Check</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
     <PackageReleaseNotes>A library to check your arguments in a simple comfort way. This library do not use Expression or nameof. It is based on Func&lt;T&gt;. So no performance issue during positive argument check.</PackageReleaseNotes>
     <PackageTags>C#;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;</PackageTags>
-
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
