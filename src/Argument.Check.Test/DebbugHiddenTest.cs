@@ -19,12 +19,9 @@ namespace Argument.Check.Test
         [ClassInitialize]
         public static void ClassInit(TestContext testContext)
         {
-            var directory = new DirectoryInfo(testContext.ResultsDirectory);
-            var currentDirectoryInfo = new DirectoryInfo(Environment.CurrentDirectory);
+            var currentDirectory = new DirectoryInfo(Environment.CurrentDirectory);
 
-            throw new ArgumentException($"ResultsDirectory: {directory.FullName}\r\nCurrentDirectory: {currentDirectoryInfo.FullName}");
-
-            var argumentCheckDirectory = FindFolderWithSources(directory, "Argument.Check");
+            var argumentCheckDirectory = FindFolderWithSources(currentDirectory, "Argument.Check");
             var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
             cSharpFileInfos = allCSharpFiles.Select(csharpFile =>
             {
