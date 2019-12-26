@@ -7,17 +7,19 @@ namespace Argument.Check
     public static partial class Throw
     {
         [DebuggerHidden]
-        public static void IfWhitespace(Func<string> argument)
+        public static string IfWhitespace(Func<string> argumentFunc)
         {
-            IfNull(() => argument);
-            IfNullInternal(argument);
+            Throw.IfNull(() => argumentFunc);
+            Throw.IfNull(argumentFunc);
 
-            if (!argument().IsNullOrWhiteSpace())
+            var argument = argumentFunc();
+
+            if (!argument.IsNullOrWhiteSpace())
             {
-                return;
+                return argument;
             }
 
-            throw new ArgumentException("The string must not be only whitespace.", argument.GetParameterName(arg => arg.Is<string>() && arg.Cast<string>().IsWhitespace()));
+            throw new ArgumentException("The string must not be only whitespace.", argumentFunc.GetParameterName(arg => arg.Is<string>() && arg.Cast<string>().IsWhitespace()));
         }
     }
 }

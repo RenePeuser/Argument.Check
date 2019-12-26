@@ -7,28 +7,22 @@ namespace Argument.Check
     public partial class Throw
     {
         [DebuggerHidden]
-        public static void IfOutOfRange<T>(Func<T> argumentFunc, T min, T max) where T : IComparable
+        public static T IfOutOfRange<T>(Func<T> argumentFunc, T min, T max) where T : IComparable
         {
             IfNull(() => argumentFunc);
 
-            if (!argumentFunc().IsOutOfRange(min, max))
+            var argument = argumentFunc();
+            if (!argument.IsOutOfRange(min, max))
             {
-                return;
+                return argument;
             }
 
-            ThrowValueOutOfRangeException(argumentFunc, min, max, arg => arg is T && ((T) arg).IsOutOfRange(min, max));
-        }
+            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(Predicate), $"Value: '{argument}' is not in expected range from '{min}' to '{max}'.");
 
-        [DebuggerHidden]
-        private static void ThrowValueOutOfRangeException<T>(
-            Func<T> argumentFunc,
-            T minimum,
-            T maximum,
-            Func<object, bool> predicate) where T : IComparable
-        {
-            throw new ArgumentOutOfRangeException(
-                argumentFunc.GetParameterName(predicate),
-                $"Value: '{argumentFunc()}' is not in expected range from '{minimum}' to '{maximum}'.");
+            bool Predicate(object arg)
+            {
+                return arg is T && ((T) arg).IsOutOfRange(min, max);
+            }
         }
     }
 }

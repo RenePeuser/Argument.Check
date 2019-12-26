@@ -7,37 +7,37 @@ namespace Argument.Check
     public partial class Throw
     {
         [DebuggerHidden]
-        public static void If<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate)
+        public static T If<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate)
         {
             IfNull(() => argumentFunc);
             IfNull(() => validationPredicate);
 
-            IfInternal(argumentFunc, validationPredicate, b => b, string.Empty);
-        }
-
-        [DebuggerHidden]
-        public static void If<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate, string message)
-        {
-            IfNull(() => argumentFunc);
-            IfNull(() => validationPredicate);
-
-            IfInternal(argumentFunc, validationPredicate, b => b, message);
-        }
-
-        [DebuggerHidden]
-        private static void IfInternal<T>(
-            Func<T> argumentFunc,
-            Func<T, bool> validationPredicate,
-            Func<bool, bool> isValidFunc,
-            string message)
-        {
             var argument = argumentFunc();
-            var isValid = validationPredicate(argument);
+            var isMatching = validationPredicate(argument);
 
-            if (isValidFunc(isValid))
+            if (isMatching.IsFalse())
             {
-                throw new ArgumentException(message, argumentFunc.GetParameterName(arg => arg.EqualsTo(argument)));
+                return argument;
             }
+
+            throw new ArgumentException(string.Empty, argumentFunc.GetParameterName(arg => arg.EqualsTo(argument)));
+        }
+
+        [DebuggerHidden]
+        public static T If<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate, string message)
+        {
+            IfNull(() => argumentFunc);
+            IfNull(() => validationPredicate);
+
+            var argument = argumentFunc();
+            var isMatching = validationPredicate(argument);
+
+            if (isMatching.IsFalse())
+            {
+                return argument;
+            }
+
+            throw new ArgumentException(message, argumentFunc.GetParameterName(arg => arg.EqualsTo(argument)));
         }
     }
 }

@@ -7,19 +7,23 @@ namespace Argument.Check
     public static partial class Throw
     {
         [DebuggerHidden]
-        public static void IfNullOrEmpty(Func<string> argumentFunc)
+        public static string IfNullOrEmpty(Func<string> argumentFunc)
         {
-            IfNull(() => argumentFunc);
-            IfNullInternal(argumentFunc);
-            IfEmpty(argumentFunc);
+            Throw.IfNull(() => argumentFunc);
+            Throw.IfNull(argumentFunc);
+            Throw.IfEmpty(argumentFunc);
+
+            return argumentFunc();
         }
 
         [DebuggerHidden]
-        public static void IfNullOrEmpty<T>(Func<IEnumerable<T>> argumentFunc)
+        public static IEnumerable<T> IfNullOrEmpty<T>(Func<IEnumerable<T>> argumentFunc)
         {
-            IfNull(() => argumentFunc);
-            IfNullInternal(argumentFunc);
-            IfEmpty(argumentFunc);
+            Throw.IfNull(() => argumentFunc);
+            Throw.IfNull(argumentFunc);
+            Throw.IfEmpty(argumentFunc);
+
+            return argumentFunc();
         }
     }
 }

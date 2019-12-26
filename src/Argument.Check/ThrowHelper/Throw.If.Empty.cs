@@ -9,29 +9,31 @@ namespace Argument.Check
     public static partial class Throw
     {
         [DebuggerHidden]
-        public static void IfEmpty(Func<string> argumentFunc)
+        public static string IfEmpty(Func<string> argumentFunc)
         {
             IfNull(() => argumentFunc);
             IfNull(argumentFunc);
 
 
-            if (!argumentFunc().IsEmpty())
+            var argument = argumentFunc();
+            if (!argument.IsEmpty())
             {
-                return;
+                return argument;
             }
 
             throw new ArgumentException("The string must not be empty.", argumentFunc.GetParameterName(arg => arg.Is<string>() && arg.Cast<string>().IsEmpty()));
         }
 
         [DebuggerHidden]
-        public static void IfEmpty<T>(Func<IEnumerable<T>> argumentFunc)
+        public static IEnumerable<T> IfEmpty<T>(Func<IEnumerable<T>> argumentFunc)
         {
             IfNull(() => argumentFunc);
             IfNull(argumentFunc);
 
-            if (argumentFunc().Any())
+            var argument = argumentFunc();
+            if (argument.Any())
             {
-                return;
+                return argument;
             }
 
             throw new ArgumentException("The enumerable must not be empty.", argumentFunc.GetParameterName(arg => arg.Is<IEnumerable<T>>() && arg.Cast<IEnumerable<T>>().IsEmpty()));

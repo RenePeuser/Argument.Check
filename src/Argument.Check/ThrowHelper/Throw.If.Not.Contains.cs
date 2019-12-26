@@ -9,7 +9,7 @@ namespace Argument.Check
     public partial class Throw
     {
         [DebuggerHidden]
-        public static void IfNotContains<T>(Func<T> argumentFunc, IEnumerable<T> source)
+        public static T IfNotContains<T>(Func<T> argumentFunc, IEnumerable<T> source)
         {
             IfNull(() => source);
             IfNull(() => argumentFunc);
@@ -17,11 +17,10 @@ namespace Argument.Check
             var argument = argumentFunc();
             if (source.Contains(argument))
             {
-                return;
+                return argument;
             }
 
-            throw new ArgumentException(
-                $"The argument '{argument}' is not contained in the enumeration.", argumentFunc.GetParameterName(arg => arg.EqualsTo(argument) && !source.Contains(argument)));
+            throw new ArgumentException($"The argument '{argument}' is not contained in the enumeration.", argumentFunc.GetParameterName(arg => arg.EqualsTo(argument) && !source.Contains(argument)));
         }
     }
 }

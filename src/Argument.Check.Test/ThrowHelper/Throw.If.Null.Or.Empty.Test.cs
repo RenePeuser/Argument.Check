@@ -49,6 +49,12 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
+        public void Should_Return_The_Same_Enumeration_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrEmpty(() => _listWithoutNullItem));
+        }
+
+        [TestMethod]
         public void Should_Throw_An_Exception_If_Source_ArgumentFunc_Is_Null()
         {
             Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrEmpty(_nullArgumentFunc), ArgumentFuncName);
@@ -78,6 +84,12 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Not_Throw_An_Exception_If_String_Is_Not_Null_And_Does_Not_Contains_Null_Items()
         {
             Throw.IfNullOrEmpty(() => _sonGoku);
+        }
+
+        [TestMethod]
+        public void Should_Return_The_Same_String_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_sonGoku, Throw.IfNullOrEmpty(() => _sonGoku));
         }
 
         [TestMethod]

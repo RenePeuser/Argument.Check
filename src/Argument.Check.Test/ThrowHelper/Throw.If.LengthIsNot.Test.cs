@@ -12,6 +12,7 @@ namespace Argument.Check.Test.ThrowHelper
         private readonly string _nullString = null;
         private readonly string _stringIsToSmall = "less";
         private readonly string _stringToLarge = "greater";
+        private readonly string _sonGoku = "SonGoku";
 
         [TestMethod]
         public void Should_Throw_Exception_If_String_Length_Is_Too_Small()
@@ -48,7 +49,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_Exception_If_String_Length_Is_Equal_To_Expected_Length()
         {
-            Throw.IfLengthIsNot(() => "hallo", 5);
+            Throw.IfLengthIsNot(() => _sonGoku, 7);
+        }
+
+        [TestMethod]
+        public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_sonGoku, Throw.IfLengthIsNot(() => _sonGoku, 7));
         }
     }
 }

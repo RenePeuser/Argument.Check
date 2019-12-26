@@ -6,12 +6,14 @@ namespace Argument.Check
     public static partial class Throw
     {
         [DebuggerHidden]
-        public static void IfNullOrWhiteSpace(Func<string> argumentFunc)
+        public static string IfNullOrWhiteSpace(Func<string> argumentFunc)
         {
-            IfNull(() => argumentFunc);
-            IfNullInternal(argumentFunc);
-            IfEmpty(argumentFunc);
-            IfWhitespace(argumentFunc);
+            Throw.IfNull(() => argumentFunc);
+            Throw.IfNull(argumentFunc);
+            Throw.IfEmpty(argumentFunc);
+            Throw.IfWhitespace(argumentFunc);
+
+            return argumentFunc();
         }
     }
 }

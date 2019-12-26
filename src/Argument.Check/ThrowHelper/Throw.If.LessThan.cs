@@ -7,23 +7,22 @@ namespace Argument.Check
     public partial class Throw
     {
         [DebuggerHidden]
-        public static void IfLessThan<T>(Func<T> argumentFunc, T limit) where T : IComparable
+        public static T IfLessThan<T>(Func<T> argumentFunc, T limit) where T : IComparable
         {
             IfNull(() => argumentFunc);
 
-            if (!argumentFunc().IsLessThan(limit))
+            var argument = argumentFunc();
+            if (!argument.IsLessThan(limit))
             {
-                return;
+                return argument;
             }
 
-            ThrowLessThanException(argumentFunc, limit, arg => arg is T && ((T) arg).IsLessThan(limit));
-        }
+            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(Predicate), $"Value: '{argument}' must not be less than: '{limit}'.");
 
-        [DebuggerHidden]
-        private static void ThrowLessThanException<T>(Func<T> argumentFunc, T limit, Func<object, bool> predicate)
-            where T : IComparable
-        {
-            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(predicate), $"Value: '{argumentFunc()}' must not be less than: '{limit}'.");
+            bool Predicate(object arg)
+            {
+                return arg is T && ((T) arg).IsLessThan(limit);
+            }
         }
     }
 }

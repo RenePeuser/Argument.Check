@@ -8,15 +8,15 @@ namespace Argument.Check
     public partial class Throw
     {
         [DebuggerHidden]
-        public static void IfExists(Func<FileSystemInfo> fileSystemInfoFunc)
+        public static FileSystemInfo IfExists(Func<FileSystemInfo> fileSystemInfoFunc)
         {
-            IfNull(() => fileSystemInfoFunc);
-            IfNullInternal(fileSystemInfoFunc);
+            Throw.IfNull(() => fileSystemInfoFunc);
+            Throw.IfNull(fileSystemInfoFunc);
 
             var fileSystemInfo = fileSystemInfoFunc();
             if (fileSystemInfo.Exists.IsFalse())
             {
-                return;
+                return fileSystemInfo;
             }
 
             switch (fileSystemInfo)

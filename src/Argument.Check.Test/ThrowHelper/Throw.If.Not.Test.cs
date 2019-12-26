@@ -24,6 +24,12 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
+        public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One_Wihtout_Message()
+        {
+            Assert.AreEqual(_falseValue, Throw.IfNot(() => _falseValue, item => !item));
+        }
+
+        [TestMethod]
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
             Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNot(NullFunc, item => item), _argumentFuncName);
@@ -55,6 +61,12 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Not_Throw_An_Exception_If_Predicate_Is_False_With_The_Given_Message()
         {
             Throw.IfNot(() => _falseValue, item => !item, _message);
+        }
+
+        [TestMethod]
+        public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_falseValue, Throw.IfNot(() => _falseValue, item => !item, _message));
         }
     }
 }

@@ -33,6 +33,12 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
+        public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_validValue, Throw.IfLessThan(() => _validValue, _limit));
+        }
+
+        [TestMethod]
         public void Should_Throw_Exception_If_ArgumentFunc_Is_Null()
         {
             Assert.ThrowsException<ArgumentNullException>(() => Throw.IfLessThan(_nullArgumentFunc, _limit), nameof(ArgumentFuncName));

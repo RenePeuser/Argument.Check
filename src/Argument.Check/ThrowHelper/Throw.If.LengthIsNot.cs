@@ -7,26 +7,23 @@ namespace Argument.Check
     public static partial class Throw
     {
         [DebuggerHidden]
-        public static void IfLengthIsNot(Func<string> argumentFunc, int length)
+        public static string IfLengthIsNot(Func<string> argumentFunc, int length)
         {
             IfNull(() => argumentFunc);
             IfNull(argumentFunc);
 
-            if (!argumentFunc().Length.NotEqualsTo(length))
+            var argument = argumentFunc();
+            if (!argument.Length.NotEqualsTo(length))
             {
-                return;
+                return argument;
             }
 
-            ThrowStringLengthIsNotException(argumentFunc, length, arg => arg.Is<string>() && arg.Cast<string>().Length.NotEqualsTo(length));
-        }
+            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(Predicate), $"String length: '{argument}' is not as expected. Expected value: '{length}'.");
 
-        [DebuggerHidden]
-        private static void ThrowStringLengthIsNotException(
-            Func<string> argumentFunc,
-            int length,
-            Func<object, bool> predicate)
-        {
-            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(predicate), $"String length: '{argumentFunc()}' is not as expected. Expected value: '{length}'.");
+            bool Predicate(object arg)
+            {
+                return arg.Is<string>() && arg.Cast<string>().Length.NotEqualsTo(length);
+            }
         }
     }
 }

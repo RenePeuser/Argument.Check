@@ -7,23 +7,17 @@ namespace Argument.Check
     public partial class Throw
     {
         [DebuggerHidden]
-        public static void IfNull<T>(Func<T> argumentFunc) where T : class
+        public static T IfNull<T>(Func<T> argumentFunc) where T : class
         {
             if (argumentFunc == null)
             {
                 throw new ArgumentNullException(nameof(argumentFunc));
             }
 
-            IfNullInternal(argumentFunc);
-        }
-
-        [DebuggerHidden]
-        private static void IfNullInternal<T>(Func<T> argumentFunc)
-            where T : class
-        {
-            if (argumentFunc() != null)
+            var argument = argumentFunc();
+            if (argument.IsNotNull())
             {
-                return;
+                return argument;
             }
 
             throw new ArgumentNullException(argumentFunc.GetParameterName(arg => arg == null));

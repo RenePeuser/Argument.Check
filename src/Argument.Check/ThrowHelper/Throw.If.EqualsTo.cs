@@ -7,23 +7,17 @@ namespace Argument.Check
     public partial class Throw
     {
         [DebuggerHidden]
-        public static void IfEqualsTo<T>(Func<T> argumentFunc, T expectedValue)
+        public static T IfEqualsTo<T>(Func<T> argumentFunc, T expectedValue)
         {
             IfNull(() => argumentFunc);
-            IfEqualsToInternal(argumentFunc, expectedValue);
-        }
-
-        [DebuggerHidden]
-        private static void IfEqualsToInternal<T>(Func<T> argumentFunc, T expectedValue)
-        {
-            var argumentValue = argumentFunc();
-            if (!argumentValue.EqualsTo(expectedValue))
+            
+            var argument = argumentFunc();
+            if (!argument.EqualsTo(expectedValue))
             {
-                return;
+                return argument;
             }
 
-            throw new ArgumentException(
-                $"The argument value: '{argumentValue}' was equal to: '{expectedValue}'.", argumentFunc.GetParameterName(arg => arg.EqualsTo(expectedValue)));
+            throw new ArgumentException($"The argument value: '{argument}' was equal to: '{expectedValue}'.", argumentFunc.GetParameterName(arg => arg.EqualsTo(expectedValue)));
         }
     }
 }

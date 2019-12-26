@@ -33,6 +33,12 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
+        public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_sonGoku, Throw.IfNotType<string>(() => _sonGoku));
+        }
+
+        [TestMethod]
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
             Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNotType<string>(_nullArgumentFunc), ArgumentFuncName);

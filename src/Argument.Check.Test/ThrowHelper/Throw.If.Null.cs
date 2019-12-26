@@ -24,6 +24,12 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
+        public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_notNullString, Throw.IfNull(() => _notNullString));
+        }
+
+        [TestMethod]
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
             Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNull(_nullArgumentFunc), ArgumentFunc);

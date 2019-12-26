@@ -37,6 +37,12 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
+        public void Should_Return_The_Same_String_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(SonGoku, Throw.IfEmpty(() => SonGoku));
+        }
+
+        [TestMethod]
         public void Should_Throw_An_Exception_If_Strings_Are_Empty()
         {
             Assert.ThrowsException<ArgumentException>(() => Throw.IfEmpty(() => _emptyStrings), nameof(_emptyStrings));
@@ -54,6 +60,12 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Not_Throw_An_Exception_When_Strings_Are_Not_Empty()
         {
             Throw.IfEmpty(() => _notEmptyStrings);
+        }
+
+        [TestMethod]
+        public void Should_Return_The_Same_String_Enumeration_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_notEmptyStrings, Throw.IfEmpty(() => _notEmptyStrings));
         }
 
         [TestMethod]

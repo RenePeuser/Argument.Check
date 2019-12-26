@@ -40,6 +40,12 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
+        public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrAnyItemIsNull(() => _listWithoutNullItem));
+        }
+
+        [TestMethod]
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
             Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(_nullArgumentFunc), ArgumentFuncName);

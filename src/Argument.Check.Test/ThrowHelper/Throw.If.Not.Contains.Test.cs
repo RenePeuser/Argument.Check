@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.ThrowHelper
@@ -8,11 +7,13 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfNotContainsTest
     {
+        private const string Vegeta = "Vegeta";
         private const string ArgumentFuncName = "argumentFunc";
         private readonly string _nullArgument = null;
         private readonly Func<string> _nullArgumentFunc = null;
-        private readonly IEnumerable<string> _stringValues = new[] { "Vegeta", "Beerus" };
+        private readonly string _containedValue = Vegeta;
         private readonly string _valueNotContained = "SonGoku";
+        private readonly IEnumerable<string> _stringValues = new[] { Vegeta, "Beerus" };
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Not_In_Expected_Source()
@@ -31,7 +32,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Value_Is_In_Expected_Source()
         {
-            Throw.IfNotContains(() => _stringValues.First(), _stringValues);
+            Throw.IfNotContains(() => _containedValue, _stringValues);
+        }
+
+        [TestMethod]
+        public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_containedValue, Throw.IfNotContains(() => _containedValue, _stringValues));
         }
 
         [TestMethod]

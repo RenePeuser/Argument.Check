@@ -40,9 +40,21 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
+        public void Should_Return_The_Same_LowerLimit_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_lowerLimit, Throw.IfOutOfRange(() => _lowerLimit, _lowerLimit, _upperLimit));
+        }
+
+        [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Value_Is_Equal_To_Upper_Limit()
         {
             Throw.IfOutOfRange(() => _upperLimit, _lowerLimit, _upperLimit);
+        }
+
+        [TestMethod]
+        public void Should_Return_The_Same_UpperLimit_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_upperLimit, Throw.IfOutOfRange(() => _upperLimit, _lowerLimit, _upperLimit));
         }
 
         [TestMethod]

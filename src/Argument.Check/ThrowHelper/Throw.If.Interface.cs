@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Argument.Check.Extensions;
 
 namespace Argument.Check
 {
@@ -13,6 +14,22 @@ namespace Argument.Check
             {
                 throw new ArgumentException($"Type: '{type}' must not be an interface.");
             }
+        }
+
+        [DebuggerHidden]
+        public static T IfInterface<T>(Func<T> argumentFunc) where T : class
+        {
+            Throw.IfNull(() => argumentFunc);
+            Throw.IfNull(argumentFunc);
+
+            var argument = argumentFunc();
+            var type = typeof(T);
+            if (type.IsInterface.IsFalse())
+            {
+                return argument;
+            }
+
+            throw new ArgumentException($"Type: '{type}' must not be an interface.");
         }
     }
 }

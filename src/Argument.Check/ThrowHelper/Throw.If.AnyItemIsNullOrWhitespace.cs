@@ -8,27 +8,23 @@ namespace Argument.Check
     public partial class Throw
     {
         [DebuggerHidden]
-        public static void IfAnyItemIsNullOrWhitespace(Func<IEnumerable<string>> argumentFunc)
+        public static IEnumerable<string> IfAnyItemIsNullOrWhitespace(Func<IEnumerable<string>> argumentFunc)
         {
             IfNull(() => argumentFunc);
             IfNull(argumentFunc);
 
-            if (!argumentFunc().IsAnyItemNullOrWhitespace())
+            var argument = argumentFunc();
+            if (!argument.IsAnyItemNullOrWhitespace())
             {
-                return;
+                return argument;
             }
 
-            ThrowIsAnyItemNullOrWhiteSpaceException(
-                argumentFunc,
-                arg => arg.Is<IEnumerable<string>>() && arg.Cast<IEnumerable<string>>().IsAnyItemNullOrWhitespace());
-        }
+            throw new ArgumentException($"At least one string in the enumeration '{string.Join(",", argument)}' was null or a whitespace.", argumentFunc.GetParameterName(Predicate));
 
-        [DebuggerHidden]
-        private static void ThrowIsAnyItemNullOrWhiteSpaceException(
-            Func<IEnumerable<string>> argumentFunc,
-            Func<object, bool> predicate)
-        {
-            throw new ArgumentException($"At least one string in the enumeration '{string.Join(",", argumentFunc())}' was null or a whitespace.", argumentFunc.GetParameterName(predicate));
+            bool Predicate(object arg)
+            {
+                return arg.Is<IEnumerable<string>>() && arg.Cast<IEnumerable<string>>().IsAnyItemNullOrWhitespace();
+            }
         }
     }
 }

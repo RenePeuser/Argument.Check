@@ -40,6 +40,12 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
+        public void Should_Return_The_Same_String_Argument_Reference_Like_The_Checked_One()
+        {
+            Assert.AreEqual(_sonGoku, Throw.IfWhitespace(() => _sonGoku));
+        }
+
+        [TestMethod]
         public void Should_Throw_An_Exception_If_String_ArgumentFunc_Is_Null()
         {
             Assert.ThrowsException<ArgumentNullException>(() => Throw.IfWhitespace(_nullStringArgumentFunc), ArgumentFuncName);

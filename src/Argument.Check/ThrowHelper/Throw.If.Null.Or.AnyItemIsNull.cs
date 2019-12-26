@@ -8,25 +8,23 @@ namespace Argument.Check
     public partial class Throw
     {
         [DebuggerHidden]
-        public static void IfNullOrAnyItemIsNull<T>(Func<IEnumerable<T>> argumentFunc)
+        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>(Func<IEnumerable<T>> argumentFunc)
         {
-            IfNull(() => argumentFunc);
-            IfNull(argumentFunc);
+            Throw.IfNull(() => argumentFunc);
+            Throw.IfNull(argumentFunc);
 
-            if (!argumentFunc().IsAnyItemNull())
+            var argument = argumentFunc();
+            if (!argument.IsAnyItemNull())
             {
-                return;
+                return argument;
             }
 
-            ThrowIsAnyItemNullException(argumentFunc, arg => arg.Is<IEnumerable<T>>() && arg.Cast<IEnumerable<T>>().IsAnyItemNull());
-        }
+            throw new ArgumentNullException(argumentFunc.GetParameterName(Predicate), $"At least one item in the enumeration '{argumentFunc()}' was null.");
 
-        [DebuggerHidden]
-        private static void ThrowIsAnyItemNullException<T>(
-            Func<IEnumerable<T>> argumentFunc,
-            Func<object, bool> predicate)
-        {
-            throw new ArgumentNullException(argumentFunc.GetParameterName(predicate), $"At least one item in the enumeration '{argumentFunc()}' was null.");
+            bool Predicate(object arg)
+            {
+                return arg.Is<IEnumerable<T>>() && arg.Cast<IEnumerable<T>>().IsAnyItemNull();
+            }
         }
     }
 }
