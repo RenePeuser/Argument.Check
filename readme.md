@@ -57,7 +57,7 @@ public MyClass(FileInfo fileInfo)
 ```csharp
 public MyClass(DirectoryInfo directoryInfo)
 {
-    Throw.IfExists(() =>  arg);
+    Throw.IfExists(() => arg);
 }
 ```
 
@@ -65,7 +65,7 @@ public MyClass(DirectoryInfo directoryInfo)
 ```csharp
 public MyClass(int value)
 {
-    Throw.IfGreaterThan(() =>  value, 10);
+    Throw.IfGreaterThan(() => value, 10);
 }
 ```
 
@@ -73,7 +73,7 @@ public MyClass(int value)
 ```csharp
 public MyClass(int value)
 {
-    Throw.IfLessThan(() =>  value, 10);
+    Throw.IfLessThan(() => value, 10);
 }
 ```
 
@@ -81,7 +81,63 @@ public MyClass(int value)
 ```csharp
 public MyClass(int value)
 {
-    Throw.IfLessThan(() =>  value, 10, 100);
+    Throw.IfOutOfRange(() => value, 10, 100);
+}
+```
+
+### Custom expression
+```csharp
+public MyClass(string value)
+{
+    Throw.If(() => value, v => v.Length > 10 && a.Contains("abc"), "The given string must not be greater than 10, and must not contain 'abc'");
+}
+```
+
+### Argument must be an interface
+```csharp
+public MyClass(object value)
+{
+    Throw.IfNotInterface(() => value); 
+}
+```
+
+### Argument must be equal to any expectation
+```csharp
+public MyClass(object value)
+{
+    Throw.IfNotEqualsTo(() => value, new object()); 
+}
+```
+
+### And many more.
+
+```csharp
+public MyClass(object value)
+{
+    Throw.IfAnyItemIsNullOrWhitespace(...)
+    Throw.If(...)
+    Throw.IfEmpty(...)
+    Throw.IfEqualsTo(...)
+    Throw.IfExists(...)
+    Throw.IfGreaterOrEqual(...)
+    Throw.IfGreaterThan(...)
+    Throw.IfInterface(...)
+    Throw.IfLengthIsNot(...)
+    Throw.IfLessOrEqual(...)
+    Throw.IfLessThan(...)
+    Throw.IfNotContains(...)
+    Throw.IfNot(...)
+    Throw.IfNotEqualsTo(...)
+    Throw.IfNotExists(...)
+    Throw.IfNotInterface(...)
+    Throw.IfNotType(...)
+    Throw.IfNull(...)
+    Throw.IfNullOrAny(...)
+    Throw.IfNullOrAnyItemIsNull(...)
+    Throw.IfNullOrEmpty(...)
+    Throw.IfNullOrWhiteSpace(...)
+    Throw.IfOutOfRange(...)
+    Throw.IfWhitespace(...)   
 }
 ```
 
