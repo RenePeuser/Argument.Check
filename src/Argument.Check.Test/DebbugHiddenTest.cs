@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -10,8 +11,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test
 {
-
-
     [TestClass]
     public class DebbugHiddenTest
     {
@@ -21,6 +20,10 @@ namespace Argument.Check.Test
         public static void ClassInit(TestContext testContext)
         {
             var directory = new DirectoryInfo(testContext.ResultsDirectory);
+            var currentDirectoryInfo = new DirectoryInfo(Environment.CurrentDirectory);
+
+            throw new ArgumentException($"ResultsDirectory: {directory.FullName}\r\nCurrentDirectory: {currentDirectoryInfo.FullName}");
+
             var argumentCheckDirectory = FindFolderWithSources(directory, "Argument.Check");
             var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
             cSharpFileInfos = allCSharpFiles.Select(csharpFile =>
