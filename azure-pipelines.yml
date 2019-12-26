@@ -23,10 +23,8 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration) ./src/Argument.Check.sln  /p:Version='$(GitVersion.NuGetVersion)'
   displayName: 'dotnet build $(buildConfiguration)'
 
-#- script: dotnet test --configuration $(buildConfiguration) ./src/Argument.Check.sln --logger trx --results-directory $(System.DefaultWorkingDirectory)
-#  displayName: 'dotnet test $(buildConfiguration)'
-
 - task: DotNetCoreCLI@2
+  displayName: dotnet test
   inputs:
     command: 'test'
     projects: './src/Argument.Check.sln'
