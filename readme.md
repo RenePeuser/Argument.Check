@@ -95,7 +95,7 @@ public MyClass(int value)
 ```csharp
 public MyClass(string value)
 {
-    Throw.If(() => value, v => v.Length > 10 && v.Contains("abc"), "The given string must not be greater than 10, and must not contain 'abc'");
+    Throw.If(() => value, v => v.Length > 10 && v.Contains("abc"), "The given string length must not be longer than 10, and must not contain 'abc'");
 }
 ```
 
