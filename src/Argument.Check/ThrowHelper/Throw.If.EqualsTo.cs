@@ -4,13 +4,15 @@ using Argument.Check.Extensions;
 
 namespace Argument.Check
 {
+    /// <summary>Provides a set of static methods to validate your argument.</summary>
     public partial class Throw
     {
         /// <summary>
         /// Throws an <see cref="ArgumentException"/>, when the given argument is not equals to the <see cref="expectedValue"/>.
         /// </summary>
+        /// <typeparam name="T">The type of the argument.</typeparam>
         /// <param name="argumentFunc">A function, which returns the string to validate.</param>
-        /// /// <param name="expectedValue">The value which the argument must equals.</param>
+        /// <param name="expectedValue">The value which the argument must equals.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not equals to the <see cref="expectedValue"/>.</exception>
         [DebuggerHidden]

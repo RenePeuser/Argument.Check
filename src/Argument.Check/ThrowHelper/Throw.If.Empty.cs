@@ -6,6 +6,7 @@ using Argument.Check.Extensions;
 
 namespace Argument.Check
 {
+    /// <summary>Provides a set of static methods to validate your argument.</summary>
     public static partial class Throw
     {
         /// <summary>

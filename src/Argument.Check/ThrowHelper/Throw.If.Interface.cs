@@ -6,6 +6,10 @@ namespace Argument.Check
 {
     public partial class Throw
     {
+        /// <summary>
+        /// Throws an <see cref="ArgumentException"/>, when the given type is an interface.
+        /// </summary>
+        /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is an interface.</exception>
         [DebuggerHidden]
         public static void IfInterface<T>() where T : class
         {
@@ -16,6 +20,13 @@ namespace Argument.Check
             }
         }
 
+        /// <summary>
+        /// Throws an <see cref="ArgumentException"/>, when the given type is an interface.
+        /// </summary>
+        /// <typeparam name="T">The type of the argument.</typeparam>
+        /// <param name="argumentFunc">A function, which returns the string to validate.</param>
+        /// <returns>The given argument, which was checked.</returns>
+        /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is an interface.</exception>
         [DebuggerHidden]
         public static T IfInterface<T>(Func<T> argumentFunc) where T : class
         {
