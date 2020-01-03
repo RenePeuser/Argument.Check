@@ -12,7 +12,7 @@ You can install this package over your NugetPack-Manager in your Visual Studio
 or use the .NET-CLI
 
 ```bash
-dotnet add package Argument.Check
+dotnet add package Argument.Check --version 0.9.0
 ```
 
 ## Configure Resharper (Optional)
@@ -22,7 +22,7 @@ Resharper settings.
 
 ![](./assets/resharper-settings.png)
 
-This setting has follwing effect:
+This setting has following effect:
 
 ![](./assets/resharper-agrument-null-check.gif)
 
@@ -95,7 +95,7 @@ public MyClass(int value)
 ```csharp
 public MyClass(string value)
 {
-    Throw.If(() => value, v => v.Length > 10 && v.Contains("abc"), "The given string must not be greater than 10, and must not contain 'abc'");
+    Throw.If(() => value, v => v.Length > 10 && v.Contains("abc"), "The given string length must not be longer than 10, and must not contain 'abc'");
 }
 ```
 
