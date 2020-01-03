@@ -158,9 +158,7 @@ public MyClass(object value)
     Throw.IfNullOrWhiteSpace(...)
 
     Throw.IfOutOfRange(...)
-    
     Throw.IfWhitespace(...)   
-
     Throw.IfAnyItemIsNullOrWhitespace(...)
 }
 ```
