@@ -9,11 +9,11 @@ namespace Argument.Check.Test.ThrowHelper
     {
         private const string Vegeta = "Vegeta";
         private const string ArgumentFuncName = "argumentFunc";
+        private readonly string _containedValue = Vegeta;
         private readonly string _nullArgument = null;
         private readonly Func<string> _nullArgumentFunc = null;
-        private readonly string _containedValue = Vegeta;
-        private readonly string _valueNotContained = "SonGoku";
         private readonly IEnumerable<string> _stringValues = new[] { Vegeta, "Beerus" };
+        private readonly string _valueNotContained = "SonGoku";
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Not_In_Expected_Source()

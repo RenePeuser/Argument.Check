@@ -6,9 +6,7 @@ namespace Argument.Check
     /// <summary>Provides a set of static methods to validate your arguments.</summary>
     public partial class Throw
     {
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when the given type is not an interface.
-        /// </summary>
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given type is not an interface.</summary>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
         [DebuggerHidden]
         public static void IfNotInterface<T>() where T : class
@@ -20,9 +18,7 @@ namespace Argument.Check
             }
         }
 
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when the given type is not an interface.
-        /// </summary>
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given type is not an interface.</summary>
         /// <typeparam name="T">The type of the argument.</typeparam>
         /// <param name="argumentFunc">A function, which returns the string to validate.</param>
         /// <returns>The given argument, which was checked.</returns>
@@ -30,8 +26,8 @@ namespace Argument.Check
         [DebuggerHidden]
         public static T IfNotInterface<T>(Func<T> argumentFunc) where T : class
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(argumentFunc);
+            IfNull(() => argumentFunc);
+            IfNull(argumentFunc);
 
             var argument = argumentFunc();
             var type = typeof(T);

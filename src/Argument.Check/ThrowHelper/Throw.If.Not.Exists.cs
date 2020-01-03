@@ -8,17 +8,15 @@ namespace Argument.Check
     /// <summary>Provides a set of static methods to validate your arguments.</summary>
     public partial class Throw
     {
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when the given <see cref="FileSystemInfo"/> does not exists.
-        /// </summary>
-        /// <param name="argumentFunc">A function, which returns the <see cref="FileSystemInfo"/> to validate.</param>
-        /// <returns>The <see cref="FileSystemInfo"/>, which was checked.</returns>
-        /// <exception cref="ArgumentException">The exception, which will be thrown, if <see cref="FileSystemInfo"/> does not exists.</exception>
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given <see cref="FileSystemInfo" /> does not exists.</summary>
+        /// <param name="argumentFunc">A function, which returns the <see cref="FileSystemInfo" /> to validate.</param>
+        /// <returns>The <see cref="FileSystemInfo" />, which was checked.</returns>
+        /// <exception cref="ArgumentException">The exception, which will be thrown, if <see cref="FileSystemInfo" /> does not exists.</exception>
         [DebuggerHidden]
         public static FileSystemInfo IfNotExists(Func<FileSystemInfo> argumentFunc)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(argumentFunc);
+            IfNull(() => argumentFunc);
+            IfNull(argumentFunc);
 
             var fileSystemInfo = argumentFunc();
             if (fileSystemInfo.Exists)

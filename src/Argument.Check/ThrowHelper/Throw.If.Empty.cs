@@ -9,9 +9,7 @@ namespace Argument.Check
     /// <summary>Provides a set of static methods to validate your arguments.</summary>
     public static partial class Throw
     {
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when the given argument string is empty.
-        /// </summary>
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given argument string is empty.</summary>
         /// <param name="argumentFunc">A function, which returns the string to validate.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
@@ -31,9 +29,7 @@ namespace Argument.Check
             throw new ArgumentException("The string must not be empty.", argumentFunc.GetParameterName(arg => arg.Is<string>() && arg.Cast<string>().IsEmpty()));
         }
 
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when the given sequence is empty.
-        /// </summary>
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given sequence is empty.</summary>
         /// <param name="argumentFunc">A function, which returns the sequence to validate.</param>
         /// <returns>The given sequence, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the sequence is not valid.</exception>

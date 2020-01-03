@@ -14,7 +14,6 @@ namespace Argument.Check.Test.ThrowHelper
         private readonly FileSystemInfo _nullArgument = null;
         private readonly Func<FileSystemInfo> _nullArgumentFunc = null;
 
-
         [TestMethod]
         public void Should_Throw_An_Exception_If_DirectoryInfo_Not_Exist()
         {

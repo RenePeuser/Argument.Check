@@ -22,10 +22,11 @@ namespace Argument.Check.Test.SolutionAndProjects
             var argumentCheckDirectory = FindFolderWithSources(currentDirectory, "Argument.Check");
             var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
             CSharpFileInfos = allCSharpFiles.Select(csharpFile =>
-            {
-                var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(csharpFile.FullName));
-                return new CSharpFileInfo(csharpFile, syntaxTree);
-            }).ToList();
+                {
+                    var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(csharpFile.FullName));
+                    return new CSharpFileInfo(csharpFile, syntaxTree);
+                })
+                .ToList();
         }
 
         private static DirectoryInfo FindFolderWithSources(DirectoryInfo startDirectoryInfo, string name)

@@ -10,9 +10,9 @@ namespace Argument.Check.Test.ThrowHelper
         private readonly int _expectedLength = 5;
         private readonly Func<string> _nullArgumentFunc = null;
         private readonly string _nullString = null;
+        private readonly string _sonGoku = "SonGoku";
         private readonly string _stringIsToSmall = "less";
         private readonly string _stringToLarge = "greater";
-        private readonly string _sonGoku = "SonGoku";
 
         [TestMethod]
         public void Should_Throw_Exception_If_String_Length_Is_Too_Small()

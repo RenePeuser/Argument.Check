@@ -7,9 +7,7 @@ namespace Argument.Check
     /// <summary>Provides a set of static methods to validate your arguments.</summary>
     public partial class Throw
     {
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when the given argument is <c>null</c>.
-        /// </summary>
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given argument is <c>null</c>.</summary>
         /// <typeparam name="T">The type of the argument.</typeparam>
         /// <param name="argumentFunc">A function, which returns the argument to validate.</param>
         /// <returns>The given argument, which was checked.</returns>

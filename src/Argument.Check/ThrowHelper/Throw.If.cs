@@ -6,10 +6,8 @@ namespace Argument.Check
 {
     /// <summary>Provides a set of static methods to validate your arguments.</summary>
     public partial class Throw
-    {   
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when validation predicate is <c>true</c>.
-        /// </summary>
+    {
+        /// <summary>Throws an <see cref="ArgumentException" />, when validation predicate is <c>true</c>.</summary>
         /// <typeparam name="T">The type of the argument.</typeparam>
         /// <param name="argumentFunc">A function, which returns the argument to validate.</param>
         /// <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
@@ -32,9 +30,7 @@ namespace Argument.Check
             throw new ArgumentException(string.Empty, argumentFunc.GetParameterName(arg => arg.EqualsTo(argument)));
         }
 
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when validation predicate is <c>true</c>.
-        /// </summary>
+        /// <summary>Throws an <see cref="ArgumentException" />, when validation predicate is <c>true</c>.</summary>
         /// <typeparam name="T">The type of the argument.</typeparam>
         /// <param name="argumentFunc">A function, which returns the argument to validate.</param>
         /// <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>

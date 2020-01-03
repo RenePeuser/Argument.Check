@@ -7,9 +7,7 @@ namespace Argument.Check
     /// <summary>Provides a set of static methods to validate your arguments.</summary>
     public static partial class Throw
     {
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when the given string has not an expected length of <c>length</c>.
-        /// </summary>
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given string has not an expected length of <c>length</c>.</summary>
         /// <param name="argumentFunc">A function, which returns the string to validate.</param>
         /// <param name="length">The length which the string argument must have.</param>
         /// <returns>The given string, which was checked.</returns>

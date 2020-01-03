@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -20,7 +19,7 @@ namespace Argument.Check.Test.SolutionAndProjects
                 where method.Modifiers.Any(m => m.Text.Contains("public"))
                 select new AnalyzeResult(cSharpFileInfo.FileInfo, method.Identifier.ToString());
 
-            Assert.IsFalse(publicMethods.Any(), ToMessage("Not allowed public methods detected, only Throw.xxx helpers must be public",publicMethods));
+            Assert.IsFalse(publicMethods.Any(), ToMessage("Not allowed public methods detected, only Throw.xxx helpers must be public", publicMethods));
         }
 
         [TestMethod]
@@ -50,6 +49,7 @@ namespace Argument.Check.Test.SolutionAndProjects
                 {
                     stringBuilder.AppendLine($"- {analyzeResult.MethodName}");
                 }
+
                 stringBuilder.AppendLine();
             }
 

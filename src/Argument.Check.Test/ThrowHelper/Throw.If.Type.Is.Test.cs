@@ -7,10 +7,10 @@ namespace Argument.Check.Test.ThrowHelper
     public class IfTypeIsTest
     {
         private const string ArgumentFuncName = "argumentFunc";
+        private readonly int _notExpectedType = 4;
         private readonly Func<object> _nullArgumentFunc = null;
         private readonly string _nullString = null;
         private readonly string _sonGoku = "SonGoku";
-        private readonly int _notExpectedType = 4;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Expected_Type()

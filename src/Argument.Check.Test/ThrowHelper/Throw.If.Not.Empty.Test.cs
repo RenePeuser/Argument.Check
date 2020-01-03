@@ -11,8 +11,8 @@ namespace Argument.Check.Test.ThrowHelper
         private const string ArgumentFuncName = "argumentFunc";
 
         private readonly string _emptyString = string.Empty;
-        private readonly string _notEmptyString = "Vegeta";
         private readonly IEnumerable<string> _emptyStrings = Enumerable.Empty<string>();
+        private readonly string _notEmptyString = "Vegeta";
         private readonly IEnumerable<string> _notEmptyStrings = new[] { "SonGoku" };
         private readonly Func<IEnumerable<string>> _nullEnumerableFunc = null;
         private readonly Func<string> _nullStringFunc = null;

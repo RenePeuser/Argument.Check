@@ -1,351 +1,422 @@
 <?xml version="1.0"?>
+
 <doc>
-    <assembly>
-        <name>Argument.Check</name>
-    </assembly>
-    <members>
-        <member name="T:Argument.Check.Throw">
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-            <summary>Provides a set of static methods to validate your arguments.</summary>
-        </member>
-        <member name="M:Argument.Check.Throw.IfAnyItemIsNullOrWhitespace(System.Func{System.Collections.Generic.IEnumerable{System.String}})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when any item of the given sequence is null, empty or whitespace.
-            </summary>
-            <param name="argumentFunc">A function, which returns the sequence to validate.</param>
-            <returns>The given sequence, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfContains``1(System.Func{``0},System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument is part of the given sequence <c>source</c>.
-            </summary>
-            <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable"/>"/>.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="source">The sequence which should contains the given argument.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">The exception, which will be thrown, if the given argument is part of the given sequence <c>source</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.If``1(System.Func{``0},System.Func{``0,System.Boolean})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when validation predicate is <c>true</c>.
-            </summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argumentFunc">A function, which returns the argument to validate.</param>
-            <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.If``1(System.Func{``0},System.Func{``0,System.Boolean},System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when validation predicate is <c>true</c>.
-            </summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argumentFunc">A function, which returns the argument to validate.</param>
-            <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
-            <param name="exceptionMessage">The exception exceptionMessage which should be shown, if argument was not valid.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfEmpty(System.Func{System.String})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument string is empty.
-            </summary>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfEmpty``1(System.Func{System.Collections.Generic.IEnumerable{``0}})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given sequence is empty.
-            </summary>
-            <param name="argumentFunc">A function, which returns the sequence to validate.</param>
-            <returns>The given sequence, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the sequence is not valid.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfEqualsTo``1(System.Func{``0},``0)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument is equals to the <c>expectedValue</c>.
-            </summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="expectedValue">The value which the argument must equals.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is equals to the <c>expectedValue</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfExists(System.Func{System.IO.FileSystemInfo})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given <see cref="T:System.IO.FileSystemInfo"/> exists.
-            </summary>
-            <param name="argumentFunc">A function, which returns the <see cref="T:System.IO.FileSystemInfo"/> to validate.</param>
-            <returns>The <see cref="T:System.IO.FileSystemInfo"/>, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if <see cref="T:System.IO.FileSystemInfo"/> does exists.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfGreaterOrEqual``1(System.Func{``0},``0)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument is equals or greater than the <c>limit</c>.
-            </summary>
-            <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable"/>"/>.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="limit">The limit for the expected value.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">The exception, which will be thrown, if the argument is equals or greater than the <c>limit</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfGreaterThan``1(System.Func{``0},``0)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument is greater than the <c>limit</c>.
-            </summary>
-            <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable"/>"/>.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="limit">The limit for the expected value.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">The exception, which will be thrown, if the argument is greater than the <c>limit</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfInterface``1">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given type is an interface.
-            </summary>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is an interface.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfInterface``1(System.Func{``0})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given type is an interface.
-            </summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is an interface.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfLengthIs(System.Func{System.String},System.Int32)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given string equals to an expected length of <c>length</c>.
-            </summary>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="length">The length which the string argument must have.</param>
-            <returns>The given string, which was checked.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">The exception, which will be thrown, if the given string equals to an expected length of <c>length</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfLengthIsNot(System.Func{System.String},System.Int32)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given string has not an expected length of <c>length</c>.
-            </summary>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="length">The length which the string argument must have.</param>
-            <returns>The given string, which was checked.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">The exception, which will be thrown, if the given string has not an expected length of <c>length</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfLessOrEqual``1(System.Func{``0},``0)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument is equals or less than the <c>limit</c>.
-            </summary>
-            <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable"/>"/>.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="limit">The limit for the expected value.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">The exception, which will be thrown, if the given argument is equals or less than the <c>limit</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfLessThan``1(System.Func{``0},``0)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument is less than the <c>limit</c>.
-            </summary>
-            <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable"/>"/>.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="limit">The limit for the expected value.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">The exception, which will be thrown, if the given argument is less than the <c>limit</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNotContains``1(System.Func{``0},System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument is not part of the given sequence <c>source</c>.
-            </summary>
-            <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable"/>"/>.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="source">The sequence which should contains the given argument.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">The exception, which will be thrown, if the given argument is not part of the given sequence <c>source</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNot``1(System.Func{``0},System.Func{``0,System.Boolean})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when validation predicate is <c>false</c>.
-            </summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argumentFunc">A function, which returns the argument to validate.</param>
-            <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNot``1(System.Func{``0},System.Func{``0,System.Boolean},System.String)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when validation predicate is <c>false</c>.
-            </summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argumentFunc">A function, which returns the argument to validate.</param>
-            <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
-            <param name="exceptionMessage">The exception exceptionMessage which should be shown, if argument was not valid.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNotEmpty(System.Func{System.String})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument string is not empty.
-            </summary>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not empty.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNotEmpty``1(System.Func{System.Collections.Generic.IEnumerable{``0}})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given sequence is not empty.
-            </summary>
-            <param name="argumentFunc">A function, which returns the sequence to validate.</param>
-            <returns>The given sequence, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the sequence is not empty.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNotEqualsTo``1(System.Func{``0},``0)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument is not equals to the <c>expectedValue</c>.
-            </summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="expectedValue">The value which the argument must equals.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not equals to the <c>expectedValue</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNotExists(System.Func{System.IO.FileSystemInfo})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given <see cref="T:System.IO.FileSystemInfo"/> does not exists.
-            </summary>
-            <param name="argumentFunc">A function, which returns the <see cref="T:System.IO.FileSystemInfo"/> to validate.</param>
-            <returns>The <see cref="T:System.IO.FileSystemInfo"/>, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if <see cref="T:System.IO.FileSystemInfo"/> does not exists.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNotInterface``1">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given type is not an interface.
-            </summary>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNotInterface``1(System.Func{``0})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given type is not an interface.
-            </summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNull``1(System.Func{``0})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument is <c>null</c>.
-            </summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argumentFunc">A function, which returns the argument to validate.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentNullException">The exception, which will be thrown, if the argument is not valid.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNullOrAny``1(System.Func{System.Collections.Generic.IEnumerable{``0}},System.Func{``0,System.Boolean})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given sequence is <c>null</c> or any item match the given <c>predicate</c>.
-            </summary>
-            <param name="argumentFunc">A function, which returns the sequence to validate.</param>
-            <param name="predicate">A function which checks the argument, if it is valid or not.</param>
-            <returns>The given sequence, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given sequence is <c>null</c> or any item match the given <c>predicate</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNullOrAnyItemIsNull``1(System.Func{System.Collections.Generic.IEnumerable{``0}})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given sequence is <c>null</c> or any item of the sequence is null.
-            </summary>
-            <param name="argumentFunc">A function, which returns the sequence to validate.</param>
-            <returns>The given sequence, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given sequence is <c>null</c> or any item of the sequence is null.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNullOrEmpty(System.Func{System.String})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given string is <c>null</c> or empty.
-            </summary>
-            <param name="argumentFunc">A function, which returns the sequence to validate.</param>
-            <returns>The given sequence, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given string is <c>null</c> or empty.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNullOrEmpty``1(System.Func{System.Collections.Generic.IEnumerable{``0}})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given sequence is <c>null</c> or empty.
-            </summary>
-            <param name="argumentFunc">A function, which returns the sequence to validate.</param>
-            <returns>The given sequence, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given sequence is <c>null</c> or empty.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNullOrWhiteSpace(System.Func{System.String})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given string is <c>null</c>, whitespace or empty.
-            </summary>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <returns>The given sequence, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given string is <c>null</c>, whitespace or empty.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfOutOfRange``1(System.Func{``0},``0,``0)">
-            <summary>
-            Throws an <see cref="T:System.ArgumentOutOfRangeException"/>, when the given argument is out of range of <c>min</c> and <c>max</c>.
-            </summary>
-            <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable"/>"/>.</typeparam>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <param name="min">The minimum of the valid range.</param>
-            <param name="max">The maximum of the valid range.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentOutOfRangeException">The exception, which will be thrown, when the given argument is out of range of <c>min</c> and <c>max</c>.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfTypeIs``1(System.Func{System.Object})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given type is the specific type <c>T</c>.
-            Hint: It is a type equal test, it is not assignable from check !.
-            </summary>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given type is the specific type.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfTypeIsNot``1(System.Func{System.Object})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given type is not the specific type <c>T</c>.
-            Hint: It is a type equal test, it is not assignable from check !.
-            </summary>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given type is not the specific type.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfWhitespace(System.Func{System.String})">
-            <summary>
-            Throws an <see cref="T:System.ArgumentException"/>, when the given argument string is whitespace.
-            </summary>
-            <param name="argumentFunc">A function, which returns the string to validate.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given argument string is whitespace.</exception>
-        </member>
-    </members>
+  <assembly>
+    <name>Argument.Check</name>
+  </assembly>
+  <members>
+    <member name="T:Argument.Check.Throw">
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+      <summary>Provides a set of static methods to validate your arguments.</summary>
+    </member>
+    <member
+      name="M:Argument.Check.Throw.IfAnyItemIsNullOrWhitespace(System.Func{System.Collections.Generic.IEnumerable{System.String}})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when any item of the given sequence is null, empty or whitespace.
+      </summary>
+      <param name="argumentFunc">A function, which returns the sequence to validate.</param>
+      <returns>The given sequence, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfContains``1(System.Func{``0},System.Collections.Generic.IEnumerable{``0})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument is part of the given sequence
+        <c>source</c>.
+      </summary>
+      <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable" />"/>.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="source">The sequence which should contains the given argument.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        The exception, which will be thrown, if the given argument is part of the given sequence
+        <c>source</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.If``1(System.Func{``0},System.Func{``0,System.Boolean})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when validation predicate is <c>true</c>.
+      </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="argumentFunc">A function, which returns the argument to validate.</param>
+      <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.If``1(System.Func{``0},System.Func{``0,System.Boolean},System.String)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when validation predicate is <c>true</c>.
+      </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="argumentFunc">A function, which returns the argument to validate.</param>
+      <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
+      <param name="exceptionMessage">The exception exceptionMessage which should be shown, if argument was not valid.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfEmpty(System.Func{System.String})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument string is empty.
+      </summary>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfEmpty``1(System.Func{System.Collections.Generic.IEnumerable{``0}})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given sequence is empty.
+      </summary>
+      <param name="argumentFunc">A function, which returns the sequence to validate.</param>
+      <returns>The given sequence, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the sequence is not valid.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfEqualsTo``1(System.Func{``0},``0)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument is equals to the
+        <c>expectedValue</c>.
+      </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="expectedValue">The value which the argument must equals.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">
+        The exception, which will be thrown, if the argument is equals to the
+        <c>expectedValue</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfExists(System.Func{System.IO.FileSystemInfo})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given <see cref="T:System.IO.FileSystemInfo" />
+        exists.
+      </summary>
+      <param name="argumentFunc">A function, which returns the <see cref="T:System.IO.FileSystemInfo" /> to validate.</param>
+      <returns>The <see cref="T:System.IO.FileSystemInfo" />, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">
+        The exception, which will be thrown, if
+        <see cref="T:System.IO.FileSystemInfo" /> does exists.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfGreaterOrEqual``1(System.Func{``0},``0)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument is equals or greater than the
+        <c>limit</c>.
+      </summary>
+      <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable" />"/>.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="limit">The limit for the expected value.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        The exception, which will be thrown, if the argument is equals or greater than the
+        <c>limit</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfGreaterThan``1(System.Func{``0},``0)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument is greater than the <c>limit</c>.
+      </summary>
+      <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable" />"/>.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="limit">The limit for the expected value.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        The exception, which will be thrown, if the argument is greater than the
+        <c>limit</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfInterface``1">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given type is an interface.
+      </summary>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is an interface.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfInterface``1(System.Func{``0})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given type is an interface.
+      </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is an interface.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfLengthIs(System.Func{System.String},System.Int32)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given string equals to an expected length of
+        <c>length</c>.
+      </summary>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="length">The length which the string argument must have.</param>
+      <returns>The given string, which was checked.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        The exception, which will be thrown, if the given string equals to an expected length of
+        <c>length</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfLengthIsNot(System.Func{System.String},System.Int32)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given string has not an expected length of
+        <c>length</c>.
+      </summary>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="length">The length which the string argument must have.</param>
+      <returns>The given string, which was checked.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        The exception, which will be thrown, if the given string has not an expected length of
+        <c>length</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfLessOrEqual``1(System.Func{``0},``0)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument is equals or less than the
+        <c>limit</c>.
+      </summary>
+      <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable" />"/>.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="limit">The limit for the expected value.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        The exception, which will be thrown, if the given argument is equals or less than the
+        <c>limit</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfLessThan``1(System.Func{``0},``0)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument is less than the <c>limit</c>.
+      </summary>
+      <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable" />"/>.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="limit">The limit for the expected value.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        The exception, which will be thrown, if the given argument is less than the
+        <c>limit</c>.
+      </exception>
+    </member>
+    <member
+      name="M:Argument.Check.Throw.IfNotContains``1(System.Func{``0},System.Collections.Generic.IEnumerable{``0})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument is not part of the given sequence
+        <c>source</c>.
+      </summary>
+      <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable" />"/>.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="source">The sequence which should contains the given argument.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        The exception, which will be thrown, if the given argument is not part of the given sequence
+        <c>source</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNot``1(System.Func{``0},System.Func{``0,System.Boolean})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when validation predicate is <c>false</c>.
+      </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="argumentFunc">A function, which returns the argument to validate.</param>
+      <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNot``1(System.Func{``0},System.Func{``0,System.Boolean},System.String)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when validation predicate is <c>false</c>.
+      </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="argumentFunc">A function, which returns the argument to validate.</param>
+      <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
+      <param name="exceptionMessage">The exception exceptionMessage which should be shown, if argument was not valid.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNotEmpty(System.Func{System.String})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument string is not empty.
+      </summary>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not empty.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNotEmpty``1(System.Func{System.Collections.Generic.IEnumerable{``0}})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given sequence is not empty.
+      </summary>
+      <param name="argumentFunc">A function, which returns the sequence to validate.</param>
+      <returns>The given sequence, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the sequence is not empty.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNotEqualsTo``1(System.Func{``0},``0)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument is not equals to the
+        <c>expectedValue</c>.
+      </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="expectedValue">The value which the argument must equals.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">
+        The exception, which will be thrown, if the argument is not equals to the
+        <c>expectedValue</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNotExists(System.Func{System.IO.FileSystemInfo})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given <see cref="T:System.IO.FileSystemInfo" />
+        does not exists.
+      </summary>
+      <param name="argumentFunc">A function, which returns the <see cref="T:System.IO.FileSystemInfo" /> to validate.</param>
+      <returns>The <see cref="T:System.IO.FileSystemInfo" />, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">
+        The exception, which will be thrown, if
+        <see cref="T:System.IO.FileSystemInfo" /> does not exists.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNotInterface``1">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given type is not an interface.
+      </summary>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNotInterface``1(System.Func{``0})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given type is not an interface.
+      </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNull``1(System.Func{``0})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument is <c>null</c>.
+      </summary>
+      <typeparam name="T">The type of the argument.</typeparam>
+      <param name="argumentFunc">A function, which returns the argument to validate.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentNullException">The exception, which will be thrown, if the argument is not valid.</exception>
+    </member>
+    <member
+      name="M:Argument.Check.Throw.IfNullOrAny``1(System.Func{System.Collections.Generic.IEnumerable{``0}},System.Func{``0,System.Boolean})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given sequence is <c>null</c> or any item match the given
+        <c>predicate</c>.
+      </summary>
+      <param name="argumentFunc">A function, which returns the sequence to validate.</param>
+      <param name="predicate">A function which checks the argument, if it is valid or not.</param>
+      <returns>The given sequence, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">
+        The exception, which will be thrown, when the given sequence is
+        <c>null</c> or any item match the given <c>predicate</c>.
+      </exception>
+    </member>
+    <member
+      name="M:Argument.Check.Throw.IfNullOrAnyItemIsNull``1(System.Func{System.Collections.Generic.IEnumerable{``0}})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given sequence is <c>null</c> or any item of the sequence is null.
+      </summary>
+      <param name="argumentFunc">A function, which returns the sequence to validate.</param>
+      <returns>The given sequence, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">
+        The exception, which will be thrown, when the given sequence is
+        <c>null</c> or any item of the sequence is null.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNullOrEmpty(System.Func{System.String})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given string is <c>null</c> or empty.
+      </summary>
+      <param name="argumentFunc">A function, which returns the sequence to validate.</param>
+      <returns>The given sequence, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">
+        The exception, which will be thrown, when the given string is
+        <c>null</c> or empty.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNullOrEmpty``1(System.Func{System.Collections.Generic.IEnumerable{``0}})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given sequence is <c>null</c> or empty.
+      </summary>
+      <param name="argumentFunc">A function, which returns the sequence to validate.</param>
+      <returns>The given sequence, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">
+        The exception, which will be thrown, when the given sequence is
+        <c>null</c> or empty.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfNullOrWhiteSpace(System.Func{System.String})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given string is <c>null</c>, whitespace or empty.
+      </summary>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <returns>The given sequence, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">
+        The exception, which will be thrown, when the given string is
+        <c>null</c>, whitespace or empty.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfOutOfRange``1(System.Func{``0},``0,``0)">
+      <summary>
+        Throws an <see cref="T:System.ArgumentOutOfRangeException" />, when the given argument is out of range of
+        <c>min</c> and <c>max</c>.
+      </summary>
+      <typeparam name="T">The type of the argument, which must be a type of <see cref="T:System.IComparable" />"/>.</typeparam>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <param name="min">The minimum of the valid range.</param>
+      <param name="max">The maximum of the valid range.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        The exception, which will be thrown, when the given argument is out of range of
+        <c>min</c> and <c>max</c>.
+      </exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfTypeIs``1(System.Func{System.Object})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given type is the specific type <c>T</c>.
+        Hint: It is a type equal test, it is not assignable from check !.
+      </summary>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given type is the specific type.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfTypeIsNot``1(System.Func{System.Object})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given type is not the specific type <c>T</c>.
+        Hint: It is a type equal test, it is not assignable from check !.
+      </summary>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given type is not the specific type.</exception>
+    </member>
+    <member name="M:Argument.Check.Throw.IfWhitespace(System.Func{System.String})">
+      <summary>
+        Throws an <see cref="T:System.ArgumentException" />, when the given argument string is whitespace.
+      </summary>
+      <param name="argumentFunc">A function, which returns the string to validate.</param>
+      <returns>The given argument, which was checked.</returns>
+      <exception cref="T:System.ArgumentException">The exception, which will be thrown, when the given argument string is whitespace.</exception>
+    </member>
+  </members>
 </doc>

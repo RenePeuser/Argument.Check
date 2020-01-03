@@ -14,11 +14,11 @@ namespace Argument.Check.Test.SolutionAndProjects
         public void All_Methods_Must_Be_Decorated_With_The_DebuggerHidden_Attribute()
         {
             var missingHiddenAttribute = from cSharpFileInfo in CSharpFileInfos
-                                         from @class in cSharpFileInfo.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
-                                         from method in @class.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                                         let attributeListSyntaxes = method.AttributeLists
-                                         where !attributeListSyntaxes.Any() || !attributeListSyntaxes.First().Attributes.Any() || !attributeListSyntaxes.First().Attributes.Any(a => a.Name.ToString().Contains("DebuggerHidden"))
-                                         select new AnalyzeResult(cSharpFileInfo.FileInfo, method.Identifier.ToString());
+                from @class in cSharpFileInfo.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
+                from method in @class.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                let attributeListSyntaxes = method.AttributeLists
+                where !attributeListSyntaxes.Any() || !attributeListSyntaxes.First().Attributes.Any() || !attributeListSyntaxes.First().Attributes.Any(a => a.Name.ToString().Contains("DebuggerHidden"))
+                select new AnalyzeResult(cSharpFileInfo.FileInfo, method.Identifier.ToString());
 
             Assert.IsFalse(missingHiddenAttribute.Any(), ToMessage(missingHiddenAttribute));
         }
@@ -37,6 +37,7 @@ namespace Argument.Check.Test.SolutionAndProjects
                 {
                     stringBuilder.AppendLine($"- {analyzeResult.MethodName}");
                 }
+
                 stringBuilder.AppendLine();
             }
 

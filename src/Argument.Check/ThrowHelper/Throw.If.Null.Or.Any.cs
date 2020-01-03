@@ -9,9 +9,7 @@ namespace Argument.Check
     /// <summary>Provides a set of static methods to validate your arguments.</summary>
     public partial class Throw
     {
-        /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when the given sequence is <c>null</c> or any item match the given <c>predicate</c>.
-        /// </summary>
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given sequence is <c>null</c> or any item match the given <c>predicate</c>.</summary>
         /// <param name="argumentFunc">A function, which returns the sequence to validate.</param>
         /// <param name="predicate">A function which checks the argument, if it is valid or not.</param>
         /// <returns>The given sequence, which was checked.</returns>
@@ -19,8 +17,8 @@ namespace Argument.Check
         [DebuggerHidden]
         public static IEnumerable<T> IfNullOrAny<T>(Func<IEnumerable<T>> argumentFunc, Func<T, bool> predicate)
         {
-            Throw.IfNull(() => argumentFunc);
-            Throw.IfNull(() => predicate);
+            IfNull(() => argumentFunc);
+            IfNull(() => predicate);
 
             var argument = argumentFunc();
             if (!argument.Any(predicate))
