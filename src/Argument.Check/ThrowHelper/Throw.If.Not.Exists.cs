@@ -5,8 +5,7 @@ using Argument.Check.Extensions;
 
 namespace Argument.Check
 {
-    using static FormattableString;
-
+    /// <summary>Provides a set of static methods to validate your arguments.</summary>
     public partial class Throw
     {
         /// <summary>
@@ -30,11 +29,11 @@ namespace Argument.Check
             switch (fileSystemInfo)
             {
                 case FileInfo fileInfo:
-                    throw new ArgumentException(Invariant($"The file: '{fileInfo.FullName}' does not exists."), argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
+                    throw new ArgumentException($"The file: '{fileInfo.FullName}' does not exists.", argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
                 case DirectoryInfo directoryInfo:
-                    throw new ArgumentException(Invariant($"The directory: '{directoryInfo.FullName}' does not exists."), argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
+                    throw new ArgumentException($"The directory: '{directoryInfo.FullName}' does not exists.", argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
                 default:
-                    throw new ArgumentException(Invariant($"The path: '{fileSystemInfo.FullName}' does not exists."), argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
+                    throw new ArgumentException($"The path: '{fileSystemInfo.FullName}' does not exists.", argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
             }
         }
     }

@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace Argument.Check
 {
+    /// <summary>Provides a set of static methods to validate your arguments.</summary>
     public static partial class Throw
     {
         /// <summary>
