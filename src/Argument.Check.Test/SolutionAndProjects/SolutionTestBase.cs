@@ -3,44 +3,29 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Argument.Check.Test
+namespace Argument.Check.Test.SolutionAndProjects
 {
     [TestClass]
-    public class DebbugHiddenTest
+    public abstract class SolutionTestBase
     {
-        private static IEnumerable<CSharpFileInfo> cSharpFileInfos;
+        internal static List<CSharpFileInfo> CSharpFileInfos { get; private set; }
 
-        [ClassInitialize]
+        [AssemblyInitialize]
         public static void ClassInit(TestContext testContext)
         {
             var currentDirectory = new DirectoryInfo(Environment.CurrentDirectory);
 
             var argumentCheckDirectory = FindFolderWithSources(currentDirectory, "Argument.Check");
             var allCSharpFiles = argumentCheckDirectory.EnumerateFiles("*.cs", SearchOption.AllDirectories);
-            cSharpFileInfos = allCSharpFiles.Select(csharpFile =>
+            CSharpFileInfos = allCSharpFiles.Select(csharpFile =>
             {
                 var syntaxTree = CSharpSyntaxTree.ParseText(File.ReadAllText(csharpFile.FullName));
                 return new CSharpFileInfo(csharpFile, syntaxTree);
             }).ToList();
-        }
-
-        [TestMethod]
-        public void All_Methods_Must_Be_Decorated_With_The_DebuggerHidden_Attribute()
-        {
-            var missingHiddenAttribute = from cSharpFileInfo in cSharpFileInfos
-                                         from @class in cSharpFileInfo.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
-                                         from method in @class.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                                         let attributeListSyntaxes = method.AttributeLists
-                                         where !attributeListSyntaxes.Any() || !attributeListSyntaxes.First().Attributes.Any() || !attributeListSyntaxes.First().Attributes.Any(a => a.Name.ToString().Contains("DebuggerHidden"))
-                                         select new AnalyzeResult(cSharpFileInfo.FileInfo, method.Identifier.ToString());
-
-            Assert.IsFalse(missingHiddenAttribute.Any(), ToMessage(missingHiddenAttribute));
         }
 
         private static DirectoryInfo FindFolderWithSources(DirectoryInfo startDirectoryInfo, string name)
@@ -64,28 +49,8 @@ namespace Argument.Check.Test
             return FindFolderWithSources(startDirectoryInfo.Parent, name);
         }
 
-        private string ToMessage(IEnumerable<AnalyzeResult> analyzeResults)
-        {
-            var groups = analyzeResults.GroupBy(result => result.CSharpFileInfo.FullName);
-            var stringBuilder = new StringBuilder();
-
-            stringBuilder.AppendLine($"Missing {nameof(DebuggerHiddenAttribute)} detected:");
-            stringBuilder.AppendLine();
-            foreach (var group in groups)
-            {
-                stringBuilder.AppendLine(group.Key);
-                foreach (var analyzeResult in group)
-                {
-                    stringBuilder.AppendLine($"- {analyzeResult.MethodName}");
-                }
-                stringBuilder.AppendLine();
-            }
-
-            return stringBuilder.ToString();
-        }
-
         [DebuggerDisplay("{CSharpFileInfo.Name}")]
-        private class AnalyzeResult
+        internal class AnalyzeResult
         {
             public AnalyzeResult(FileInfo cSharpFileInfo, string methodName)
             {
@@ -99,7 +64,7 @@ namespace Argument.Check.Test
         }
 
         [DebuggerDisplay("{FileInfo.Name}")]
-        private class CSharpFileInfo
+        internal class CSharpFileInfo
         {
             public CSharpFileInfo(FileInfo fileInfo, SyntaxTree syntaxTree)
             {
