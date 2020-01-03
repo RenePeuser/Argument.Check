@@ -8,7 +8,7 @@ namespace Argument.Check
     public partial class Throw
     {
         /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when the given type is not the specific type <see cref="T"/>.
+        /// Throws an <see cref="ArgumentException"/>, when the given type is not the specific type <c>T</c>.
         /// Hint: It is a type equal test, it is not assignable from check !.
         /// </summary>
         /// <param name="argumentFunc">A function, which returns the string to validate.</param>

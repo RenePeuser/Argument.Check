@@ -8,7 +8,7 @@ namespace Argument.Check
     public partial class Throw
     {
         /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when <see cref="validationPredicate"/> is <c>false</c>.
+        /// Throws an <see cref="ArgumentException"/>, when validation predicate is <c>false</c>.
         /// </summary>
         /// <typeparam name="T">The type of the argument.</typeparam>
         /// <param name="argumentFunc">A function, which returns the argument to validate.</param>
@@ -33,7 +33,7 @@ namespace Argument.Check
         }
 
         /// <summary>
-        /// Throws an <see cref="ArgumentException"/>, when <see cref="validationPredicate"/> is <c>false</c>.
+        /// Throws an <see cref="ArgumentException"/>, when validation predicate is <c>false</c>.
         /// </summary>
         /// <typeparam name="T">The type of the argument.</typeparam>
         /// <param name="argumentFunc">A function, which returns the argument to validate.</param>
