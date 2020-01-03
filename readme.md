@@ -143,6 +143,7 @@ public MyClass(object value)
     Throw.IfNullOrEmpty(...)
     Throw.IfNullOrWhiteSpace(...)
     Throw.IfOutOfRange(...)
+    Throw.IfType(...)
     Throw.IfWhitespace(...)   
 }
 ```

@@ -6,6 +6,13 @@ namespace Argument.Check
 {
     public static partial class Throw
     {
+        /// <summary>
+        /// Throws an <see cref="ArgumentException"/>, when the given string has not an expected length of <see cref="length"/>.
+        /// </summary>
+        /// <param name="argumentFunc">A function, which returns the string to validate.</param>
+        /// <param name="length">The length which the string argument must have.</param>
+        /// <returns>The given string, which was checked.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, if the given string has not an expected length of <see cref="length"/>.</exception>
         [DebuggerHidden]
         public static string IfLengthIsNot(Func<string> argumentFunc, int length)
         {
