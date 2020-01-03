@@ -7,13 +7,19 @@ namespace Argument.Check
 {
     public partial class Throw
     {
+        /// <summary>
+        /// Throws an <see cref="ArgumentException"/>, when the given <see cref="FileSystemInfo"/> exists.
+        /// </summary>
+        /// <param name="argumentFunc">A function, which returns the <see cref="FileSystemInfo"/> to validate.</param>
+        /// <returns>The <see cref="FileSystemInfo"/>, which was checked.</returns>
+        /// <exception cref="ArgumentException">The exception, which will be thrown, if <see cref="FileSystemInfo"/> does exists.</exception>
         [DebuggerHidden]
-        public static FileSystemInfo IfExists(Func<FileSystemInfo> fileSystemInfoFunc)
+        public static FileSystemInfo IfExists(Func<FileSystemInfo> argumentFunc)
         {
-            Throw.IfNull(() => fileSystemInfoFunc);
-            Throw.IfNull(fileSystemInfoFunc);
+            Throw.IfNull(() => argumentFunc);
+            Throw.IfNull(argumentFunc);
 
-            var fileSystemInfo = fileSystemInfoFunc();
+            var fileSystemInfo = argumentFunc();
             if (fileSystemInfo.Exists.IsFalse())
             {
                 return fileSystemInfo;
@@ -22,11 +28,11 @@ namespace Argument.Check
             switch (fileSystemInfo)
             {
                 case FileInfo fileInfo:
-                    throw new ArgumentException($"The file: '{fileInfo.FullName}' already exists.", fileSystemInfoFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists));
+                    throw new ArgumentException($"The file: '{fileInfo.FullName}' already exists.", argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists));
                 case DirectoryInfo directoryInfo:
-                    throw new ArgumentException($"The directory: '{directoryInfo.FullName}' already exists.", fileSystemInfoFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists));
+                    throw new ArgumentException($"The directory: '{directoryInfo.FullName}' already exists.", argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists));
                 default:
-                    throw new ArgumentException($"The path: '{fileSystemInfo.FullName}' already exists.", fileSystemInfoFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists));
+                    throw new ArgumentException($"The path: '{fileSystemInfo.FullName}' already exists.", argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists));
             }
         }
     }

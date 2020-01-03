@@ -9,13 +9,19 @@ namespace Argument.Check
 
     public partial class Throw
     {
+        /// <summary>
+        /// Throws an <see cref="ArgumentException"/>, when the given <see cref="FileSystemInfo"/> does not exists.
+        /// </summary>
+        /// <param name="argumentFunc">A function, which returns the <see cref="FileSystemInfo"/> to validate.</param>
+        /// <returns>The <see cref="FileSystemInfo"/>, which was checked.</returns>
+        /// <exception cref="ArgumentException">The exception, which will be thrown, if <see cref="FileSystemInfo"/> does not exists.</exception>
         [DebuggerHidden]
-        public static FileSystemInfo IfNotExists(Func<FileSystemInfo> fileSystemInfoFunc)
+        public static FileSystemInfo IfNotExists(Func<FileSystemInfo> argumentFunc)
         {
-            Throw.IfNull(() => fileSystemInfoFunc);
-            Throw.IfNull(fileSystemInfoFunc);
+            Throw.IfNull(() => argumentFunc);
+            Throw.IfNull(argumentFunc);
 
-            var fileSystemInfo = fileSystemInfoFunc();
+            var fileSystemInfo = argumentFunc();
             if (fileSystemInfo.Exists)
             {
                 return fileSystemInfo;
@@ -24,11 +30,11 @@ namespace Argument.Check
             switch (fileSystemInfo)
             {
                 case FileInfo fileInfo:
-                    throw new ArgumentException(Invariant($"The file: '{fileInfo.FullName}' does not exists."), fileSystemInfoFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
+                    throw new ArgumentException(Invariant($"The file: '{fileInfo.FullName}' does not exists."), argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
                 case DirectoryInfo directoryInfo:
-                    throw new ArgumentException(Invariant($"The directory: '{directoryInfo.FullName}' does not exists."), fileSystemInfoFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
+                    throw new ArgumentException(Invariant($"The directory: '{directoryInfo.FullName}' does not exists."), argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
                 default:
-                    throw new ArgumentException(Invariant($"The path: '{fileSystemInfo.FullName}' does not exists."), fileSystemInfoFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
+                    throw new ArgumentException(Invariant($"The path: '{fileSystemInfo.FullName}' does not exists."), argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists.IsFalse()));
             }
         }
     }
