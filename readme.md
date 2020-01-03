@@ -119,32 +119,49 @@ public MyClass(object value)
 
 ```csharp
 public MyClass(object value)
-{
-    Throw.IfAnyItemIsNullOrWhitespace(...)
+{    
     Throw.If(...)
-    Throw.IfEmpty(...)
-    Throw.IfEqualsTo(...)
-    Throw.IfExists(...)
-    Throw.IfGreaterOrEqual(...)
-    Throw.IfGreaterThan(...)
-    Throw.IfInterface(...)
-    Throw.IfLengthIsNot(...)
-    Throw.IfLessOrEqual(...)
-    Throw.IfLessThan(...)
-    Throw.IfNotContains(...)
     Throw.IfNot(...)
-    Throw.IfNotEqualsTo(...)
-    Throw.IfNotExists(...)
-    Throw.IfNotInterface(...)    
+
     Throw.IfNull(...)
-    Throw.IfNullOrAny(...)
-    Throw.IfNullOrAnyItemIsNull(...)
-    Throw.IfNullOrEmpty(...)
-    Throw.IfNullOrWhiteSpace(...)
-    Throw.IfOutOfRange(...)
+
+    Throw.IfEmpty(...)
+    Throw.IfNotEmpty(...)
+
     Throw.IfTypeIs(...)
     Throw.IfTypeIsNot(...)
+
+    Throw.IfEqualsTo(...)
+    Throw.IfNotEqualsTo(...)
+
+    Throw.IfExists(...)
+    Throw.IfNotExists(...)
+
+    Throw.IfGreaterOrEqual(...)
+    Throw.IfGreaterThan(...)
+
+    Throw.IfLessOrEqual(...)
+    Throw.IfLessThan(...)
+
+    Throw.IfInterface(...)
+    Throw.IfNotInterface(...)
+    
+    Throw.IfLengthIs(...)
+    Throw.IfLengthIsNot(...)
+    
+    Throw.IfContains(...)
+    Throw.IfNotContains(...)
+            
+    Throw.IfNullOrAny(...)
+    Throw.IfNullOrAnyItemIsNull(...)    
+    Throw.IfNullOrEmpty(...)
+    Throw.IfNullOrWhiteSpace(...)
+
+    Throw.IfOutOfRange(...)
+    
     Throw.IfWhitespace(...)   
+
+    Throw.IfAnyItemIsNullOrWhitespace(...)
 }
 ```
 
