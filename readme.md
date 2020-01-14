@@ -12,7 +12,7 @@ You can install this package over your NugetPack-Manager in your Visual Studio
 or use the .NET-CLI
 
 ```bash
-dotnet add package Argument.Check --version 0.9.0
+dotnet add package Argument.Check --version 1.0.1
 ```
 
 ## Configure Resharper (Optional)
