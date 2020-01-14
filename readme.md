@@ -47,7 +47,7 @@ public MyClass(object arg)
 ```csharp
 public MyClass(IService service)
 {
-    _service = Throw.IfNull(() =>  arg);
+    _service = Throw.IfNull(() =>  service);
 }
 ```
 
@@ -55,7 +55,7 @@ public MyClass(IService service)
 ```csharp
 public MyClass(FileInfo fileInfo)
 {
-    Throw.IfExists(() =>  arg);
+    Throw.IfExists(() =>  fileInfo);
 }
 ```
 
@@ -63,7 +63,7 @@ public MyClass(FileInfo fileInfo)
 ```csharp
 public MyClass(DirectoryInfo directoryInfo)
 {
-    Throw.IfExists(() => arg);
+    Throw.IfExists(() => directoryInfo);
 }
 ```
 
