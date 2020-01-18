@@ -44,15 +44,14 @@ public Class(IService service)
 
             var method = func.Method;
             var typeInfo = method.DeclaringType.Cast<TypeInfo>();
-            var declaredMethods = typeInfo.DeclaredMethods.Where(m => fieldInfos.Any(field => m.ReturnType.EqualsTo(field.FieldType))).ToList();
-            var filteredFields = fieldInfos.Where(f => declaredMethods.Any(m => f.FieldType.EqualsTo(m.ReturnParameter.ParameterType))).ToList();
-            if (declaredMethods.Count != filteredFields.Count)
+            var declaredMethods = typeInfo.DeclaredMethods;
+            if (declaredMethods.Count() != fieldInfos.Count())
             {
                 throw new InvalidOperationException($"Please check, that you only do argument checking with the 'Throw' helpers in the scope of an constructor or method. It will not work for outer scope stuff. Sample:{Environment.NewLine}{Sample}");
             }
 
             var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
-            var ilMethods = filteredFields.Select((field, index) => new ILReconstructedMethod(orderedMethods[index], field));
+            var ilMethods = fieldInfos.Select((field, index) => new ILReconstructedMethod(orderedMethods[index], field));
             return ilMethods;
         }
     }

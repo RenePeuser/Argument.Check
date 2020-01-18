@@ -7,11 +7,9 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfNullOrAnyTest
     {
-        private const string ArgumentFuncName = "argumentFunc";
         private readonly IEnumerable<string> _listWithNullItem = new[] { "Vegeta", "Beerus", null };
         private readonly IEnumerable<string> _listWithoutNullItem = new[] { "Vegeta", "Beerus" };
         private readonly IEnumerable<string> _nullArgument = null;
-        private readonly Func<IEnumerable<string>> _nullArgumentFunc = null;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_In_The_Source_Match_The_Given_Predicate()
@@ -51,7 +49,7 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+                static void TestNullFunc()
                 {
                     Throw.IfNullOrAny(NullHelper.GetNullOf<Func<string>>(), _ => true);
                 }
