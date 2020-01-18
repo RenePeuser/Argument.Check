@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using Argument.Check.Models;
 
 namespace Argument.Check.Extensions
@@ -36,7 +36,7 @@ public Class(IService service)
 }
 ";
 
-        // [DebuggerHidden]
+        [DebuggerHidden]
         internal static IEnumerable<ILReconstructedMethod> Rebuild<T>(this Func<T> func, IEnumerable<FieldInfo> fieldInfos)
         {
             Throw.IfNull(() => func);
@@ -57,22 +57,22 @@ public Class(IService service)
 
             if (declaredMethods.Count == fieldInfos.Count())
             {
-                var rebuildIlMethods = Test1(declaredMethods, fieldInfos);
+                var rebuildIlMethods = FetchOneArgumentOneCheck(declaredMethods, fieldInfos);
                 return rebuildIlMethods;
             }
 
-            var result = Test2(declaredMethods, fieldInfos).ToList();
+            var result = FetchMultiCheckForOneArgument(declaredMethods, fieldInfos).ToList();
             return result;
         }
 
-        private static IEnumerable<ILReconstructedMethod> Test1(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
+        private static IEnumerable<ILReconstructedMethod> FetchOneArgumentOneCheck(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
         {
             var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
             var ilMethods = fieldInfos.Select((field, index) => new ILReconstructedMethod(orderedMethods[index], field));
             return ilMethods;
         }
 
-        private static IEnumerable<ILReconstructedMethod> Test2(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
+        private static IEnumerable<ILReconstructedMethod> FetchMultiCheckForOneArgument(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
         {
             var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
             var counetr = declaredMethods.Count() / fieldInfos.Count();

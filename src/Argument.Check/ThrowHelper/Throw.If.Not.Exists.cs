@@ -12,7 +12,7 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the <see cref="FileSystemInfo" /> to validate.</param>
         /// <returns>The <see cref="FileSystemInfo" />, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if <see cref="FileSystemInfo" /> does not exists.</exception>
-        // [DebuggerHidden]
+        [DebuggerHidden]
         public static FileSystemInfo IfNotExists(Func<FileSystemInfo> argumentFunc)
         {
             IfNull(() => argumentFunc);

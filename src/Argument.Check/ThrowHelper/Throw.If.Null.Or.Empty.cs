@@ -11,7 +11,7 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the sequence to validate.</param>
         /// <returns>The given sequence, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, when the given string is <c>null</c> or empty.</exception>
-        // [DebuggerHidden]
+        [DebuggerHidden]
         public static string IfNullOrEmpty(Func<string> argumentFunc)
         {
             IfNull(() => argumentFunc);
@@ -25,7 +25,7 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the sequence to validate.</param>
         /// <returns>The given sequence, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, when the given sequence is <c>null</c> or empty.</exception>
-        // [DebuggerHidden]
+        [DebuggerHidden]
         public static IEnumerable<T> IfNullOrEmpty<T>(Func<IEnumerable<T>> argumentFunc)
         {
             IfNull(() => argumentFunc);

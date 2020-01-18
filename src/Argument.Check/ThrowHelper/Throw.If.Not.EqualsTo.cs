@@ -13,7 +13,7 @@ namespace Argument.Check
         /// <param name="expectedValue">The value which the argument must equals.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not equals to the <c>expectedValue</c>.</exception>
-        // [DebuggerHidden]
+        [DebuggerHidden]
         public static T IfNotEqualsTo<T>(Func<T> argumentFunc, T expectedValue)
         {
             IfNull(() => argumentFunc);

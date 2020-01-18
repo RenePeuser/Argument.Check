@@ -12,7 +12,7 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the argument to validate.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentNullException">The exception, which will be thrown, if the argument is not valid.</exception>
-        // [DebuggerHidden]
+        [DebuggerHidden]
         public static T IfNull<T>(Func<T> argumentFunc) where T : class
         {
             if (argumentFunc == null)

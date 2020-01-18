@@ -12,7 +12,7 @@ namespace Argument.Check
         /// <param name="length">The length which the string argument must have.</param>
         /// <returns>The given string, which was checked.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, if the given string equals to an expected length of <c>length</c>.</exception>
-        // [DebuggerHidden]
+        [DebuggerHidden]
         public static string IfLengthIs(Func<string> argumentFunc, int length)
         {
             IfNull(() => argumentFunc);

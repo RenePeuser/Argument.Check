@@ -5,7 +5,7 @@ namespace Argument.Check.Extensions
 {
     internal static class TypeExtensions
     {
-        // [DebuggerHidden]
+        [DebuggerHidden]
         internal static bool IsTypeOf<T>(this Type type)
         {
             Throw.IfNull(() => type);

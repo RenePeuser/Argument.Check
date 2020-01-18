@@ -7,7 +7,7 @@ namespace Argument.Check.Extensions
 {
     internal static class EnumerableExtensions
     {
-        // [DebuggerHidden]
+        [DebuggerHidden]
         internal static bool IsAnyItemNull<T>(this IEnumerable<T> source)
         {
             Throw.IfNull(() => source);
@@ -15,7 +15,7 @@ namespace Argument.Check.Extensions
             return source.IsAnyItem(item => item == null);
         }
 
-        // [DebuggerHidden]
+        [DebuggerHidden]
         internal static bool IsAnyItemNullOrWhitespace(this IEnumerable<string> source)
         {
             Throw.IfNull(() => source);
@@ -23,7 +23,7 @@ namespace Argument.Check.Extensions
             return source.IsAnyItem(item => item.IsNullOrWhiteSpace());
         }
 
-        // [DebuggerHidden]
+        [DebuggerHidden]
         internal static bool IsAnyItem<T>(this IEnumerable<T> source, Predicate<T> check)
         {
             Throw.IfNull(() => source);
@@ -31,7 +31,7 @@ namespace Argument.Check.Extensions
             return source.Any(item => check(item));
         }
 
-        // [DebuggerHidden]
+        [DebuggerHidden]
         internal static bool IsEmpty<T>(this IEnumerable<T> source)
         {
             Throw.IfNull(() => source);
@@ -39,7 +39,7 @@ namespace Argument.Check.Extensions
             return !source.Any();
         }
 
-        // [DebuggerHidden]
+        [DebuggerHidden]
         internal static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
         {
             return source == null || source.IsEmpty();

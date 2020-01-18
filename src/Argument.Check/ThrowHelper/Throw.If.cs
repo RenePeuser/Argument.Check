@@ -13,7 +13,7 @@ namespace Argument.Check
         /// <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        // [DebuggerHidden]
+        [DebuggerHidden]
         public static T If<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate)
         {
             IfNull(() => argumentFunc);
@@ -37,7 +37,7 @@ namespace Argument.Check
         /// <param name="exceptionMessage">The exception exceptionMessage which should be shown, if argument was not valid.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        // [DebuggerHidden]
+        [DebuggerHidden]
         public static T If<T>(Func<T> argumentFunc, Func<T, bool> validationPredicate, string exceptionMessage)
         {
             IfNull(() => argumentFunc);
