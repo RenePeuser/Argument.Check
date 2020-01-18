@@ -17,7 +17,7 @@ You can install this package over your NugetPack-Manager in your Visual Studio
 or use the .NET-CLI
 
 ```bash
-dotnet add package Argument.Check --version 0.9.0
+dotnet add package Argument.Check --version 1.0.1
 ```
 
 ## Configure Resharper (Optional)
@@ -52,7 +52,7 @@ public MyClass(object arg)
 ```csharp
 public MyClass(IService service)
 {
-    _service = Throw.IfNull(() =>  arg);
+    _service = Throw.IfNull(() =>  service);
 }
 ```
 
@@ -71,7 +71,7 @@ public MyClass(IService service)
 ```csharp
 public MyClass(FileInfo fileInfo)
 {
-    Throw.IfExists(() =>  arg);
+    Throw.IfExists(() =>  fileInfo);
 }
 ```
 
@@ -79,7 +79,7 @@ public MyClass(FileInfo fileInfo)
 ```csharp
 public MyClass(DirectoryInfo directoryInfo)
 {
-    Throw.IfExists(() => arg);
+    Throw.IfExists(() => directoryInfo);
 }
 ```
 
