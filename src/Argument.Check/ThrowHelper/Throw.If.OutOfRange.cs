@@ -14,7 +14,7 @@ namespace Argument.Check
         /// <param name="max">The maximum of the valid range.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, when the given argument is out of range of <c>min</c> and <c>max</c>.</exception>
-        [DebuggerHidden]
+        // [DebuggerHidden]
         public static T IfOutOfRange<T>(Func<T> argumentFunc, T min, T max) where T : IComparable
         {
             IfNull(() => argumentFunc);

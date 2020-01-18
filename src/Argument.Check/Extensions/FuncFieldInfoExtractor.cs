@@ -7,7 +7,7 @@ namespace Argument.Check.Extensions
 {
     internal static class FuncFieldInfoExtractor
     {
-        [DebuggerHidden]
+        // [DebuggerHidden]
         internal static FieldInfo GetFieldInfo<T>(this Func<T> func)
         {
             Throw.IfNull(() => func);
@@ -19,7 +19,7 @@ namespace Argument.Check.Extensions
             return checkArgumentFieldInfo.ReturnValue;
         }
 
-        [DebuggerHidden]
+        // [DebuggerHidden]
         internal static string GetParameterName<T>(this Func<T> func)
         {
             Throw.IfNull(() => func);

@@ -10,7 +10,7 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the string to validate.</param>
         /// <returns>The given sequence, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, when the given string is <c>null</c>, whitespace or empty.</exception>
-        [DebuggerHidden]
+        // [DebuggerHidden]
         public static string IfNullOrWhiteSpace(Func<string> argumentFunc)
         {
             IfNull(() => argumentFunc);

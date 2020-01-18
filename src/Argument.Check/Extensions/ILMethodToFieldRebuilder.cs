@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using Argument.Check.Models;
 
 namespace Argument.Check.Extensions
@@ -36,7 +36,7 @@ public Class(IService service)
 }
 ";
 
-        [DebuggerHidden]
+        // [DebuggerHidden]
         internal static IEnumerable<ILReconstructedMethod> Rebuild<T>(this Func<T> func, IEnumerable<FieldInfo> fieldInfos)
         {
             Throw.IfNull(() => func);
@@ -44,15 +44,51 @@ public Class(IService service)
 
             var method = func.Method;
             var typeInfo = method.DeclaringType.Cast<TypeInfo>();
-            var declaredMethods = typeInfo.DeclaredMethods;
-            if (declaredMethods.Count() != fieldInfos.Count())
+
+            var typeInfoDeclaredMethods = typeInfo.DeclaredMethods;
+
+            var declaredMethods = typeInfoDeclaredMethods.Where(m => fieldInfos.Any(f => m.ReturnParameter.ParameterType.IsAssignableFrom(f.FieldType))).ToList();
+
+            var methodsWhichNotMatchFieldType = typeInfoDeclaredMethods.Except(declaredMethods).ToList();
+            if (methodsWhichNotMatchFieldType.Any())
             {
                 throw new InvalidOperationException($"Please check, that you only do argument checking with the 'Throw' helpers in the scope of an constructor or method. It will not work for outer scope stuff. Sample:{Environment.NewLine}{Sample}");
             }
 
+            if (declaredMethods.Count == fieldInfos.Count())
+            {
+                var rebuildIlMethods = Test1(declaredMethods, fieldInfos);
+                return rebuildIlMethods;
+            }
+
+            var result = Test2(declaredMethods, fieldInfos).ToList();
+            return result;
+        }
+
+        private static IEnumerable<ILReconstructedMethod> Test1(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
+        {
             var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
             var ilMethods = fieldInfos.Select((field, index) => new ILReconstructedMethod(orderedMethods[index], field));
             return ilMethods;
+        }
+
+        private static IEnumerable<ILReconstructedMethod> Test2(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
+        {
+            var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
+            var counetr = declaredMethods.Count() / fieldInfos.Count();
+
+            int count = 0;
+            int index = 0;
+            foreach (var orderedMethod in orderedMethods)
+            {
+                if (count == counetr)
+                {
+                    index++;
+                }
+                var fieldForMethod = fieldInfos.ElementAt(index);
+                count++;
+                yield return new ILReconstructedMethod(orderedMethod, fieldForMethod);
+            }
         }
     }
 }

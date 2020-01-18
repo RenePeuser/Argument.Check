@@ -13,7 +13,7 @@ namespace Argument.Check
         /// <param name="limit">The limit for the expected value.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, if the given argument is equals or less than the <c>limit</c>.</exception>
-        [DebuggerHidden]
+        // [DebuggerHidden]
         public static T IfLessOrEqual<T>(Func<T> argumentFunc, T limit) where T : IComparable
         {
             IfNull(() => argumentFunc);

@@ -11,7 +11,7 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the string to validate.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, when the given type is not the specific type.</exception>
-        [DebuggerHidden]
+        // [DebuggerHidden]
         public static object IfTypeIsNot<T>(Func<object> argumentFunc) where T : class
         {
             IfNull(() => argumentFunc);

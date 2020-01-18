@@ -14,7 +14,7 @@ namespace Argument.Check
         /// <param name="predicate">A function which checks the argument, if it is valid or not.</param>
         /// <returns>The given sequence, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, when the given sequence is <c>null</c> or any item match the given <c>predicate</c>.</exception>
-        [DebuggerHidden]
+        // [DebuggerHidden]
         public static IEnumerable<T> IfNullOrAny<T>(Func<IEnumerable<T>> argumentFunc, Func<T, bool> predicate)
         {
             IfNull(() => argumentFunc);

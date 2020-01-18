@@ -12,7 +12,7 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the sequence to validate.</param>
         /// <returns>The given sequence, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        [DebuggerHidden]
+        // [DebuggerHidden]
         public static IEnumerable<string> IfAnyItemIsNullOrWhitespace(Func<IEnumerable<string>> argumentFunc)
         {
             IfNull(() => argumentFunc);

@@ -4,19 +4,19 @@ namespace Argument.Check.Extensions
 {
     internal static class ObjectExtensions
     {
-        [DebuggerHidden]
+        // [DebuggerHidden]
         internal static bool Is<T>(this object source)
         {
             return source is T;
         }
 
-        [DebuggerHidden]
+        // [DebuggerHidden]
         internal static bool IsNotNull(this object source)
         {
             return !source.EqualsTo(null);
         }
 
-        [DebuggerHidden]
+        // [DebuggerHidden]
         internal static bool IsNotTypeOf<T>(this object source)
         {
             Throw.IfNull(() => source);
@@ -24,7 +24,7 @@ namespace Argument.Check.Extensions
             return !source.IsTypeOf<T>();
         }
 
-        [DebuggerHidden]
+        // [DebuggerHidden]
         internal static bool IsTypeOf<T>(this object source)
         {
             Throw.IfNull(() => source);
@@ -32,7 +32,7 @@ namespace Argument.Check.Extensions
             return source.GetType().IsTypeOf<T>();
         }
 
-        [DebuggerHidden]
+        // [DebuggerHidden]
         internal static T Cast<T>(this object source)
         {
             Throw.IfNull(() => source);

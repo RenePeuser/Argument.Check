@@ -9,7 +9,7 @@ namespace Argument.Check
     {
         /// <summary>Throws an <see cref="ArgumentException" />, when the given type is not an interface.</summary>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
-        [DebuggerHidden]
+        // [DebuggerHidden]
         public static void IfNotInterface<T>() where T : class
         {
             var type = typeof(T);
@@ -24,7 +24,7 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the string to validate.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
-        [DebuggerHidden]
+        // [DebuggerHidden]
         public static T IfNotInterface<T>(Func<T> argumentFunc) where T : class
         {
             IfNull(() => argumentFunc);

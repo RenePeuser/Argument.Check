@@ -15,7 +15,7 @@ namespace Argument.Check
         /// <param name="source">The sequence which should contains the given argument.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, if the given argument is part of the given sequence <c>source</c>.</exception>
-        [DebuggerHidden]
+        // [DebuggerHidden]
         public static T IfContains<T>(Func<T> argumentFunc, IEnumerable<T> source)
         {
             IfNull(() => argumentFunc);

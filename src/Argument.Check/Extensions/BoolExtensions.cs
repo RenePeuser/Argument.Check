@@ -4,7 +4,7 @@ namespace Argument.Check.Extensions
 {
     internal static class BoolExtensions
     {
-        [DebuggerHidden]
+        // [DebuggerHidden]
         internal static bool IsFalse(this bool source)
         {
             return !source;
