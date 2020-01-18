@@ -15,27 +15,27 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Equal_To_Expected_Limit()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfLessOrEqual(() => _limit, _limit), nameof(_limit));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Smaller_To_Expected_Limit()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfLessOrEqual(() => _smallerValue, _limit), nameof(_limit));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_With_Correct_Message_If_Value_Is_Equal_To_Expected_Limit()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfLessOrEqual(() => _smallerValue, _limit), nameof(_limit));
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
 
-            Assert.IsTrue(exception.Message.Contains($"Value: '{_smallerValue}' must not be less than or equal to: '{_limit}'."));
+            Assert.AreEqual($"Value: '{_smallerValue}' must not be less than or equal to: '{_limit}'. (Parameter 'value')", exception.Message);
         }
 
         [TestMethod]
         public void Should_Not_Throw_Exception_If_Value_Is_Lower_Than_Expected_Limit()
         {
-            Throw.IfLessOrEqual(() => _validValue, _limit);
+            TestMethod(_validValue, _limit);
         }
 
         [TestMethod]
@@ -48,6 +48,26 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Throw_Exception_If_ArgumentFunc_Is_Null()
         {
             Assert.ThrowsException<ArgumentNullException>(() => Throw.IfLessOrEqual(_nullArgumentFunc, _limit), nameof(ArgumentFuncName));
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
+        {
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfLessOrEqual(NullHelper.GetNullOf<Func<int>>(), 5);
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        private void TestMethod(int value, int limit)
+        {
+            Throw.IfLessOrEqual(() => value, limit);
         }
     }
 }

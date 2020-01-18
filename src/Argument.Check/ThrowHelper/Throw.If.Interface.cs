@@ -37,7 +37,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException($"Type: '{type}' must not be an interface.");
+            throw new ArgumentException($"Argument: '{argumentFunc.GetParameterName()}' must not be an interface.");
         }
     }
 }

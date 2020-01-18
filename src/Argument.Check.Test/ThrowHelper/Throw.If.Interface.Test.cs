@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,7 +8,6 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfInterfaceTest
     {
-        private readonly IEnumerable<string> _enumerable = Enumerable.Empty<string>();
         private readonly object _noInterface = new object();
 
         [TestMethod]
@@ -22,7 +21,15 @@ namespace Argument.Check.Test.ThrowHelper
         {
             var exception = Assert.ThrowsException<ArgumentException>(Throw.IfInterface<ICloneable>);
 
-            Assert.IsTrue(exception.Message.Contains($"Type: '{typeof(ICloneable)}' must not be an interface."));
+            Assert.AreEqual($"Type: '{typeof(ICloneable)}' must not be an interface.", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_With_Correct_Message_If_Type_Instance_Is_An_Interface()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(Enumerable.Empty<string>()));
+
+            Assert.AreEqual("Argument: 'argument' must not be an interface.", exception.Message);
         }
 
         [TestMethod]
@@ -44,9 +51,23 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
-        public void Should_Throw_An_Exception_If_Instance_Is_Not_An_Interface()
+        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfInterface(() => _enumerable));
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfInterface(NullHelper.GetNullOf<Func<object>>());
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        private void TestMethod(IEnumerable argument)
+        {
+            Throw.IfInterface(() => argument);
         }
     }
 }

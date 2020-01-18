@@ -6,10 +6,7 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfOutOfRangeTest
     {
-        private const string ArgumentFuncName = "argumentFunc";
-
         private readonly int _lowerLimit = 5;
-        private readonly Func<int> _nullArgumentFunc = null;
         private readonly int _upperLimit = 9;
         private readonly int _valueHigherThanUpperLimit = 42;
         private readonly int _valueInRange = 7;
@@ -18,25 +15,25 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Higher_Than_Upper_Limit()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfOutOfRange(() => _valueHigherThanUpperLimit, _lowerLimit, _upperLimit), nameof(_valueHigherThanUpperLimit));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_valueHigherThanUpperLimit, _lowerLimit, _upperLimit));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Lower_Than_Lower_Limit()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfOutOfRange(() => _valueLowerThanLowerLimit, _lowerLimit, _upperLimit), nameof(_valueLowerThanLowerLimit));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_valueLowerThanLowerLimit, _lowerLimit, _upperLimit));
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Value_Is_In_Range()
         {
-            Throw.IfOutOfRange(() => _valueInRange, _lowerLimit, _upperLimit);
+            TestMethod(_valueInRange, _lowerLimit, _upperLimit);
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Value_Is_Equal_To_Lower_Limit()
         {
-            Throw.IfOutOfRange(() => _lowerLimit, _lowerLimit, _upperLimit);
+            TestMethod(_lowerLimit, _lowerLimit, _upperLimit);
         }
 
         [TestMethod]
@@ -48,7 +45,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Value_Is_Equal_To_Upper_Limit()
         {
-            Throw.IfOutOfRange(() => _upperLimit, _lowerLimit, _upperLimit);
+            TestMethod(_upperLimit, _lowerLimit, _upperLimit);
         }
 
         [TestMethod]
@@ -60,7 +57,21 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfOutOfRange(_nullArgumentFunc, _lowerLimit, _upperLimit), ArgumentFuncName);
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfOutOfRange(NullHelper.GetNullOf<Func<int>>(), 5, 7);
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        private void TestMethod(int value, int lower, int upper)
+        {
+            Throw.IfOutOfRange(() => value, lower, upper);
         }
     }
 }

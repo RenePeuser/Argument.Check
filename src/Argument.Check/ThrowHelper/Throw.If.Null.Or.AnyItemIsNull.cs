@@ -24,12 +24,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentNullException(argumentFunc.GetParameterName(Predicate), $"At least one item in the enumeration '{argumentFunc()}' was null.");
-
-            bool Predicate(object arg)
-            {
-                return arg.Is<IEnumerable<T>>() && arg.Cast<IEnumerable<T>>().IsAnyItemNull();
-            }
+            throw new ArgumentNullException(argumentFunc.GetParameterName(), $"At least one item in the enumeration '{argumentFunc()}' was null.");
         }
     }
 }

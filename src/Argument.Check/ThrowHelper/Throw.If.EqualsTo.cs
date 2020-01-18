@@ -24,7 +24,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException($"The argument value: '{argument}' was equal to: '{expectedValue}'.", argumentFunc.GetParameterName(arg => arg.EqualsTo(expectedValue)));
+            throw new ArgumentException($"The argument value: '{argument}' was equal to: '{expectedValue}'.", argumentFunc.GetParameterName());
         }
     }
 }

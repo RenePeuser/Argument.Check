@@ -15,26 +15,25 @@ namespace Argument.Check.Test.ThrowHelper
         private readonly string _notEmptyString = "Vegeta";
         private readonly IEnumerable<string> _notEmptyStrings = new[] { "SonGoku" };
         private readonly Func<IEnumerable<string>> _nullEnumerableFunc = null;
-        private readonly Func<string> _nullStringFunc = null;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Not_Empty()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfNotEmpty(() => _notEmptyString), nameof(_notEmptyString));
+            Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyString));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_String_Is_Not_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => Throw.IfNotEmpty(() => _notEmptyString), nameof(_notEmptyString));
+            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyString));
 
-            Assert.IsTrue(exception.Message.Contains("The string must be empty."));
+            Assert.AreEqual("The string must be empty. (Parameter 'contains')", exception.Message);
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_When_String_Is_Valid()
         {
-            Throw.IfNotEmpty(() => _emptyString);
+            TestMethod(_emptyString);
         }
 
         [TestMethod]
@@ -46,21 +45,21 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Strings_Are_Empty()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfNotEmpty(() => _notEmptyStrings), nameof(_notEmptyStrings));
+            Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyStrings));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Strings_Are_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => Throw.IfNotEmpty(() => _notEmptyStrings), nameof(_notEmptyStrings));
+            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyStrings));
 
-            Assert.IsTrue(exception.Message.Contains("The enumerable must be empty."));
+            Assert.AreEqual("The enumerable must be empty. (Parameter 'source')", exception.Message);
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_When_Strings_Are_Not_Empty()
         {
-            Throw.IfNotEmpty(() => _emptyStrings);
+            TestMethod(_emptyStrings);
         }
 
         [TestMethod]
@@ -78,7 +77,41 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_ArgumentFunc_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNotEmpty(_nullStringFunc), ArgumentFuncName);
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfNotEmpty(NullHelper.GetNullOf<Func<string>>());
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_If_Enumeration_ArgumentFunc_Is_Null()
+        {
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfNotEmpty(NullHelper.GetNullOf<Func<IEnumerable<string>>>());
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        private void TestMethod(string contains)
+        {
+            Throw.IfNotEmpty(() => contains);
+        }
+
+        private void TestMethod<T>(IEnumerable<T> source)
+        {
+            Throw.IfNotEmpty(() => source);
         }
     }
 }

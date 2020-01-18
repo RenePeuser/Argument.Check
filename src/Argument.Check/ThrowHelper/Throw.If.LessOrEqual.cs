@@ -24,12 +24,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(Predicate), $"Value: '{argument}' must not be less than or equal to: '{limit}'.");
-
-            bool Predicate(object arg)
-            {
-                return arg is T && ((T) arg).IsLessOrEqual(limit);
-            }
+            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(), $"Value: '{argument}' must not be less than or equal to: '{limit}'.");
         }
     }
 }

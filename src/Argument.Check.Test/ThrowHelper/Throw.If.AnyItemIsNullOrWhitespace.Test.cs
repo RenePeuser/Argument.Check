@@ -10,6 +10,7 @@ namespace Argument.Check.Test.ThrowHelper
         private const string ArgumentFuncName = "argumentFunc";
         private const string SonGoku = "SonGoku";
         private const string Vegeta = "Vegeta";
+        private const string ArgumentName = "strings";
 
         private readonly IEnumerable<string> _validStrings = new[] { SonGoku };
         private readonly IEnumerable<string> _valuesWithAnEmptyString = new[] { SonGoku, string.Empty };
@@ -19,25 +20,25 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_Is_Empty()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfAnyItemIsNullOrWhitespace(() => _valuesWithAnEmptyString), nameof(_valuesWithAnEmptyString));
+            Assert.ThrowsException<ArgumentException>(() => TestMethod(_valuesWithOneNull), ArgumentName);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_Is_A_Whitespace()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfAnyItemIsNullOrWhitespace(() => _valuesWithOneWhitespace), nameof(_valuesWithAnEmptyString));
+            Assert.ThrowsException<ArgumentException>(() => TestMethod(_valuesWithOneWhitespace), ArgumentName);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_Is_A_Null()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfAnyItemIsNullOrWhitespace(() => _valuesWithOneNull), nameof(_valuesWithAnEmptyString));
+            Assert.ThrowsException<ArgumentException>(() => TestMethod(_valuesWithOneNull), ArgumentName);
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_When_Strings_Are_Valid()
         {
-            Throw.IfAnyItemIsNullOrWhitespace(() => _validStrings);
+            TestMethod(_validStrings);
         }
 
         [TestMethod]
@@ -47,17 +48,31 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
+        public void Should_Throw_An_Exception_With_Correct_Information()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfAnyItemIsNullOrWhitespace(null), ArgumentFuncName);
+            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_valuesWithOneWhitespace), nameof(_valuesWithAnEmptyString));
+
+            Assert.IsTrue(exception.Message.Contains($"At least one string in the enumeration '{SonGoku}, ,{Vegeta}' was null or a whitespace."));
         }
 
         [TestMethod]
-        public void Should_Throw_An_Exception_With_Correct_Information()
+        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => Throw.IfAnyItemIsNullOrWhitespace(() => _valuesWithOneWhitespace), nameof(_valuesWithAnEmptyString));
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfAnyItemIsNullOrWhitespace(NullHelper.GetNullOf<Func<IEnumerable<string>>>());
+                }
+            });
 
-            Assert.IsTrue(exception.Message.Contains($"At least one string in the enumeration '{SonGoku}, ,{Vegeta}' was null or a whitespace."));
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        private void TestMethod(IEnumerable<string> strings)
+        {
+            Throw.IfAnyItemIsNullOrWhitespace(() => strings);
         }
     }
 }

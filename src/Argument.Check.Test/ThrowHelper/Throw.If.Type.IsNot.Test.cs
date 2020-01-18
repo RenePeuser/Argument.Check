@@ -6,8 +6,6 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class IfTypeIsNot
     {
-        private const string ArgumentFuncName = "argumentFunc";
-        private readonly Func<object> _nullArgumentFunc = null;
         private readonly string _nullString = null;
         private readonly string _sonGoku = "SonGoku";
         private readonly int _unexpectedType = 4;
@@ -15,21 +13,21 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Not_Expected_Type()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfTypeIsNot<string>(() => _unexpectedType), nameof(_unexpectedType));
+            Assert.ThrowsException<ArgumentException>(() => TestMethod<string>(_unexpectedType));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Expected_Message_If_Argument_Is_Not_Expected_Type()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => Throw.IfTypeIsNot<string>(() => _unexpectedType), nameof(_unexpectedType));
+            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod<string>(_unexpectedType));
 
-            Assert.IsTrue(exception.Message.Contains($"The given type: '{_unexpectedType.GetType()}' is not the expected type: '{typeof(string)}'."));
+            Assert.AreEqual($"The given type: '{_unexpectedType.GetType()}' is not the expected type: '{typeof(string)}'. (Parameter 'argument')", exception.Message);
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Argument_Is_Expected_Type()
         {
-            Throw.IfTypeIsNot<string>(() => _sonGoku);
+            TestMethod<string>(_sonGoku);
         }
 
         [TestMethod]
@@ -39,15 +37,29 @@ namespace Argument.Check.Test.ThrowHelper
         }
 
         [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
+        public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfTypeIsNot<string>(_nullArgumentFunc), ArgumentFuncName);
+            Assert.ThrowsException<ArgumentNullException>(() => TestMethod<string>(_nullString), nameof(_nullString));
         }
 
         [TestMethod]
-        public void Should_Throw_An_Exception_If_Argument_Is_Null()
+        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfTypeIsNot<string>(() => _nullString), nameof(_nullString));
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfTypeIsNot<object>(NullHelper.GetNullOf<Func<object>>());
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        private void TestMethod<T>(object argument) where T : class
+        {
+            Throw.IfTypeIsNot<T>(() => argument);
         }
     }
 }

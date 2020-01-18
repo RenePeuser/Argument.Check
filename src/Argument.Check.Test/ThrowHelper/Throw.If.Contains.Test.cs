@@ -7,32 +7,31 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfContainsTest
     {
+        private const string ArgumentName = "contains";
         private const string Vegeta = "Vegeta";
-        private const string ArgumentFuncName = "argumentFunc";
         private readonly string _containedValue = Vegeta;
         private readonly string _nullArgument = null;
-        private readonly Func<string> _nullArgumentFunc = null;
         private readonly IEnumerable<string> _stringValues = new[] { Vegeta, "Beerus" };
         private readonly string _valueNotContained = "SonGoku";
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Not_In_Expected_Source()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfContains(() => _containedValue, _stringValues), nameof(_containedValue));
+            Assert.ThrowsException<ArgumentException>(() => TestMethod(_containedValue, _stringValues));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Expected_Message_If_Value_Is_Not_In_Expected_Source()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => Throw.IfContains(() => _containedValue, _stringValues), nameof(_containedValue));
+            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_containedValue, _stringValues), nameof(_containedValue));
 
-            Assert.IsTrue(exception.Message.Contains(_containedValue));
+            Assert.IsTrue(exception.Message.Contains($"The argument '{Vegeta}' is contained in the enumeration. (Parameter '{ArgumentName}')"));
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Value_Is_Not_In_Expected_Source()
         {
-            Throw.IfContains(() => _valueNotContained, _stringValues);
+            TestMethod(_valueNotContained, _stringValues);
         }
 
         [TestMethod]
@@ -44,13 +43,27 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfContains(_nullArgumentFunc, _stringValues), ArgumentFuncName);
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfContains(NullHelper.GetNullOf<Func<string>>(), _stringValues);
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Argument_Is_Null()
         {
-            Throw.IfContains(() => _nullArgument, _stringValues);
+            TestMethod(_nullArgument, _stringValues);
+        }
+
+        private void TestMethod<T>(T contains, IEnumerable<T> source)
+        {
+            Throw.IfContains(() => contains, source);
         }
     }
 }

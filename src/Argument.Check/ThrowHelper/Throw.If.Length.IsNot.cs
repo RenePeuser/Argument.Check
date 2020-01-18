@@ -24,12 +24,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(Predicate), $"String length: '{argument}' is not as expected. Expected value: '{length}'.");
-
-            bool Predicate(object arg)
-            {
-                return arg.Is<string>() && arg.Cast<string>().Length.NotEqualsTo(length);
-            }
+            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(), $"String length: '{argument}' is not as expected. Expected value: '{length}'.");
         }
     }
 }

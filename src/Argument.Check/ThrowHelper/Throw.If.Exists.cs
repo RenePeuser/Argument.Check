@@ -27,11 +27,11 @@ namespace Argument.Check
             switch (fileSystemInfo)
             {
                 case FileInfo fileInfo:
-                    throw new ArgumentException($"The file: '{fileInfo.FullName}' already exists.", argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists));
+                    throw new ArgumentException($"The file: '{fileInfo.FullName}' already exists.", argumentFunc.GetParameterName());
                 case DirectoryInfo directoryInfo:
-                    throw new ArgumentException($"The directory: '{directoryInfo.FullName}' already exists.", argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists));
+                    throw new ArgumentException($"The directory: '{directoryInfo.FullName}' already exists.", argumentFunc.GetParameterName());
                 default:
-                    throw new ArgumentException($"The path: '{fileSystemInfo.FullName}' already exists.", argumentFunc.GetParameterName(arg => arg.Is<FileSystemInfo>() && arg.Cast<FileSystemInfo>().Exists));
+                    throw new ArgumentException($"The path: '{fileSystemInfo.FullName}' already exists.", argumentFunc.GetParameterName());
             }
         }
     }

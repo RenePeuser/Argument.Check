@@ -26,7 +26,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentNullException(argumentFunc.GetParameterName(arg => arg == null));
+            throw new ArgumentNullException(argumentFunc.GetParameterName());
         }
     }
 }

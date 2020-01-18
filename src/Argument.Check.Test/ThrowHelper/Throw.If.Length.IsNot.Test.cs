@@ -17,21 +17,21 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_Exception_If_String_Length_Is_Too_Small()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfLengthIsNot(() => _stringIsToSmall, _expectedLength), nameof(_stringIsToSmall));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_stringIsToSmall, _expectedLength));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_If_String_Length_Is_Too_Large()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfLengthIsNot(() => _stringToLarge, _expectedLength), nameof(_stringToLarge));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_stringToLarge, _expectedLength));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_With_Correct_Message_If_String_Length_Is_Too_Large()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfLengthIsNot(() => _stringToLarge, _expectedLength), nameof(_stringToLarge));
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_stringToLarge, _expectedLength));
 
-            Assert.IsTrue(exception.Message.Contains($"String length: '{_stringToLarge}' is not as expected. Expected value: '{_expectedLength}'."));
+            Assert.AreEqual($"String length: '{_stringToLarge}' is not as expected. Expected value: '{_expectedLength}'. (Parameter 'argument')", exception.Message);
         }
 
         [TestMethod]
@@ -43,19 +43,39 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_Exception_If_Argument_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfLengthIsNot(() => _nullString, _expectedLength), nameof(_nullString));
+            Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullString, _expectedLength), nameof(_nullString));
         }
 
         [TestMethod]
         public void Should_Not_Throw_Exception_If_String_Length_Is_Equal_To_Expected_Length()
         {
-            Throw.IfLengthIsNot(() => _sonGoku, 7);
+            TestMethod(_sonGoku, 7);
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
             Assert.AreEqual(_sonGoku, Throw.IfLengthIsNot(() => _sonGoku, 7));
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
+        {
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfLengthIsNot(NullHelper.GetNullOf<Func<string>>(), 5);
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        private void TestMethod(string argument, int length)
+        {
+            Throw.IfLengthIsNot(() => argument, length);
         }
     }
 }

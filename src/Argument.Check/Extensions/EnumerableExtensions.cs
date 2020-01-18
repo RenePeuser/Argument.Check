@@ -38,5 +38,11 @@ namespace Argument.Check.Extensions
 
             return !source.Any();
         }
+
+        [DebuggerHidden]
+        internal static bool IsNullOrEmpty<T>(this IEnumerable<T> source)
+        {
+            return source == null || source.IsEmpty();
+        }
     }
 }

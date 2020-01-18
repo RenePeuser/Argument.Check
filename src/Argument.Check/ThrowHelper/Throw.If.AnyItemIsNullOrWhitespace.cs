@@ -24,12 +24,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException($"At least one string in the enumeration '{string.Join(",", argument)}' was null or a whitespace.", argumentFunc.GetParameterName(Predicate));
-
-            bool Predicate(object arg)
-            {
-                return arg.Is<IEnumerable<string>>() && arg.Cast<IEnumerable<string>>().IsAnyItemNullOrWhitespace();
-            }
+            throw new ArgumentException($"At least one string in the enumeration '{string.Join(",", argument)}' was null or a whitespace.", argumentFunc.GetParameterName());
         }
     }
 }

@@ -16,13 +16,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_In_The_Source_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(() => _listWithNullItem), nameof(_listWithNullItem));
+            Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_listWithNullItem));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Any_Item_In_The_Source_Is_Null()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(() => _listWithNullItem), nameof(_listWithNullItem));
+            var exception = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_listWithNullItem));
 
             Assert.IsTrue(exception.Message.Contains($"At least one item in the enumeration '{_listWithNullItem}' was null."));
         }
@@ -30,13 +30,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(() => _nullArgument), nameof(_nullArgument));
+            Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Source_Is_Not_Null_And_Does_Not_Contains_Null_Items()
         {
-            Throw.IfNullOrAnyItemIsNull(() => _listWithoutNullItem);
+            TestMethod(_listWithoutNullItem);
         }
 
         [TestMethod]
@@ -49,6 +49,26 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
             Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(_nullArgumentFunc), ArgumentFuncName);
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_If_Enumeration_ArgumentFunc_Is_Null()
+        {
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfNullOrAnyItemIsNull(NullHelper.GetNullOf<Func<string>>());
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        private void TestMethod(IEnumerable<string> values)
+        {
+            Throw.IfNullOrAnyItemIsNull(() => values);
         }
     }
 }

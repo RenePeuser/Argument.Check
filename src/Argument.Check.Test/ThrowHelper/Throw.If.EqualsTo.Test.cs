@@ -6,21 +6,19 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfEqualsToTest
     {
-        private const string ArgumentFuncName = "argumentFunc";
         private readonly bool _expectedValue = true;
         private readonly object _nullArgument = null;
-        private readonly Func<bool> _nullArgumentFunc = null;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Equal()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfEqualsTo(() => _expectedValue, _expectedValue), nameof(_expectedValue));
+            Assert.ThrowsException<ArgumentException>(() => TestMethod(_expectedValue, _expectedValue));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Value_Is_Equal()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => Throw.IfEqualsTo(() => _expectedValue, _expectedValue), nameof(_expectedValue));
+            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_expectedValue, _expectedValue));
 
             Assert.IsTrue(exception.Message.Contains($"The argument value: '{_expectedValue}' was equal to: '{_expectedValue}'."));
         }
@@ -40,13 +38,27 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfEqualsTo(_nullArgumentFunc, _expectedValue), ArgumentFuncName);
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfEqualsTo(NullHelper.GetNullOf<Func<int>>(), 5);
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Argument_Is_Null()
         {
             Throw.IfEqualsTo(() => _nullArgument, _expectedValue);
+        }
+
+        private void TestMethod<T>(T argument, T expected)
+        {
+            Throw.IfEqualsTo(() => argument, expected);
         }
     }
 }

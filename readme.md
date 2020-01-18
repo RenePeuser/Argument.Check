@@ -3,6 +3,11 @@
 A library to check your arguments in a simple comfort way. This library do not use 'Expression' or 'nameof(arg)'. 
 It is based on Func<T>. So no performance issue during positive argument check.
 
+```
+This argument check works only in your scope of your method or constructor ! It was not made to check properties
+or fields on your local class or the given instance.
+```
+
 ## Install
 
 You can install this package over your NugetPack-Manager in your Visual Studio
@@ -48,6 +53,17 @@ public MyClass(object arg)
 public MyClass(IService service)
 {
     _service = Throw.IfNull(() =>  arg);
+}
+```
+
+### Null check on a stack variable
+```csharp
+public MyClass(IService service)
+{
+    Throw.IfNull(() => service);
+
+    var result = service.GetSomething();
+    Throw.IfNull(() => result);
 }
 ```
 

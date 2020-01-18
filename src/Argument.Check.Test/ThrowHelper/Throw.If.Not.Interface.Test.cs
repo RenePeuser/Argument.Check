@@ -22,7 +22,15 @@ namespace Argument.Check.Test.ThrowHelper
         {
             var exception = Assert.ThrowsException<ArgumentException>(Throw.IfNotInterface<object>);
 
-            Assert.IsTrue(exception.Message.Contains($"Type: '{typeof(object)}' must be an interface."));
+            Assert.AreEqual("Type: 'System.Object' must be an interface.", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_With_Correct_Message_If_Type_Instance_Is_Not_An_Interface()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(new object()));
+
+            Assert.AreEqual("Argument: 'argument' must be an interface.", exception.Message);
         }
 
         [TestMethod]
@@ -46,7 +54,27 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Instance_Is_Not_An_Interface()
         {
-            Assert.ThrowsException<ArgumentException>(() => Throw.IfNotInterface(() => _noInterface));
+            Assert.ThrowsException<ArgumentException>(() => TestMethod(_noInterface));
+        }
+
+        [TestMethod]
+        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
+        {
+            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                TestNullFunc();
+                void TestNullFunc()
+                {
+                    Throw.IfNotInterface(NullHelper.GetNullOf<Func<object>>());
+                }
+            });
+
+            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+        }
+
+        private void TestMethod(object argument)
+        {
+            Throw.IfNotInterface(() => argument);
         }
     }
 }

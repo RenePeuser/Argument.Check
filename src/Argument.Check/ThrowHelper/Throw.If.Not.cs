@@ -27,7 +27,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException(string.Empty, argumentFunc.GetParameterName(arg => arg.EqualsTo(argument)));
+            throw new ArgumentException(string.Empty, argumentFunc.GetParameterName());
         }
 
         /// <summary>Throws an <see cref="ArgumentException" />, when validation predicate is <c>false</c>.</summary>
@@ -51,7 +51,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException(exceptionMessage, argumentFunc.GetParameterName(arg => arg.EqualsTo(argument)));
+            throw new ArgumentException(exceptionMessage, argumentFunc.GetParameterName());
         }
     }
 }

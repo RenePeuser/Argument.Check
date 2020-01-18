@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using Argument.Check.Extensions;
 
 namespace Argument.Check
 {
@@ -36,7 +37,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException($"Type: '{type}' must be an interface.");
+            throw new ArgumentException($"Argument: '{argumentFunc.GetParameterName()}' must be an interface.");
         }
     }
 }
