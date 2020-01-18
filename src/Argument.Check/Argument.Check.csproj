@@ -10,8 +10,10 @@
     <PackageLicenseFile></PackageLicenseFile>
     <PackageProjectUrl>https://renepeuser.visualstudio.com/Argument.Check</PackageProjectUrl>
     <RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
-    <PackageReleaseNotes>A library to check your arguments in a simple comfort way. This library do not use Expression or nameof. It is based on Func&lt;T&gt;. So no performance issue during positive argument check.</PackageReleaseNotes>
-    <PackageTags>C#;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;</PackageTags>
+    <PackageReleaseNotes>Bug-Fixes / Changes
+- Fix argument detection when multiple paramerters have the same type
+- Reducde possibility to misuse the 'Throw' helper, with scope check.</PackageReleaseNotes>
+    <PackageTags>C#;.Net;DotNet;Arg;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;IfNull;IfExists;ThrowHelper;Contract;IsNull;</PackageTags>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
