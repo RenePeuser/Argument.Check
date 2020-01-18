@@ -4,8 +4,8 @@ A library to check your arguments in a simple comfort way. This library do not u
 It is based on Func<T>. So no performance issue during positive argument check.
 
 ```
-This argument check works only in your scope of your method or constructor ! It was not made to check properties
-or fields on your local class or the given instance.
+This argument check was made for checking the parameter of a method or constructor. You can not check states on
+any object directly.
 ```
 
 ## Install
