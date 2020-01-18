@@ -65,6 +65,7 @@ public Class(IService service)
             return result;
         }
 
+        [DebuggerHidden]
         private static IEnumerable<ILReconstructedMethod> FetchOneArgumentOneCheck(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
         {
             var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
@@ -72,6 +73,7 @@ public Class(IService service)
             return ilMethods;
         }
 
+        [DebuggerHidden]
         private static IEnumerable<ILReconstructedMethod> FetchMultiCheckForOneArgument(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
         {
             var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
