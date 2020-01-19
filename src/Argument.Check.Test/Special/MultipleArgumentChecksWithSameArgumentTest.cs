@@ -11,9 +11,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Combine(null);
+                Test(null);
 
-                void Combine(params string[] paths)
+                void Test(params string[] paths)
                 {
                     // This should throw only.
                     Throw.IfNull(() => paths);
@@ -29,9 +29,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Combine(null, new[] { "test" });
+                Test(null, new[] { "test" });
 
-                void Combine(string[] test, string[] a)
+                void Test(string[] test, string[] a)
                 {
                     Throw.IfNull(() => test);
                     Throw.IfAnyItemIsNullOrWhitespace(() => test);
@@ -49,9 +49,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Combine(new string[] { null }, new[] { "test" });
+                Test(new string[] { null }, new[] { "test" });
 
-                void Combine(string[] test, string[] a)
+                void Test(string[] test, string[] a)
                 {
                     Throw.IfNull(() => test);
                     Throw.IfAnyItemIsNullOrWhitespace(() => test);
@@ -69,9 +69,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Combine(new[] { "a" }, null);
+                Test(new[] { "a" }, null);
 
-                void Combine(string[] test, string[] a)
+                void Test(string[] test, string[] a)
                 {
                     Throw.IfNull(() => test);
                     Throw.IfAnyItemIsNullOrWhitespace(() => test);
@@ -88,9 +88,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Combine(new[] { "a" }, new string[] { null });
+                Test(new[] { "a" }, new string[] { null });
 
-                void Combine(string[] test, string[] a)
+                void Test(string[] test, string[] a)
                 {
                     Throw.IfNull(() => test);
                     Throw.IfAnyItemIsNullOrWhitespace(() => test);
@@ -108,9 +108,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Combine(new[] { "a" }, new string[] { null });
+                Test(new[] { "a" }, new string[] { null });
 
-                void Combine(string[] test, string[] a)
+                void Test(string[] test, string[] a)
                 {
                     Throw.IfNull(() => test);
                     Throw.IfAnyItemIsNullOrWhitespace(() => test);
@@ -128,9 +128,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Combine(null, "test", "test");
+                Test(null, "test", "test");
 
-                void Combine(string a, string b, string c)
+                void Test(string a, string b, string c)
                 {
                     Throw.IfNull(() => a);
                     Throw.IfWhitespace(() => a);
@@ -149,9 +149,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Combine(" ", "test", "test");
+                Test(" ", "test", "test");
 
-                void Combine(string a, string b, string c)
+                void Test(string a, string b, string c)
                 {
                     Throw.IfNull(() => a);
                     Throw.IfWhitespace(() => a);
@@ -169,9 +169,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Combine("abc", " ", "test");
+                Test("abc", " ", "test");
 
-                void Combine(string a, string b, string c)
+                void Test(string a, string b, string c)
                 {
                     Throw.IfNull(() => a);
                     Throw.IfWhitespace(() => a);
@@ -189,9 +189,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                Combine(2, "test", new object());
+                Test(2, "test", new object());
 
-                void Combine(int a, string b, object c)
+                void Test(int a, string b, object c)
                 {
                     Throw.IfLessThan(() => a, 5);
                     Throw.IfNull(() => b);
@@ -207,9 +207,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Combine(10, null, new object());
+                Test(10, null, new object());
 
-                void Combine(int a, string b, object c)
+                void Test(int a, string b, object c)
                 {
                     Throw.IfLessThan(() => a, 5);
                     Throw.IfNull(() => b);
@@ -225,9 +225,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Combine(10, "test", null);
+                Test(10, "test", null);
 
-                void Combine(int a, string b, object c)
+                void Test(int a, string b, object c)
                 {
                     Throw.IfLessThan(() => a, 5);
                     Throw.IfNull(() => b);
@@ -243,9 +243,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                Combine(7, 4, 15);
+                Test(7, 4, 15);
 
-                void Combine(int a, int b, int c)
+                void Test(int a, int b, int c)
                 {
                     Throw.IfLessThan(() => a, 2);
                     Throw.IfGreaterThan(() => a, 5);
@@ -262,9 +262,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                Combine(7, 4, 15);
+                Test(7, 4, 15);
 
-                void Combine(int a, int b, int c)
+                void Test(int a, int b, int c)
                 {
                     Throw.IfLessThan(() => a, 2);
                     Throw.IfGreaterThan(() => a, 5);
@@ -286,9 +286,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                Combine(3, 7, 15);
+                Test(3, 7, 15);
 
-                void Combine(int a, int b, int c)
+                void Test(int a, int b, int c)
                 {
                     Throw.IfLessThan(() => a, 2);
                     Throw.IfGreaterThan(() => a, 5);
@@ -309,9 +309,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                Combine(3, 3, 7);
+                Test(3, 3, 7);
 
-                void Combine(int a, int b, int c)
+                void Test(int a, int b, int c)
                 {
                     Throw.IfLessThan(() => a, 2);
                     Throw.IfGreaterThan(() => a, 5);
@@ -333,9 +333,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                Combine(7, 0, 15);
+                Test(7, 0, 15);
 
-                void Combine(int a, int b, int c)
+                void Test(int a, int b, int c)
                 {
                     Throw.IfLessThan(() => b, 2);
                 }
@@ -349,9 +349,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                Combine(7, 3, 0);
+                Test(7, 3, 0);
 
-                void Combine(int a, int b, int c)
+                void Test(int a, int b, int c)
                 {
                     Throw.IfLessThan(() => c, 2);
                 }
@@ -365,9 +365,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                Combine(7, 3, 0);
+                Test(7, 3, 0);
 
-                void Combine(int a, int b, int c)
+                void Test(int a, int b, int c)
                 {
                     Throw.IfLessThan(() => b, 2);
                     Throw.IfLessThan(() => c, 2);
@@ -375,6 +375,229 @@ namespace Argument.Check.Test.Special
             });
 
             Assert.AreEqual("Value: '0' must not be less than: '2'. (Parameter 'c')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_20()
+        {
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Test(1, 42, 42);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => a, 42);
+                    Throw.IfEqualsTo(() => a, 24);
+                    Throw.IfGreaterThan(() => a, 66);
+
+                    Throw.IfLessThan(() => b, 42);
+                    Throw.IfEqualsTo(() => b, 24);
+                    Throw.IfGreaterThan(() => b, 66);
+
+                    Throw.IfLessThan(() => c, 42);
+                    Throw.IfEqualsTo(() => c, 24);
+                    Throw.IfGreaterThan(() => c, 66);
+
+                }
+            });
+
+            Assert.AreEqual("Value: '1' must not be less than: '42'. (Parameter 'a')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_21()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            {
+                Test(24, 42, 42);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => a, 0);
+                    Throw.IfEqualsTo(() => a, 24);
+                    Throw.IfGreaterThan(() => a, 66);
+
+                    Throw.IfLessThan(() => b, 42);
+                    Throw.IfEqualsTo(() => b, 24);
+                    Throw.IfGreaterThan(() => b, 66);
+
+                    Throw.IfLessThan(() => c, 42);
+                    Throw.IfEqualsTo(() => c, 24);
+                    Throw.IfGreaterThan(() => c, 66);
+
+                }
+            });
+
+            Assert.AreEqual("The argument value: '24' was equal to: '24'. (Parameter 'a')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_22()
+        {
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Test(67, 42, 1);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => c, 42);
+                    Throw.IfEqualsTo(() => c, 24);
+                    Throw.IfGreaterThan(() => c, 66);
+
+                    Throw.IfLessThan(() => a, 0);
+                    Throw.IfEqualsTo(() => a, 24);
+                    Throw.IfGreaterThan(() => a, 66);
+
+                    Throw.IfLessThan(() => b, 42);
+                    Throw.IfEqualsTo(() => b, 24);
+                    Throw.IfGreaterThan(() => b, 66);
+                }
+            });
+
+            Assert.AreEqual("Value: '1' must not be less than: '42'. (Parameter 'c')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_23()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            {
+                Test(67, 42, 24);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => c, 1);
+                    Throw.IfEqualsTo(() => c, 24);
+                    Throw.IfGreaterThan(() => c, 66);
+
+                    Throw.IfLessThan(() => a, 0);
+                    Throw.IfEqualsTo(() => a, 24);
+                    Throw.IfGreaterThan(() => a, 66);
+
+                    Throw.IfLessThan(() => b, 42);
+                    Throw.IfEqualsTo(() => b, 24);
+                    Throw.IfGreaterThan(() => b, 66);
+                }
+            });
+
+            Assert.AreEqual("The argument value: '24' was equal to: '24'. (Parameter 'c')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_24()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            {
+                Test(24, 24, 24);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => c, 1);
+                    Throw.IfEqualsTo(() => c, 24);
+                    Throw.IfGreaterThan(() => c, 66);
+
+                    Throw.IfLessThan(() => a, 0);
+                    Throw.IfEqualsTo(() => a, 24);
+                    Throw.IfGreaterThan(() => a, 66);
+
+                    Throw.IfLessThan(() => b, 42);
+                    Throw.IfEqualsTo(() => b, 24);
+                    Throw.IfGreaterThan(() => b, 66);
+                }
+            });
+
+            Assert.AreEqual("The argument value: '24' was equal to: '24'. (Parameter 'c')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_25()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            {
+                Test(24, 24, 24);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => b, 1);
+                    Throw.IfEqualsTo(() => b, 24);
+                    Throw.IfGreaterThan(() => b, 66);
+
+                    Throw.IfLessThan(() => c, 1);
+                    Throw.IfEqualsTo(() => c, 24);
+                    Throw.IfGreaterThan(() => c, 66);
+
+                    Throw.IfLessThan(() => a, 0);
+                    Throw.IfEqualsTo(() => a, 24);
+                    Throw.IfGreaterThan(() => a, 66);
+                }
+            });
+
+            Assert.AreEqual("The argument value: '24' was equal to: '24'. (Parameter 'b')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_26()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            {
+                Test(24, 24, 24);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => b, 1);
+                    Throw.IfEqualsTo(() => b, 24);
+                    Throw.IfGreaterThan(() => b, 66);
+
+                    Throw.IfEqualsTo(() => c, 24);
+                    Throw.IfGreaterThan(() => c, 66);
+
+                    Throw.IfLessThan(() => a, 0);
+                }
+            });
+
+            Assert.AreEqual("The argument value: '24' was equal to: '24'. (Parameter 'b')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_27()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            {
+                Test(24, 24, 24);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => b, 1);
+                    Throw.IfEqualsTo(() => b, 24);
+                    Throw.IfGreaterThan(() => b, 66);
+
+                    Throw.IfEqualsTo(() => c, 24);
+
+                    Throw.IfLessThan(() => a, 0);
+                }
+            });
+
+            Assert.AreEqual("The argument value: '24' was equal to: '24'. (Parameter 'b')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_28()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            {
+                Test(24, 24, 24);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => b, 1);
+                    Throw.IfEqualsTo(() => b, 24);
+                    Throw.IfGreaterThan(() => b, 66);
+
+                    Throw.IfEqualsTo(() => c, 24);
+                }
+            });
+
+            Assert.AreEqual("The argument value: '24' was equal to: '24'. (Parameter 'b')", exception.Message);
         }
     }
 }
