@@ -95,15 +95,9 @@ public Class(IService service)
         [DebuggerHidden]
         private static IEnumerable<ILReconstructedMethod> FetchMultiCheckForOneArgument<T>(this Func<T> func, IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos, Func<object, bool> predicate)
         {
-            var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
-            foreach (var orderedMethod in orderedMethods)
-            {
-                var fieldInfo = fieldInfos.FirstOrDefault(f => predicate(f.GetValue(func.Target)));
-                if (fieldInfo.IsNotNull())
-                {
-                    yield return new ILReconstructedMethod(orderedMethod, fieldInfo);
-                }
-            }
+            //var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
+
+            yield return new ILReconstructedMethod(func.Method, fieldInfos.FirstOrDefault(f => predicate(f.GetValue(func.Target))));
         }
     }
 }

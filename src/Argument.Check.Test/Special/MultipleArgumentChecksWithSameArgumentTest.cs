@@ -599,5 +599,27 @@ namespace Argument.Check.Test.Special
 
             Assert.AreEqual("The argument value: '24' was equal to: '24'. (Parameter 'b')", exception.Message);
         }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_29()
+        {
+            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            {
+                Test(13, 12, 24);
+
+                void Test(int a, int b, int c)
+                {
+                    Throw.IfEqualsTo(() => a, 13);
+
+                    Throw.IfEqualsTo(() => b, 12);
+                    Throw.IfEqualsTo(() => b, 13);
+                    Throw.IfEqualsTo(() => b, 14);
+
+                    Throw.IfEqualsTo(() => c, 24);
+                }
+            });
+
+            Assert.AreEqual("The argument value: '13' was equal to: '13'. (Parameter 'a')", exception.Message);
+        }
     }
 }
