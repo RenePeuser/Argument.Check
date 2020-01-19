@@ -26,7 +26,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException("The string must not be empty.", argumentFunc.GetParameterName());
+            throw new ArgumentException("The string must not be empty.", argumentFunc.GetParameterName(arg => arg.Is<string>() && arg.Cast<string>().IsEmpty()));
         }
 
         /// <summary>Throws an <see cref="ArgumentException" />, when the given sequence is empty.</summary>
@@ -45,7 +45,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException("The enumerable must not be empty.", argumentFunc.GetParameterName());
+            throw new ArgumentException("The enumerable must not be empty.", argumentFunc.GetParameterName(arg => arg.Is<IEnumerable<T>>() && arg.Cast<IEnumerable<T>>().IsEmpty()));
         }
     }
 }

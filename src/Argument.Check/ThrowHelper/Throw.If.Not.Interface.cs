@@ -25,19 +25,18 @@ namespace Argument.Check
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
         [DebuggerHidden]
-        public static T IfNotInterface<T>(Func<T> argumentFunc) where T : class
+        public static object IfNotInterface<T>(Func<object> argumentFunc) where T : class
         {
             IfNull(() => argumentFunc);
             IfNull(argumentFunc);
 
             var argument = argumentFunc();
-            var type = typeof(T);
-            if (type.IsInterface)
+            if (argument.Is<T>())
             {
                 return argument;
             }
 
-            throw new ArgumentException($"Argument: '{argumentFunc.GetParameterName()}' must be an interface.");
+            throw new ArgumentException($"Argument: '{argumentFunc.GetParameterName(arg => arg.Is<T>().IsNot())}' must be an interface.");
         }
     }
 }

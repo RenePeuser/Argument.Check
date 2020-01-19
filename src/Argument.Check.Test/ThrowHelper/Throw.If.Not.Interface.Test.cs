@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -42,13 +43,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Instance_Is_An_Interface()
         {
-            Throw.IfNotInterface(() => _enumerable);
+            Throw.IfNotInterface<IEnumerable>(() => _enumerable);
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_enumerable, Throw.IfNotInterface(() => _enumerable));
+            Assert.AreEqual(_enumerable, Throw.IfNotInterface<IEnumerable>(() => _enumerable));
         }
 
         [TestMethod]
@@ -65,7 +66,7 @@ namespace Argument.Check.Test.ThrowHelper
                 TestNullFunc();
                 void TestNullFunc()
                 {
-                    Throw.IfNotInterface(NullHelper.GetNullOf<Func<object>>());
+                    Throw.IfNotInterface<IEnumerable>(NullHelper.GetNullOf<Func<object>>());
                 }
             });
 
@@ -74,7 +75,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(object argument)
         {
-            Throw.IfNotInterface(() => argument);
+            Throw.IfNotInterface<IEnumerable>(() => argument);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException($"The argument '{argument}' is not contained in the enumeration.", argumentFunc.GetParameterName());
+            throw new ArgumentException($"The argument '{argument}' is not contained in the enumeration.", argumentFunc.GetParameterName(arg => arg.EqualsTo(argument) && !source.Contains(argument)));
         }
     }
 }

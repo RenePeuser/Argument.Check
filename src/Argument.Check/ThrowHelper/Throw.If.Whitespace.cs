@@ -24,7 +24,7 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentException("The string must not be only whitespace.", argumentFunc.GetParameterName());
+            throw new ArgumentException("The string must not be only whitespace.", argumentFunc.GetParameterName(arg => arg.Is<string>() && arg.Cast<string>().IsWhitespace()));
         }
     }
 }

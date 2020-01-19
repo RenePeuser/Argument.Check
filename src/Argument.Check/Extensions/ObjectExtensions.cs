@@ -13,7 +13,13 @@ namespace Argument.Check.Extensions
         [DebuggerHidden]
         internal static bool IsNotNull(this object source)
         {
-            return !source.EqualsTo(null);
+            return IsNull(source).IsNot();
+        }
+
+        [DebuggerHidden]
+        internal static bool IsNull(this object source)
+        {
+            return source.EqualsTo(null);
         }
 
         [DebuggerHidden]

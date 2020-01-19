@@ -25,7 +25,12 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(), $"Value: '{argument}' is not in expected range from '{min}' to '{max}'.");
+            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(Predicate), $"Value: '{argument}' is not in expected range from '{min}' to '{max}'.");
+
+            bool Predicate(object arg)
+            {
+                return arg is T && ((T)arg).IsOutOfRange(min, max);
+            }
         }
     }
 }

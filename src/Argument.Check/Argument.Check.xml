@@ -111,7 +111,7 @@
             <summary>Throws an <see cref="T:System.ArgumentException" />, when the given type is an interface.</summary>
             <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is an interface.</exception>
         </member>
-        <member name="M:Argument.Check.Throw.IfInterface``1(System.Func{``0})">
+        <member name="M:Argument.Check.Throw.IfInterface``1(System.Func{System.Object})">
             <summary>Throws an <see cref="T:System.ArgumentException" />, when the given type is an interface.</summary>
             <typeparam name="T">The type of the argument.</typeparam>
             <param name="argumentFunc">A function, which returns the string to validate.</param>
@@ -203,7 +203,7 @@
             <summary>Throws an <see cref="T:System.ArgumentException" />, when the given type is not an interface.</summary>
             <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
         </member>
-        <member name="M:Argument.Check.Throw.IfNotInterface``1(System.Func{``0})">
+        <member name="M:Argument.Check.Throw.IfNotInterface``1(System.Func{System.Object})">
             <summary>Throws an <see cref="T:System.ArgumentException" />, when the given type is not an interface.</summary>
             <typeparam name="T">The type of the argument.</typeparam>
             <param name="argumentFunc">A function, which returns the string to validate.</param>

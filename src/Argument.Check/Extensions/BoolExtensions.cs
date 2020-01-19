@@ -9,5 +9,11 @@ namespace Argument.Check.Extensions
         {
             return !source;
         }
+
+        [DebuggerHidden]
+        internal static bool IsNot(this bool source)
+        {
+            return !source;
+        }
     }
 }

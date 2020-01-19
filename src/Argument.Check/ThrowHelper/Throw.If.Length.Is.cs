@@ -24,7 +24,12 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(), $"String length: '{argument}' must not be equals to to a length of: '{length}'.");
+            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(Predicate), $"String length: '{argument}' must not be equals to to a length of: '{length}'.");
+
+            bool Predicate(object arg)
+            {
+                return arg.Is<string>() && arg.Cast<string>().Length.EqualsTo(length);
+            }
         }
     }
 }

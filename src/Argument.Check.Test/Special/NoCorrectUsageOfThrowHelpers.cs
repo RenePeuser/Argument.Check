@@ -29,8 +29,6 @@ public Class(IService service)
     Throw.IfNull(() => result);
 }
 ";
-
-
         [TestMethod]
         public void Should_Detect_Correct_Argument_Also_With_Pre_Func_Usage()
         {

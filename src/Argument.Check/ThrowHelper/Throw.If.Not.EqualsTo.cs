@@ -25,7 +25,7 @@ namespace Argument.Check
             }
 
             throw new ArgumentException(
-                $"The argument value: '{argument}' is not equal to: '{expectedValue}'.", argumentFunc.GetParameterName());
+                $"The argument value: '{argument}' is not equal to: '{expectedValue}'.", argumentFunc.GetParameterName(arg => arg.NotEqualsTo(expectedValue)));
         }
     }
 }

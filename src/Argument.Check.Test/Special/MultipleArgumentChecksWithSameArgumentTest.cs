@@ -1,113 +1,23 @@
 ﻿using System;
-using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.Special
 {
     [TestClass]
-    public class MultipleParameterTypeWithSameTypesCheckTest
-    {
-        [TestMethod]
-        public void Should_Detect_Last_Argument_Also_With_Multiple_Equal_Parameter_Types()
-        {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
-            {
-                Test(3, 4, 5, 6);
-
-                void Test(int a, int b, int c, int d)
-                {
-                    Throw.IfLessThan(() => a, 2);
-                    Throw.IfLessThan(() => b, 3);
-                    Throw.IfLessThan(() => c, 4);
-
-                    // only this condition must throw !!
-                    Throw.IfLessThan(() => d, 7);
-                }
-            });
-
-            Assert.AreEqual("Value: '6' must not be less than: '7'. (Parameter 'd')", exception.Message);
-        }
-
-        [TestMethod]
-        public void Should_Detect_Third_Argument_Also_With_Multiple_Equal_Parameter_Types()
-        {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
-            {
-                Test(3, 4, 5, 6);
-
-                void Test(int a, int b, int c, int d)
-                {
-                    Throw.IfLessThan(() => a, 2);
-                    Throw.IfLessThan(() => b, 3);
-
-                    // only this condition must throw !!
-                    Throw.IfLessThan(() => c, 7);
-
-                    Throw.IfLessThan(() => d, 6);
-                }
-            });
-
-            Assert.AreEqual("Value: '5' must not be less than: '7'. (Parameter 'c')", exception.Message);
-        }
-
-        [TestMethod]
-        public void Should_Detect_First_Argument_Also_With_Multiple_Equal_Parameter_Types()
-        {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
-            {
-                Test(3, 4, 5, 6);
-
-                void Test(int a, int b, int c, int d)
-                {
-                    // only this condition must throw !!
-                    Throw.IfLessThan(() => a, 7);
-
-                    Throw.IfLessThan(() => b, 4);
-                    Throw.IfLessThan(() => c, 5);
-                    Throw.IfLessThan(() => d, 6);
-                }
-            });
-
-            Assert.AreEqual("Value: '3' must not be less than: '7'. (Parameter 'a')", exception.Message);
-        }
-
-        [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                Combine(null);
-
-                string Combine(params string[] paths)
-                {
-                    Throw.IfNull(() => paths);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => paths);
-
-                    return Path.Combine(paths);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'paths')", exception.Message);
-        }
-    }
-
-    [TestClass]
     public class MultipleArgumentChecksWithSameArgumentTest
     {
         [TestMethod]
-        public void Should_Detect_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers()
+        public void Should_Detect_Correct_Argument_Secenario_01()
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 Combine(null);
 
-                string Combine(params string[] paths)
+                void Combine(params string[] paths)
                 {
                     // This should throw only.
                     Throw.IfNull(() => paths);
                     Throw.IfAnyItemIsNullOrWhitespace(() => paths);
-
-                    return Path.Combine(paths);
                 }
             });
 
@@ -115,7 +25,7 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_1()
+        public void Should_Detect_Correct_Argument_Secenario_02()
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
@@ -135,7 +45,7 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_2()
+        public void Should_Detect_Correct_Argument_Secenario_03()
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
@@ -155,7 +65,7 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_3()
+        public void Should_Detect_Correct_Argument_Secenario_04()
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
@@ -174,7 +84,7 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_4()
+        public void Should_Detect_Correct_Argument_Secenario_05()
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
@@ -194,7 +104,7 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_5()
+        public void Should_Detect_Correct_Argument_Secenario_06()
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
@@ -214,7 +124,7 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_6()
+        public void Should_Detect_Correct_Argument_Secenario_07()
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
@@ -234,10 +144,8 @@ namespace Argument.Check.Test.Special
             Assert.AreEqual("Value cannot be null. (Parameter 'a')", exception.Message);
         }
 
-        // ToDo: Fix it soon.
-        [Ignore]
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_7()
+        public void Should_Detect_Correct_Argument_Secenario_08()
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
@@ -257,18 +165,18 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_8()
+        public void Should_Detect_Correct_Argument_Secenario_09()
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Combine(" ", "test", "test");
+                Combine("abc", " ", "test");
 
                 void Combine(string a, string b, string c)
                 {
                     Throw.IfNull(() => a);
                     Throw.IfWhitespace(() => a);
 
-                    Throw.IfNull(() => b);
+                    Throw.IfWhitespace(() => b);
                     Throw.IfNull(() => c);
                 }
             });
@@ -277,7 +185,7 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_9()
+        public void Should_Detect_Correct_Argument_Secenario_10()
         {
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
@@ -295,7 +203,7 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_10()
+        public void Should_Detect_Correct_Argument_Secenario_11()
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
@@ -313,7 +221,7 @@ namespace Argument.Check.Test.Special
         }
 
         [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers_11()
+        public void Should_Detect_Correct_Argument_Secenario_12()
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
@@ -328,6 +236,145 @@ namespace Argument.Check.Test.Special
             });
 
             Assert.AreEqual("Value cannot be null. (Parameter 'c')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_13()
+        {
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Combine(7, 4, 15);
+
+                void Combine(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => a, 2);
+                    Throw.IfGreaterThan(() => a, 5);
+
+                    Throw.IfOutOfRange(() => c, 10, 20);
+                }
+            });
+
+            Assert.AreEqual("Value: '7' must not be greater than: '5'. (Parameter 'a')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_14()
+        {
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Combine(7, 4, 15);
+
+                void Combine(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => a, 2);
+                    Throw.IfGreaterThan(() => a, 5);
+
+                    Throw.IfLessThan(() => b, 2);
+                    Throw.IfGreaterThan(() => b, 5);
+
+                    Throw.IfLessThan(() => c, 2);
+                    Throw.IfGreaterThan(() => c, 5);
+                }
+            });
+
+            Assert.AreEqual("Value: '7' must not be greater than: '5'. (Parameter 'a')", exception.Message);
+        }
+
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_15()
+        {
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Combine(3, 7, 15);
+
+                void Combine(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => a, 2);
+                    Throw.IfGreaterThan(() => a, 5);
+
+                    Throw.IfLessThan(() => b, 2);
+                    Throw.IfGreaterThan(() => b, 5);
+
+                    Throw.IfLessThan(() => c, 2);
+                    Throw.IfGreaterThan(() => c, 5);
+                }
+            });
+
+            Assert.AreEqual("Value: '7' must not be greater than: '5'. (Parameter 'b')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_16()
+        {
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Combine(3, 3, 7);
+
+                void Combine(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => a, 2);
+                    Throw.IfGreaterThan(() => a, 5);
+
+                    Throw.IfLessThan(() => b, 2);
+                    Throw.IfGreaterThan(() => b, 5);
+
+                    Throw.IfLessThan(() => c, 2);
+                    Throw.IfGreaterThan(() => c, 5);
+                }
+            });
+
+            Assert.AreEqual("Value: '7' must not be greater than: '5'. (Parameter 'c')", exception.Message);
+        }
+
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_17()
+        {
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Combine(7, 0, 15);
+
+                void Combine(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => b, 2);
+                }
+            });
+
+            Assert.AreEqual("Value: '0' must not be less than: '2'. (Parameter 'b')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_18()
+        {
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Combine(7, 3, 0);
+
+                void Combine(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => c, 2);
+                }
+            });
+
+            Assert.AreEqual("Value: '0' must not be less than: '2'. (Parameter 'c')", exception.Message);
+        }
+
+        [TestMethod]
+        public void Should_Detect_Correct_Argument_Secenario_19()
+        {
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                Combine(7, 3, 0);
+
+                void Combine(int a, int b, int c)
+                {
+                    Throw.IfLessThan(() => b, 2);
+                    Throw.IfLessThan(() => c, 2);
+                }
+            });
+
+            Assert.AreEqual("Value: '0' must not be less than: '2'. (Parameter 'c')", exception.Message);
         }
     }
 }
