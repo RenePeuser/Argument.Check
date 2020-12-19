@@ -1,18 +1,20 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#pragma warning disable 649
+
 namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class ThrowIfNotTest
     {
-        private readonly bool _falseValue = false;
+        private readonly bool _falseValue;
         private readonly string _message = "You can call Shenlong only once a year.";
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Predicate_Is_True()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_falseValue, item => item));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_falseValue, item => item));
         }
 
         [TestMethod]
@@ -24,13 +26,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One_Wihtout_Message()
         {
-            Assert.AreEqual(_falseValue, Throw.IfNot(() => _falseValue, item => !item));
+            Assert.AreEqual(_falseValue, Throw.IfNot(_falseValue, item => !item));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Predicate_Is_True_With_The_Given_Message()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_falseValue, item => item, _message));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_falseValue, item => item, _message));
         }
 
         [TestMethod]
@@ -58,7 +60,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_falseValue, Throw.IfNot(() => _falseValue, item => !item, _message));
+            Assert.AreEqual(_falseValue, Throw.IfNot(_falseValue, item => !item, _message));
         }
 
         [TestMethod]
@@ -67,9 +69,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfNot(NullHelper.GetNullOf<Func<object>>(), _ => true);
+                    _ = Throw.IfNot(NullHelper.GetNullOf<Func<object>>(), _ => true);
                 }
             });
 
@@ -78,12 +81,12 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(bool argument, Func<bool, bool> predicate)
         {
-            Throw.IfNot(() => argument, predicate);
+            _ = Throw.IfNot(argument, predicate);
         }
 
         private void TestMethod(bool argument, Func<bool, bool> predicate, string message)
         {
-            Throw.IfNot(() => argument, predicate, message);
+            _ = Throw.IfNot(argument, predicate, message);
         }
     }
 }

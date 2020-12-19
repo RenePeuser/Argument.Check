@@ -13,19 +13,19 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Equal_To_Expected_Limit()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>TestMethod(_limit, _limit));
+            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Greater_To_Expected_Limit()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>TestMethod(_greaterValue, _limit));
+            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_greaterValue, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_With_Correct_Message_If_Value_Is_Equal_To_Expected_Limit()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>TestMethod(_greaterValue, _limit));
+            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_greaterValue, _limit));
 
             Assert.AreEqual($"Value: '{_greaterValue}' must not be greater than or equal to: '{_limit}'. (Parameter 'current')", exception.Message);
         }
@@ -33,13 +33,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_Exception_If_Value_Is_Lower_Than_Expected_Limit()
         {
-           TestMethod(_validValue, _limit);
+            TestMethod(_validValue, _limit);
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_validValue, Throw.IfGreaterOrEqual(() => _validValue, _limit));
+            Assert.AreEqual(_validValue, Throw.IfGreaterOrEqual(_validValue, _limit));
         }
 
         [TestMethod]
@@ -48,9 +48,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfGreaterOrEqual(NullHelper.GetNullOf<Func<int>>(), 5);
+                    _ = Throw.IfGreaterOrEqual(NullHelper.GetNullOf<int>(), 5);
                 }
             });
 
@@ -59,7 +60,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(int current, int limit)
         {
-            Throw.IfGreaterOrEqual(() => current, limit);
+            _ = Throw.IfGreaterOrEqual(current, limit);
         }
     }
 }

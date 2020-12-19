@@ -4,7 +4,7 @@ namespace Argument.Check.Models
 {
     internal class ILReconstructedMethod
     {
-        public ILReconstructedMethod(MethodInfo methodInfo, FieldInfo returnValue)
+        internal ILReconstructedMethod(MethodInfo methodInfo, FieldInfo returnValue)
         {
             Throw.IfNull(() => methodInfo);
             Throw.IfNull(() => returnValue);

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
 
 namespace Argument.Check
@@ -12,8 +14,11 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the sequence to validate.</param>
         /// <returns>The given sequence, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, when the given sequence is <c>null</c> or any item of the sequence is null.</exception>
+#if !DEBUG
         [DebuggerHidden]
-        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>(Func<IEnumerable<T>> argumentFunc)
+#endif
+        [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNullOrAnyItemIsNull(myArgument)", false)]
+        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>([NotNull] Func<IEnumerable<T>> argumentFunc)
         {
             IfNull(() => argumentFunc);
             IfNull(argumentFunc);
@@ -24,12 +29,27 @@ namespace Argument.Check
                 return argument;
             }
 
-            throw new ArgumentNullException(argumentFunc.GetParameterName(Predicate), $"At least one item in the enumeration '{argumentFunc()}' was null.");
+            throw new ArgumentNullException(argumentFunc.GetParameterName(arg => arg.Is<IEnumerable<T>>() && arg.Cast<IEnumerable<T>>().IsAnyItemNull()), $"At least one item in the enumeration '{argumentFunc()}' was null.");
+        }
 
-            bool Predicate(object arg)
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given sequence is <c>null</c> or any item of the sequence is null.</summary>
+        /// <param name="argument">The argument, which has to be checked.</param>
+        /// <param name="argumentName">The argument name will be automatically detected by the <see cref="CallerArgumentExpressionAttribute"/>, so please do not enter any name, otherwise you will got the wrong parameter name.</param>
+        /// <returns>The given sequence, which was checked.</returns>
+        /// <exception cref="ArgumentException">The exception, which will be thrown, when the given sequence is <c>null</c> or any item of the sequence is null.</exception>
+#if !DEBUG
+        [DebuggerHidden]
+#endif
+        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>([NotNull] IEnumerable<T> argument, [CallerArgumentExpression("argument")] string argumentName = default!)
+        {
+            IfNull(argument);
+
+            if (!argument.IsAnyItemNull())
             {
-                return arg.Is<IEnumerable<T>>() && arg.Cast<IEnumerable<T>>().IsAnyItemNull();
+                return argument;
             }
+
+            throw new ArgumentNullException(argumentName, $"At least one item in the enumeration '{argumentName}' was null.");
         }
     }
 }

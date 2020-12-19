@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#pragma warning disable 649
+
 namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
@@ -9,14 +11,14 @@ namespace Argument.Check.Test.ThrowHelper
     {
         private const string Vegeta = "Vegeta";
         private readonly string _containedValue = Vegeta;
-        private readonly string _nullArgument = null;
-        private readonly IEnumerable<string> _stringValues = new[] { Vegeta, "Beerus", null};
+        private readonly string _nullArgument;
+        private readonly IEnumerable<string> _stringValues = new[] { Vegeta, "Beerus", null };
         private readonly string _valueNotContained = "SonGoku";
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Not_In_Expected_Source()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_valueNotContained, _stringValues));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_valueNotContained, _stringValues));
         }
 
         [TestMethod]
@@ -36,7 +38,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_containedValue, Throw.IfNotContains(() => _containedValue, _stringValues));
+            Assert.AreEqual(_containedValue, Throw.IfNotContains(_containedValue, _stringValues));
         }
 
         [TestMethod]
@@ -51,9 +53,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
+
                 void TestNullFunc()
                 {
-                    Throw.IfNotContains(NullHelper.GetNullOf<Func<string>>(), _stringValues);
+                    _ = Throw.IfNotContains(NullHelper.GetNullOf<string>(), _stringValues);
                 }
             });
 
@@ -62,7 +65,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod<T>(T contains, IEnumerable<T> source)
         {
-            Throw.IfNotContains(() => contains, source);
+            _ = Throw.IfNotContains(contains, source);
         }
     }
 }

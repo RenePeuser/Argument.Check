@@ -15,10 +15,10 @@ namespace Argument.Check.Test.Special
 
                 void Test(object songoku)
                 {
-                    Throw.IfNull(() => songoku);
+                    _ = Throw.IfNull(() => songoku);
 
                     object nullObject = null;
-                    Throw.IfNull(() => nullObject);
+                    _ = Throw.IfNull(() => nullObject);
                 }
             });
 

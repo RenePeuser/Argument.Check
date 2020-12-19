@@ -14,7 +14,7 @@ namespace Argument.Check.Extensions
     //}
 
     // This is only a helper class for trying reconstruct what il is generation, ONLY for our case of argument checking !!!!!
-    internal static class ILMethodToFieldRebuilder
+    internal static class IlMethodToFieldRebuilder
     {
         private const string Sample = @"
 
@@ -36,17 +36,16 @@ public Class(IService service)
 }
 ";
 
-        [DebuggerHidden]
+#if !DEBUG
+        [DebuggerHidden] 
+#endif
         internal static IEnumerable<ILReconstructedMethod> Rebuild<T>(this Func<T> func, IEnumerable<FieldInfo> fieldInfos, Func<object, bool> predicate)
         {
-            Throw.IfNull(() => func);
-            Throw.IfNull(() => fieldInfos);
-
             var method = func.Method;
-            var typeInfo = method.DeclaringType.Cast<TypeInfo>();
+            var typeInfo = method.DeclaringType!.Cast<TypeInfo>();
             var typeInfoDeclaredMethods = typeInfo.DeclaredMethods.ToList();
             var declaredMethods = typeInfoDeclaredMethods.Where(m => fieldInfos.Any(f => m.ReturnType.IsAssignableFrom(f.FieldType))).ToList();
-            var filteredFieldInfos = fieldInfos.Where(f => declaredMethods.Any(m => m.ReturnType.IsAssignableFrom(f.FieldType))).ToList();
+            var filteredFieldInfos = fieldInfos!.Where(f => declaredMethods.Any(m => m.ReturnType.IsAssignableFrom(f.FieldType))).ToList();
 
             // if we have generated methods which match not the return type of our parameters then we are not in our scope any more.
             var methodsWhichNotMatchFieldType = declaredMethods.IsEmpty() || filteredFieldInfos.IsEmpty() || declaredMethods.Any(m => fieldInfos.All(f => !m.ReturnType.IsAssignableFrom(f.FieldType)));
@@ -63,7 +62,7 @@ public Class(IService service)
             }
 
             // 
-            var result = FetchMultiCheckForOneArgument(func, declaredMethods, filteredFieldInfos, predicate).ToList();
+            var result = FetchMultiCheckForOneArgument(func, filteredFieldInfos, predicate).ToList();
             return result;
         }
 
@@ -74,7 +73,9 @@ public Class(IService service)
         //     Throw.IfNull(() => b);
         //     Throw.IfNull(() => c);
         // }
-        [DebuggerHidden]
+#if !DEBUG
+        [DebuggerHidden] 
+#endif
         private static IEnumerable<ILReconstructedMethod> FetchOneArgumentOneCheck(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
         {
             var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
@@ -92,12 +93,18 @@ public Class(IService service)
         //     Throw.IfNull(() => b);
         //     Throw.IfNull(() => c);
         // }
-        [DebuggerHidden]
-        private static IEnumerable<ILReconstructedMethod> FetchMultiCheckForOneArgument<T>(this Func<T> func, IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos, Func<object, bool> predicate)
+#if !DEBUG
+        [DebuggerHidden] 
+#endif
+        private static IEnumerable<ILReconstructedMethod> FetchMultiCheckForOneArgument<T>(this Func<T> func, IEnumerable<FieldInfo> fieldInfos, Func<object, bool> predicate)
         {
-            //var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
+            var fieldInfo = fieldInfos.FirstOrDefault(f => predicate(f.GetValue(func.Target)!));
+            if (fieldInfo.IsNull())
+            {
+                throw new ArgumentException("No field info could be extracted from given argument check func, please check that you are not using constants with this argument check");
+            }
 
-            yield return new ILReconstructedMethod(func.Method, fieldInfos.FirstOrDefault(f => predicate(f.GetValue(func.Target))));
+            yield return new ILReconstructedMethod(func.Method, fieldInfo);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Predicate_Is_True()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_trueValue, item => item));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_trueValue, item => item));
         }
 
         [TestMethod]
@@ -24,13 +24,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_trueValue, Throw.If(() => _trueValue, item => !item));
+            Assert.AreEqual(_trueValue, Throw.If(_trueValue, item => !item));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Predicate_Is_True_With_The_Given_Message()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_trueValue, item => item, _message));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_trueValue, item => item, _message));
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One_Also_When_Use_Custom_Message()
         {
-            Assert.AreEqual(_trueValue, Throw.If(() => _trueValue, item => !item, _message));
+            Assert.AreEqual(_trueValue, Throw.If(_trueValue, item => !item, _message));
         }
 
         [TestMethod]
@@ -67,9 +67,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.If(NullHelper.GetNullOf<Func<object>>(), _ => true);
+                    _ = Throw.If(NullHelper.GetNullOf<object>(), _ => true);
                 }
             });
 
@@ -78,12 +79,12 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(bool argument, Func<bool, bool> predicate)
         {
-            Throw.If(() => argument, predicate);
+            _ = Throw.If(argument, predicate);
         }
 
         private void TestMethod(bool argument, Func<bool, bool> predicate, string message)
         {
-            Throw.If(() => argument, predicate, message);
+            _ = Throw.If(argument, predicate, message);
         }
     }
 }

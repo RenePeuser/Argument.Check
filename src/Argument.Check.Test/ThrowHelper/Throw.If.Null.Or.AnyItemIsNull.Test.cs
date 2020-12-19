@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#pragma warning disable 649
+
 namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class ThrowIfNullOrAnyItemIsNullTest
     {
         private const string ArgumentFuncName = "argumentFunc";
-        private readonly IEnumerable<string> _listWithNullItem = new[] { "Vegeta", "Beerus", null };
-        private readonly IEnumerable<string> _listWithoutNullItem = new[] { "Vegeta", "Beerus" };
-        private readonly IEnumerable<string> _nullArgument = null;
-        private readonly Func<IEnumerable<string>> _nullArgumentFunc = null;
+        private readonly IEnumerable<string> _listWithNullItem = new[] {"Vegeta", "Beerus", null};
+        private readonly IEnumerable<string> _listWithoutNullItem = new[] {"Vegeta", "Beerus"};
+        private readonly IEnumerable<string> _nullArgument;
+        private readonly IEnumerable<string> _nullArgumentFunc;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_In_The_Source_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_listWithNullItem));
+            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_listWithNullItem));
         }
 
         [TestMethod]
@@ -30,7 +32,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
+            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
         }
 
         [TestMethod]
@@ -42,13 +44,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrAnyItemIsNull(() => _listWithoutNullItem));
+            Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrAnyItemIsNull(_listWithoutNullItem));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(_nullArgumentFunc), ArgumentFuncName);
+            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(_nullArgumentFunc), ArgumentFuncName);
         }
 
         [TestMethod]
@@ -57,9 +59,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfNullOrAnyItemIsNull(NullHelper.GetNullOf<Func<string>>());
+                    _ = Throw.IfNullOrAnyItemIsNull(NullHelper.GetNullOf<string>());
                 }
             });
 
@@ -68,7 +71,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(IEnumerable<string> values)
         {
-            Throw.IfNullOrAnyItemIsNull(() => values);
+            _ = Throw.IfNullOrAnyItemIsNull(values);
         }
     }
 }

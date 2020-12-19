@@ -16,13 +16,13 @@ namespace Argument.Check.Test.Special
 
                 void Test(int a, int b, int c)
                 {
-                    Throw.IfEqualsTo(() => a, 13);
+                    _ = Throw.IfEqualsTo(() => a, 13);
 
-                    Throw.IfEqualsTo(() => b, 12);
-                    Throw.IfEqualsTo(() => b, 13);
-                    Throw.IfEqualsTo(() => b, 14);
+                    _ = Throw.IfEqualsTo(() => b, 12);
+                    _ = Throw.IfEqualsTo(() => b, 13);
+                    _ = Throw.IfEqualsTo(() => b, 14);
 
-                    Throw.IfEqualsTo(() => c, 24);
+                    _ = Throw.IfEqualsTo(() => c, 24);
                 }
             });
 

@@ -4,13 +4,17 @@ namespace Argument.Check.Extensions
 {
     internal static class DoubleExtensions
     {
-        [DebuggerHidden]
+#if !DEBUG
+        [DebuggerHidden] 
+#endif
         internal static bool IsNan(this double value)
         {
             return double.IsNaN(value);
         }
 
-        [DebuggerHidden]
+#if !DEBUG
+        [DebuggerHidden] 
+#endif
         internal static bool IsZero(this double source)
         {
             var result = source.EqualsTo(default);

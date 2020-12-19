@@ -40,17 +40,17 @@ namespace Argument.Check.Test.SolutionAndProjects
             var groups = analyzeResults.GroupBy(result => result.CSharpFileInfo.FullName);
             var stringBuilder = new StringBuilder();
 
-            stringBuilder.AppendLine(title);
-            stringBuilder.AppendLine();
+            _ = stringBuilder.AppendLine(title);
+            _ = stringBuilder.AppendLine();
             foreach (var group in groups)
             {
-                stringBuilder.AppendLine(group.Key);
+                _ = stringBuilder.AppendLine(group.Key);
                 foreach (var analyzeResult in group)
                 {
-                    stringBuilder.AppendLine($"- {analyzeResult.MethodName}");
+                    _ = stringBuilder.AppendLine($"- {analyzeResult.MethodName}");
                 }
 
-                stringBuilder.AppendLine();
+                _ = stringBuilder.AppendLine();
             }
 
             return stringBuilder.ToString();

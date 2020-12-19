@@ -8,25 +8,25 @@ namespace Argument.Check.Extensions
     {
         private const double DefaultDoubleTolerance = 0.000001;
 
-        [DebuggerHidden]
-        internal static bool EqualsTo<T>(this T source, T target)
+#if !DEBUG
+        [DebuggerHidden] 
+#endif
+        internal static bool EqualsTo<T>(this T source, T? target)
         {
             return EqualityComparer<T>.Default.Equals(source, target);
         }
 
-        [DebuggerHidden]
-        internal static bool EqualsTo(this double source, double target)
-        {
-            return EqualsTo(source, target, DefaultDoubleTolerance);
-        }
-
-        [DebuggerHidden]
-        internal static bool EqualsTo(this double source, double target, double tolerance)
+#if !DEBUG
+        [DebuggerHidden] 
+#endif
+        internal static bool EqualsTo(this double source, double target, double tolerance = DefaultDoubleTolerance)
         {
             return Math.Abs(source - target).IsLessThan(tolerance);
         }
 
-        [DebuggerHidden]
+#if !DEBUG
+        [DebuggerHidden] 
+#endif
         internal static bool NotEqualsTo<T>(this T source, T target)
         {
             return !source.EqualsTo(target);

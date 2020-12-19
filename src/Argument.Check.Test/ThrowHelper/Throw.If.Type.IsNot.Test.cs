@@ -1,19 +1,21 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#pragma warning disable 649
+
 namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class IfTypeIsNot
     {
-        private readonly string _nullString = null;
+        private readonly string _nullString;
         private readonly string _sonGoku = "SonGoku";
         private readonly int _unexpectedType = 4;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Not_Expected_Type()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod<string>(_unexpectedType));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod<string>(_unexpectedType));
         }
 
         [TestMethod]
@@ -33,13 +35,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_sonGoku, Throw.IfTypeIsNot<string>(() => _sonGoku));
+            Assert.AreEqual(_sonGoku, Throw.IfTypeIsNot<string>(_sonGoku));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => TestMethod<string>(_nullString), nameof(_nullString));
+            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod<string>(_nullString), nameof(_nullString));
         }
 
         [TestMethod]
@@ -48,9 +50,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfTypeIsNot<object>(NullHelper.GetNullOf<Func<object>>());
+                    _ = Throw.IfTypeIsNot<object>(NullHelper.GetNullOf<object>());
                 }
             });
 
@@ -59,7 +62,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod<T>(object argument) where T : class
         {
-            Throw.IfTypeIsNot<T>(() => argument);
+            _ = Throw.IfTypeIsNot<T>(argument);
         }
     }
 }

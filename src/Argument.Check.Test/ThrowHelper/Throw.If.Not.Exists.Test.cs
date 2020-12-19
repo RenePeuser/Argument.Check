@@ -10,12 +10,12 @@ namespace Argument.Check.Test.ThrowHelper
         private readonly DirectoryInfo _existingDirectoryInfo = new DirectoryInfo(Environment.CurrentDirectory);
         private readonly DirectoryInfo _notExistingDirectioryInfo = new DirectoryInfo(@"s:\SonGoku\");
         private readonly FileInfo _notExistingFileInfo = new FileInfo(@"s:\SonGoku.db");
-        private readonly FileSystemInfo _nullArgument = null;
+        private readonly FileSystemInfo _nullArgument = null!;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_DirectoryInfo_Not_Exist()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_notExistingDirectioryInfo));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notExistingDirectioryInfo));
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_FileInfo_Not_Exist()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_notExistingFileInfo));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notExistingFileInfo));
         }
 
         [TestMethod]
@@ -49,13 +49,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_existingDirectoryInfo, Throw.IfNotExists(() => _existingDirectoryInfo));
+            Assert.AreEqual(_existingDirectoryInfo, Throw.IfNotExists(_existingDirectoryInfo));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument));
+            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument));
         }
 
         [TestMethod]
@@ -64,9 +64,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfNotExists(NullHelper.GetNullOf<Func<FileSystemInfo>>());
+                    _ = Throw.IfNotExists(NullHelper.GetNullOf<FileSystemInfo>());
                 }
             });
 
@@ -75,7 +76,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(FileSystemInfo argument)
         {
-            Throw.IfNotExists(() => argument);
+            _ = Throw.IfNotExists(argument);
         }
     }
 }

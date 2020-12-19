@@ -1,12 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#pragma warning disable 649
+
 namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class ThrowIfWhiteSpaceTest
     {
-        private readonly string _nullStringArgument = null;
+        private readonly string _nullStringArgument;
         private readonly string _sonGoku = "SonGoku";
         private readonly string _whiteSpace = " ";
 
@@ -14,7 +16,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_WhiteSpace()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_whiteSpace));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_whiteSpace));
         }
 
         [TestMethod]
@@ -28,7 +30,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullStringArgument), nameof(_nullStringArgument));
+            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullStringArgument), nameof(_nullStringArgument));
         }
 
         [TestMethod]
@@ -40,7 +42,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_String_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_sonGoku, Throw.IfWhitespace(() => _sonGoku));
+            Assert.AreEqual(_sonGoku, Throw.IfWhitespace(_sonGoku));
         }
 
         [TestMethod]
@@ -49,9 +51,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfWhitespace(NullHelper.GetNullOf<Func<string>>());
+                    _ = Throw.IfWhitespace(NullHelper.GetNullOf<Func<string>>());
                 }
             });
 
@@ -60,7 +63,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(string contains)
         {
-            Throw.IfWhitespace(() => contains);
+            _ = Throw.IfWhitespace(contains);
         }
     }
 }

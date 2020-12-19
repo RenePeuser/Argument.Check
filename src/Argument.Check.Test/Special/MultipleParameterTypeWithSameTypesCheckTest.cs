@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Argument.Check.Test.ThrowHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.Special
@@ -17,12 +16,12 @@ namespace Argument.Check.Test.Special
 
                 void Test(int a, int b, int c, int d)
                 {
-                    Throw.IfLessThan(() => a, 2);
-                    Throw.IfLessThan(() => b, 3);
-                    Throw.IfLessThan(() => c, 4);
+                    _ = Throw.IfLessThan(() => a, 2);
+                    _ = Throw.IfLessThan(() => b, 3);
+                    _ = Throw.IfLessThan(() => c, 4);
 
                     // only this condition must throw !!
-                    Throw.IfLessThan(() => d, 7);
+                    _ = Throw.IfLessThan(() => d, 7);
                 }
             });
 
@@ -38,13 +37,13 @@ namespace Argument.Check.Test.Special
 
                 void Test(int a, int b, int c, int d)
                 {
-                    Throw.IfLessThan(() => a, 2);
-                    Throw.IfLessThan(() => b, 3);
+                    _ = Throw.IfLessThan(() => a, 2);
+                    _ = Throw.IfLessThan(() => b, 3);
 
                     // only this condition must throw !!
-                    Throw.IfLessThan(() => c, 7);
+                    _ = Throw.IfLessThan(() => c, 7);
 
-                    Throw.IfLessThan(() => d, 6);
+                    _ = Throw.IfLessThan(() => d, 6);
                 }
             });
 
@@ -61,11 +60,11 @@ namespace Argument.Check.Test.Special
                 void Test(int a, int b, int c, int d)
                 {
                     // only this condition must throw !!
-                    Throw.IfLessThan(() => a, 7);
+                    _ = Throw.IfLessThan(() => a, 7);
 
-                    Throw.IfLessThan(() => b, 4);
-                    Throw.IfLessThan(() => c, 5);
-                    Throw.IfLessThan(() => d, 6);
+                    _ = Throw.IfLessThan(() => b, 4);
+                    _ = Throw.IfLessThan(() => c, 5);
+                    _ = Throw.IfLessThan(() => d, 6);
                 }
             });
 
@@ -77,12 +76,12 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Combine(null);
+                _ = Combine(null);
 
                 string Combine(params string[] paths)
                 {
-                    Throw.IfNull(() => paths);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => paths);
+                    _ = Throw.IfNull(() => paths);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(() => paths);
 
                     return Path.Combine(paths);
                 }
