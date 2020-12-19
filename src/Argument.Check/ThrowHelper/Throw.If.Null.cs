@@ -43,7 +43,6 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        
         public static T IfNull<T>(T argument, [CallerArgumentExpression("argument")] string argumentName = default!) where T : class
         {
             if (argument == null)
