@@ -47,7 +47,7 @@ namespace Argument.Check
         {
             if (argument == null)
             {
-                throw new ArgumentNullException(argumentName, $"(Parameter '{argumentName}')");
+                throw new ArgumentNullException(argumentName);
             }
 
             return argument;
