@@ -5,7 +5,10 @@
 
 trigger:
   - master
-  - refs/tags/*
+  - feature/*
+  - feat/*
+  - dev/*
+  - fix/*
 
 pool:
   vmImage: 'ubuntu-latest'
