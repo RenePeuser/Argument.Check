@@ -72,20 +72,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(string argument)
         {
-            Test.IsNull(argument);
-
             _ = Throw.IfNull(argument);
-        }
-    }
-
-    public static class Test
-    {
-        public static void IsNull(object arg, [CallerArgumentExpression("arg")] string argumentName = default)
-        {
-            if (arg is null)
-            {
-                throw new ArgumentNullException(argumentName);
-            }
         }
     }
 }
