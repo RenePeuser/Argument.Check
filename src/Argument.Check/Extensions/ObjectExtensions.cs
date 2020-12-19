@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
+using System.Diagnostics;
+#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
 using System.Diagnostics.CodeAnalysis;
 
 namespace Argument.Check.Extensions

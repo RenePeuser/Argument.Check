@@ -8,6 +8,8 @@ dotnet_analyzer_diagnostic.severity = error
 dotnet_diagnostic.CA1032.severity = silent
 dotnet_diagnostic.CS1591.severity = none
 dotnet_diagnostic.CS1998.severity = error
+# this currently made to stay compatible
+dotnet_diagnostic.CS0618.severity = none
 dotnet_diagnostic.CA1701.severity = silent
 dotnet_diagnostic.CA1702.severity = silent
 dotnet_diagnostic.CA1707.severity = none

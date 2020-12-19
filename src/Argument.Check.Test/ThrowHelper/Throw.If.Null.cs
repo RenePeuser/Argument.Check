@@ -1,7 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Microsoft.VisualBasic.CompilerServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 #pragma warning disable 649

@@ -1,5 +1,7 @@
 ﻿using System;
+#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
 using System.Diagnostics;
+#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
 using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
 
@@ -41,7 +43,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfNotEqualsTo<T>(T? argument, T? expectedValue, [CallerArgumentExpression("argument")] string argumentName = default!)
+        public static T? IfNotEqualsTo<T>(T? argument, T? expectedValue, [CallerArgumentExpression("argument")] string argumentName = default!)
         {
             if (argument.EqualsTo(expectedValue))
             {

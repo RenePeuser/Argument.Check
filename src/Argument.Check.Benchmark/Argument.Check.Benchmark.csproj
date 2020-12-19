@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Argument.Check\Argument.Check.csproj" />
+    <ProjectReference Include="..\Argument.Check\Argument.Check.csproj" />
   </ItemGroup>
 
 </Project>

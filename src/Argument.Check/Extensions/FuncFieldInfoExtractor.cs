@@ -1,5 +1,7 @@
 using System;
+#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
 using System.Diagnostics;
+#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
 using System.Linq;
 using System.Reflection;
 
@@ -13,6 +15,11 @@ namespace Argument.Check.Extensions
         internal static FieldInfo GetFieldInfo<T>(this Func<T> func, Func<object, bool> predicate)
         {
             Throw.IfNull(() => func);
+
+            if (func.Target.IsNull())
+            {
+                throw new ArgumentException("The target of the given argument check is null, please check that you are not checking constant values !");
+            }
 
             var targetType = func.Target.GetType();
             var fields = targetType.GetFields();
