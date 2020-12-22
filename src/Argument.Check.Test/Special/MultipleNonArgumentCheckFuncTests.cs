@@ -15,8 +15,12 @@ namespace Argument.Check.Test.Special
 
                 void Test(object songoku)
                 {
-                    Func<object> returnSomething = () => "Hello";
-                    Assert.AreEqual("Hello", returnSomething());
+                    object ReturnSomething()
+                    {
+                        return "Hello";
+                    }
+
+                    Assert.AreEqual("Hello", ReturnSomething());
 
                     _ = Throw.IfNull(() => songoku);
                 }

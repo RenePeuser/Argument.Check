@@ -29,7 +29,7 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Test(null, new[] {"test"});
+                Test(null, new[] { "test" });
 
                 void Test(string[] test, string[] a)
                 {
@@ -49,7 +49,7 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Test(new string[] {null}, new[] {"test"});
+                Test(new string[] { null }, new[] { "test" });
 
                 void Test(string[] test, string[] a)
                 {
@@ -69,7 +69,7 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Test(new[] {"a"}, null);
+                Test(new[] { "a" }, null);
 
                 void Test(string[] test, string[] a)
                 {
@@ -88,7 +88,7 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Test(new[] {"a"}, new string[] {null});
+                Test(new[] { "a" }, new string[] { null });
 
                 void Test(string[] test, string[] a)
                 {
@@ -108,7 +108,7 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Test(new[] {"a"}, new string[] {null});
+                Test(new[] { "a" }, new string[] { null });
 
                 void Test(string[] test, string[] a)
                 {
