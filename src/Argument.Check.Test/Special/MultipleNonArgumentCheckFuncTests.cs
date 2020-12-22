@@ -13,16 +13,16 @@ namespace Argument.Check.Test.Special
             {
                 Test(null);
 
-                void Test(object songoku)
+                static void Test(object songoku)
                 {
-                    object ReturnSomething()
+                    static object ReturnSomething()
                     {
                         return "Hello";
                     }
 
                     Assert.AreEqual("Hello", ReturnSomething());
 
-                    _ = Throw.IfNull(() => songoku);
+                    _ = Throw.IfNull(songoku);
                 }
             });
 
@@ -36,11 +36,11 @@ namespace Argument.Check.Test.Special
             {
                 Test(null);
 
-                void Test(object songoku)
+                static void Test(object songoku)
                 {
-                    _ = Throw.IfNull(() => songoku);
+                    _ = Throw.IfNull(songoku);
 
-                    Func<object> returnSomething = () => "Hello";
+                    Func<string> returnSomething = () => "Hello";
                     Assert.AreEqual("Hello", returnSomething());
                 }
             });
@@ -55,12 +55,12 @@ namespace Argument.Check.Test.Special
             {
                 Test(null);
 
-                void Test(object songoku)
+                static void Test(object songoku)
                 {
                     Func<object> returnSomething0 = () => "Hello";
                     Assert.AreEqual("Hello", returnSomething0());
 
-                    _ = Throw.IfNull(() => songoku);
+                    _ = Throw.IfNull(songoku);
 
                     Func<object> returnSomething1 = () => "Hello";
                     Assert.AreEqual("Hello", returnSomething1());
