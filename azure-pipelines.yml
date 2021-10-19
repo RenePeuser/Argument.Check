@@ -28,9 +28,11 @@ steps:
     configFilePath: "./GitVersion.yml"
 
 - task: UseDotNet@2
+  displayName: 'Use .NET 6 Preview'
   inputs:
     packageType: 'sdk'
     version: '6.0.x'
+    includePreviewVersions: true
 
 - script: dotnet build --configuration $(buildConfiguration) /p:AssemblyVerison='$(GitVersion.SemVer)'
   displayName: 'dotnet build $(buildConfiguration)'
