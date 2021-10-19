@@ -10,8 +10,8 @@ namespace Argument.Check.Test.ThrowHelper
     public class ThrowIfNullOrAnyItemIsNullTest
     {
         private const string ArgumentFuncName = "argumentFunc";
-        private readonly IEnumerable<string> _listWithNullItem = new[] {"Vegeta", "Beerus", null};
-        private readonly IEnumerable<string> _listWithoutNullItem = new[] {"Vegeta", "Beerus"};
+        private readonly IEnumerable<string> _listWithNullItem = new[] { "Vegeta", "Beerus", null };
+        private readonly IEnumerable<string> _listWithoutNullItem = new[] { "Vegeta", "Beerus" };
         private readonly IEnumerable<string> _nullArgument;
         private readonly IEnumerable<string> _nullArgumentFunc;
 
@@ -26,7 +26,7 @@ namespace Argument.Check.Test.ThrowHelper
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_listWithNullItem));
 
-            Assert.IsTrue(exception.Message.Contains($"At least one item in the enumeration '{_listWithNullItem}' was null."));
+            Assert.IsTrue(exception.Message.Contains("At least one item in the enumeration 'values' was null. (Parameter 'values')"));
         }
 
         [TestMethod]
@@ -51,22 +51,6 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
             _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(_nullArgumentFunc), ArgumentFuncName);
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_Enumeration_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfNullOrAnyItemIsNull(NullHelper.GetNullOf<string>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
         }
 
         private void TestMethod(IEnumerable<string> values)

@@ -60,22 +60,6 @@ namespace Argument.Check.Test.ThrowHelper
             Assert.AreEqual(_sonGoku, Throw.IfLengthIsNot(_sonGoku, 7));
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfLengthIsNot(NullHelper.GetNullOf<string>(), 5);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
         private void TestMethod(string argument, int length)
         {
             _ = Throw.IfLengthIsNot(argument, length);

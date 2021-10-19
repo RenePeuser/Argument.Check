@@ -8,9 +8,8 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfLessThanTest
     {
-        private const string ArgumentFuncName = "argumentFunc";
         private readonly int _limit = 42;
-        private readonly int _nullArgumentFunc;
+        private readonly int argument;
         private readonly int _smallerValue = 21;
         private readonly int _validValue = 84;
 
@@ -43,25 +42,8 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_Exception_If_ArgumentFunc_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfLessThan(_nullArgumentFunc, _limit), nameof(ArgumentFuncName));
+            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfLessThan(argument, _limit), nameof(argument));
         }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfLessOrEqual(NullHelper.GetNullOf<int>(), 5);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
         private void TestMethod(int value, int limit)
         {
             _ = Throw.IfLessOrEqual(value, limit);

@@ -42,7 +42,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>([NotNull] IEnumerable<T> argument, [CallerArgumentExpression("argument")] string argumentName = default!)
+        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>([NotNull] IEnumerable<T> argument, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument);
 

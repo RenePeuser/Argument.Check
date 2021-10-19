@@ -91,22 +91,6 @@ namespace Argument.Check.Test.ThrowHelper
             Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_Enumeration_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfNotEmpty(NullHelper.GetNullOf<IEnumerable<string>>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
         private void TestMethod(string contains)
         {
             _ = Throw.IfNotEmpty(contains);

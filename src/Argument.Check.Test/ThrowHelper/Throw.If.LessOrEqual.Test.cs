@@ -49,23 +49,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_Exception_If_ArgumentFunc_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfLessOrEqual(_nullArgumentFunc, _limit), nameof(ArgumentFuncName));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfLessOrEqual(NullHelper.GetNullOf<int>(), 5);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfLessOrEqual(_nullArgumentFunc, _limit), nameof(ArgumentFuncName));
         }
 
         private void TestMethod(int value, int limit)

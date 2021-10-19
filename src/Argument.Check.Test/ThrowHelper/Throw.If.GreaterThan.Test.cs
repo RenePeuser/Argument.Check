@@ -35,23 +35,6 @@ namespace Argument.Check.Test.ThrowHelper
         {
             Assert.AreEqual(_validValue, Throw.IfGreaterThan(_validValue, _limit));
         }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfGreaterThan(NullHelper.GetNullOf<int>(), 5);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
         private void TestMethod(int current, int limit)
         {
             _ = Throw.IfGreaterThan(current, limit);

@@ -43,10 +43,8 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfEqualsTo<T>(T argument, T expectedValue, [CallerArgumentExpression("argument")] string argumentName = default!)
+        public static T IfEqualsTo<T>(T argument, T expectedValue, [CallerArgumentExpression("argument")] string argumentName = "")
         {
-            IfNull<object>(argument);
-
             if (argument.NotEqualsTo(expectedValue))
             {
                 return argument;

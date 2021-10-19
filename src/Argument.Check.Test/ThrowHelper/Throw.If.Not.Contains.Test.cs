@@ -47,22 +47,6 @@ namespace Argument.Check.Test.ThrowHelper
             TestMethod(_nullArgument, _stringValues);
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                void TestNullFunc()
-                {
-                    _ = Throw.IfNotContains(NullHelper.GetNullOf<string>(), _stringValues);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
         private void TestMethod<T>(T contains, IEnumerable<T> source)
         {
             _ = Throw.IfNotContains(contains, source);

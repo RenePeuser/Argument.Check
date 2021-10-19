@@ -81,15 +81,6 @@
             <returns>The given argument, which was checked.</returns>
             <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
         </member>
-        <member name="M:Argument.Check.Throw.If``1(``0,System.Func{``0,System.Boolean},System.String)">
-            <summary>Throws an <see cref="T:System.ArgumentException" />, when validation predicate is <c>true</c>.</summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argument">The argument, which has to be checked.</param>
-            <param name="argumentName">The argument name will be automatically detected by the <see cref="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"/>, so please do not enter any name, otherwise you will got the wrong parameter name.</param>
-            <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        </member>
         <member name="M:Argument.Check.Throw.If``1(``0,System.Func{``0,System.Boolean},System.String,System.String)">
             <summary>Throws an <see cref="T:System.ArgumentException" />, when validation predicate is <c>true</c>.</summary>
             <typeparam name="T">The type of the argument.</typeparam>
@@ -304,15 +295,6 @@
             <param name="argumentFunc">A function, which returns the argument to validate.</param>
             <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
             <param name="exceptionMessage">The exception exceptionMessage which should be shown, if argument was not valid.</param>
-            <returns>The given argument, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
-        </member>
-        <member name="M:Argument.Check.Throw.IfNot``1(``0,System.Func{``0,System.Boolean},System.String)">
-            <summary>Throws an <see cref="T:System.ArgumentException" />, when validation predicate is <c>false</c>.</summary>
-            <typeparam name="T">The type of the argument.</typeparam>
-            <param name="argument">The argument, which has to be checked.</param>
-            <param name="argumentName">The argument name will be automatically detected by the <see cref="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"/>, so please do not enter any name, otherwise you will got the wrong parameter name.</param>
-            <param name="validationPredicate">A function which checks the argument, if it is valid or not.</param>
             <returns>The given argument, which was checked.</returns>
             <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
         </member>

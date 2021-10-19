@@ -46,7 +46,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfContains<T>(T argument, IEnumerable<T> source, [CallerArgumentExpression("argument")] string argumentName = default!)
+        public static T IfContains<T>(T argument, IEnumerable<T> source, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(source);
 

@@ -14,19 +14,19 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Predicate_Is_True()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_falseValue, item => item));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_falseValue, item => item, "Value must be false"));
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Predicate_Is_True()
         {
-            TestMethod(_falseValue, item => !item);
+            TestMethod(_falseValue, item => !item, "Value must be true");
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One_Wihtout_Message()
         {
-            Assert.AreEqual(_falseValue, Throw.IfNot(_falseValue, item => !item));
+            Assert.AreEqual(_falseValue, Throw.IfNot(_falseValue, item => !item, "Value must be true"));
         }
 
         [TestMethod]
@@ -77,11 +77,6 @@ namespace Argument.Check.Test.ThrowHelper
             });
 
             Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
-        private void TestMethod(bool argument, Func<bool, bool> predicate)
-        {
-            _ = Throw.IfNot(argument, predicate);
         }
 
         private void TestMethod(bool argument, Func<bool, bool> predicate, string message)

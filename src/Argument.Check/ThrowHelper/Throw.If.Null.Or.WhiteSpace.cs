@@ -37,7 +37,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static string IfNullOrWhiteSpace([NotNull] string argument, [CallerArgumentExpression("argument")] string argumentName = default!)
+        public static string IfNullOrWhiteSpace([NotNull] string argument, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument, argumentName);
             IfEmpty(argument, argumentName);

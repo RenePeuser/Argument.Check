@@ -10,9 +10,9 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfExistsTest
     {
-        private readonly DirectoryInfo _existingDirectoryInfo = new DirectoryInfo(Environment.CurrentDirectory);
+        private readonly DirectoryInfo _existingDirectoryInfo = new(Environment.CurrentDirectory);
         private readonly FileInfo _existingFileInfo = new DirectoryInfo(Environment.CurrentDirectory).EnumerateFiles().First();
-        private readonly FileInfo _notExistingFileInfo = new FileInfo(@"s:\SonGoku.db");
+        private readonly FileInfo _notExistingFileInfo = new(@"s:\SonGoku.db");
         private readonly FileSystemInfo _nullArgument;
 
         [TestMethod]
@@ -60,22 +60,6 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
             _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfExists(NullHelper.GetNullOf<FileSystemInfo>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
         }
 
         private void TestMethod(FileSystemInfo argument)

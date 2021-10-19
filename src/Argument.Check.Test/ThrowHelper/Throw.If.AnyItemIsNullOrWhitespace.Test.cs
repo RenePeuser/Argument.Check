@@ -53,23 +53,6 @@ namespace Argument.Check.Test.ThrowHelper
 
             Assert.IsTrue(exception.Message.Contains($"At least one string in the enumeration '{SonGoku}, ,{Vegeta}' was null or a whitespace."));
         }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfAnyItemIsNullOrWhitespace(NullHelper.GetNullOf<IEnumerable<string>>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
         private void TestMethod(IEnumerable<string> strings)
         {
             _ = Throw.IfAnyItemIsNullOrWhitespace(strings);

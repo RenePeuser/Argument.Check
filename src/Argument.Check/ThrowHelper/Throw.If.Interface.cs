@@ -56,7 +56,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static object IfInterface<T>(object argument, [CallerArgumentExpression("argument")] string argumentName = default!) where T : class
+        public static object IfInterface<T>(object argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : class
         {
             IfNull(argument);
 

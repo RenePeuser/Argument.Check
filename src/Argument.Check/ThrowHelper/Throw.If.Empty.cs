@@ -65,7 +65,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static string IfEmpty(string argument, [CallerArgumentExpression("argument")] string argumentName = default!)
+        public static string IfEmpty(string argument, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument);
 
@@ -85,7 +85,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static IEnumerable<T> IfEmpty<T>(IEnumerable<T> argument, [CallerArgumentExpression("argument")] string argumentName = default!)
+        public static IEnumerable<T> IfEmpty<T>(IEnumerable<T> argument, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument);
 

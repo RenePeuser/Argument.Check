@@ -10,7 +10,7 @@ namespace Argument.Check.Test.ThrowHelper
     public class ThrowIfNotInterfaceTest
     {
         private readonly IEnumerable<string> _enumerable = Enumerable.Empty<string>();
-        private readonly object _noInterface = new object();
+        private readonly object _noInterface = new();
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Type_Is_Not_An_Interface()
@@ -56,22 +56,6 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Throw_An_Exception_If_Instance_Is_Not_An_Interface()
         {
             _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_noInterface));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfNotInterface<IEnumerable>(NullHelper.GetNullOf<object>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
         }
 
         private void TestMethod(object argument)

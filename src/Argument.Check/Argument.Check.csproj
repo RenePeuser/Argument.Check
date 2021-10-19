@@ -14,7 +14,7 @@
 		<PackageProjectUrl>https://renepeuser.visualstudio.com/Argument.Check</PackageProjectUrl>
 		<RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
 		<PackageReleaseNotes>Changes:
-- Upgrade to Net5
+- Upgrade to Net6
 - Code analysis detect argument null check as a null check. No hint for "possible null reference exception.." any more.
 - No func need to check your arguments. "Throw.IfNull(myArgument)" instead of "Throw.IfNull(() =&gt; myArgument)"
 - The argument check is now as fast as throw expressions, no performance loss.

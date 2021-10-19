@@ -41,7 +41,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static IEnumerable<string> IfAnyItemIsNullOrWhitespace(IEnumerable<string> argument, [CallerArgumentExpression("argument")] string argumentName = default!)
+        public static IEnumerable<string> IfAnyItemIsNullOrWhitespace(IEnumerable<string> argument, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument);
 

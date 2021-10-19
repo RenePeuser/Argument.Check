@@ -48,7 +48,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfLessThan<T>(T argument, T limit, [CallerArgumentExpression("argument")] string argumentName = default!) where T : IComparable
+        public static T IfLessThan<T>(T argument, T limit, [CallerArgumentExpression("argument")] string argumentName = "") where T : IComparable
         {
             if (!argument.IsLessThan(limit))
             {
