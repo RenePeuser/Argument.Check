@@ -14,6 +14,8 @@ namespace Argument.Check.Test.SolutionAndProjects
     {
         internal static List<CSharpFileInfo> CSharpFileInfos { get; private set; }
 
+        internal static List<CSharpFileInfo> ThrowHelperCSharpFileInfos { get; private set; }
+
         [AssemblyInitialize]
         public static void ClassInit(TestContext testContext)
         {
@@ -27,6 +29,8 @@ namespace Argument.Check.Test.SolutionAndProjects
                     return new CSharpFileInfo(csharpFile, syntaxTree);
                 })
                 .ToList();
+
+            ThrowHelperCSharpFileInfos = CSharpFileInfos.Where(file => file.FileInfo.FullName.Contains("ThrowHelper")).ToList();
         }
 
         private static DirectoryInfo FindFolderWithSources(DirectoryInfo startDirectoryInfo, string name)

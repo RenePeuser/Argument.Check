@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#pragma warning disable 649
+
 namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
@@ -8,20 +10,20 @@ namespace Argument.Check.Test.ThrowHelper
     {
         private const string ArgumentFuncName = "argumentFunc";
         private readonly int _limit = 42;
-        private readonly Func<int> _nullArgumentFunc = null;
+        private readonly int _nullArgumentFunc;
         private readonly int _smallerValue = 21;
         private readonly int _validValue = 84;
 
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Equal_To_Expected_Limit()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
+            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Smaller_To_Expected_Limit()
         {
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
+            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
         }
 
         [TestMethod]
@@ -41,13 +43,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_validValue, Throw.IfLessOrEqual(() => _validValue, _limit));
+            Assert.AreEqual(_validValue, Throw.IfLessOrEqual(_validValue, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_If_ArgumentFunc_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfLessOrEqual(_nullArgumentFunc, _limit), nameof(ArgumentFuncName));
+            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfLessOrEqual(_nullArgumentFunc, _limit), nameof(ArgumentFuncName));
         }
 
         [TestMethod]
@@ -56,9 +58,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfLessOrEqual(NullHelper.GetNullOf<Func<int>>(), 5);
+                    _ = Throw.IfLessOrEqual(NullHelper.GetNullOf<int>(), 5);
                 }
             });
 
@@ -67,7 +70,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(int value, int limit)
         {
-            Throw.IfLessOrEqual(() => value, limit);
+            _ = Throw.IfLessOrEqual(value, limit);
         }
     }
 }

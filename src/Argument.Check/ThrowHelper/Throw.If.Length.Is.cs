@@ -1,5 +1,8 @@
 using System;
+#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
 using System.Diagnostics;
+#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
+using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
 
 namespace Argument.Check
@@ -12,7 +15,10 @@ namespace Argument.Check
         /// <param name="length">The length which the string argument must have.</param>
         /// <returns>The given string, which was checked.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, if the given string equals to an expected length of <c>length</c>.</exception>
+#if !DEBUG
         [DebuggerHidden]
+#endif
+        [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfLengthIs(myArgument, myLength)", false)]
         public static string IfLengthIs(Func<string> argumentFunc, int length)
         {
             IfNull(() => argumentFunc);
@@ -30,6 +36,27 @@ namespace Argument.Check
             {
                 return arg.Is<string>() && arg.Cast<string>().Length.EqualsTo(length);
             }
+        }
+
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given string equals to an expected length of <c>length</c>.</summary>
+        /// <param name="argument">The argument, which has to be checked.</param>
+        /// <param name="argumentName">The argument name will be automatically detected by the <see cref="CallerArgumentExpressionAttribute"/>, so please do not enter any name, otherwise you will got the wrong parameter name.</param>
+        /// <param name="length">The length which the string argument must have.</param>
+        /// <returns>The given string, which was checked.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, if the given string equals to an expected length of <c>length</c>.</exception>
+#if !DEBUG
+        [DebuggerHidden]
+#endif
+        public static string IfLengthIs(string argument, int length, [CallerArgumentExpression("argument")] string argumentName = default!)
+        {
+            IfNull(argument);
+
+            if (argument.Length.NotEqualsTo(length))
+            {
+                return argument;
+            }
+
+            throw new ArgumentOutOfRangeException(argumentName, $"String length: '{argument}' must not be equals to to a length of: '{length}'.");
         }
     }
 }

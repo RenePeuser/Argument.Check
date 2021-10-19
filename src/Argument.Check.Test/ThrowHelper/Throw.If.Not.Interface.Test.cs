@@ -15,7 +15,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Type_Is_Not_An_Interface()
         {
-            Assert.ThrowsException<ArgumentException>(Throw.IfNotInterface<object>);
+            _ = Assert.ThrowsException<ArgumentException>(Throw.IfNotInterface<object>);
         }
 
         [TestMethod]
@@ -43,19 +43,19 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Instance_Is_An_Interface()
         {
-            Throw.IfNotInterface<IEnumerable>(() => _enumerable);
+            _ = Throw.IfNotInterface<IEnumerable>(_enumerable);
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_enumerable, Throw.IfNotInterface<IEnumerable>(() => _enumerable));
+            Assert.AreEqual(_enumerable, Throw.IfNotInterface<IEnumerable>(_enumerable));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Instance_Is_Not_An_Interface()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_noInterface));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_noInterface));
         }
 
         [TestMethod]
@@ -64,9 +64,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfNotInterface<IEnumerable>(NullHelper.GetNullOf<Func<object>>());
+                    _ = Throw.IfNotInterface<IEnumerable>(NullHelper.GetNullOf<object>());
                 }
             });
 
@@ -75,7 +76,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(object argument)
         {
-            Throw.IfNotInterface<IEnumerable>(() => argument);
+            _ = Throw.IfNotInterface<IEnumerable>(argument);
         }
     }
 }

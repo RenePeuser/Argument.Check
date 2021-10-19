@@ -13,11 +13,11 @@ namespace Argument.Check.Test.Special
             {
                 Test(null);
 
-                void Test(params string[] paths)
+                static void Test(params string[] paths)
                 {
                     // This should throw only.
-                    Throw.IfNull(() => paths);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => paths);
+                    _ = Throw.IfNull(paths);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(paths);
                 }
             });
 
@@ -31,13 +31,13 @@ namespace Argument.Check.Test.Special
             {
                 Test(null, new[] { "test" });
 
-                void Test(string[] test, string[] a)
+                static void Test(string[] test, string[] a)
                 {
-                    Throw.IfNull(() => test);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => test);
+                    _ = Throw.IfNull(test);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(test);
 
-                    Throw.IfNull(() => a);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => a);
+                    _ = Throw.IfNull(a);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(a);
                 }
             });
 
@@ -51,13 +51,13 @@ namespace Argument.Check.Test.Special
             {
                 Test(new string[] { null }, new[] { "test" });
 
-                void Test(string[] test, string[] a)
+                static void Test(string[] test, string[] a)
                 {
-                    Throw.IfNull(() => test);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => test);
+                    _ = Throw.IfNull(test);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(test);
 
-                    Throw.IfNull(() => a);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => a);
+                    _ = Throw.IfNull(a);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(a);
                 }
             });
 
@@ -71,12 +71,12 @@ namespace Argument.Check.Test.Special
             {
                 Test(new[] { "a" }, null);
 
-                void Test(string[] test, string[] a)
+                static void Test(string[] test, string[] a)
                 {
-                    Throw.IfNull(() => test);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => test);
+                    _ = Throw.IfNull(test);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(test);
 
-                    Throw.IfNull(() => a);
+                    _ = Throw.IfNull(a);
                 }
             });
 
@@ -90,13 +90,13 @@ namespace Argument.Check.Test.Special
             {
                 Test(new[] { "a" }, new string[] { null });
 
-                void Test(string[] test, string[] a)
+                static void Test(string[] test, string[] a)
                 {
-                    Throw.IfNull(() => test);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => test);
+                    _ = Throw.IfNull(test);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(test);
 
-                    Throw.IfNull(() => a);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => a);
+                    _ = Throw.IfNull(a);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(a);
                 }
             });
 
@@ -110,13 +110,13 @@ namespace Argument.Check.Test.Special
             {
                 Test(new[] { "a" }, new string[] { null });
 
-                void Test(string[] test, string[] a)
+                static void Test(string[] test, string[] a)
                 {
-                    Throw.IfNull(() => test);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => test);
+                    _ = Throw.IfNull(test);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(test);
 
-                    Throw.IfNull(() => a);
-                    Throw.IfAnyItemIsNullOrWhitespace(() => a);
+                    _ = Throw.IfNull(a);
+                    _ = Throw.IfAnyItemIsNullOrWhitespace(a);
                 }
             });
 
@@ -130,14 +130,14 @@ namespace Argument.Check.Test.Special
             {
                 Test(null, "test", "test");
 
-                void Test(string a, string b, string c)
+                static void Test(string a, string b, string c)
                 {
-                    Throw.IfNull(() => a);
-                    Throw.IfWhitespace(() => a);
-                    Throw.IfNullOrWhiteSpace(() => a);
+                    _ = Throw.IfNull(a);
+                    _ = Throw.IfWhitespace(a);
+                    _ = Throw.IfNullOrWhiteSpace(a);
 
-                    Throw.IfNull(() => b);
-                    Throw.IfNull(() => c);
+                    _ = Throw.IfNull(b);
+                    _ = Throw.IfNull(c);
                 }
             });
 
@@ -151,13 +151,13 @@ namespace Argument.Check.Test.Special
             {
                 Test(" ", "test", "test");
 
-                void Test(string a, string b, string c)
+                static void Test(string a, string b, string c)
                 {
-                    Throw.IfNull(() => a);
-                    Throw.IfWhitespace(() => a);
+                    _ = Throw.IfNull(a);
+                    _ = Throw.IfWhitespace(a);
 
-                    Throw.IfNull(() => b);
-                    Throw.IfNull(() => c);
+                    _ = Throw.IfNull(b);
+                    _ = Throw.IfNull(c);
                 }
             });
 
@@ -171,13 +171,13 @@ namespace Argument.Check.Test.Special
             {
                 Test("abc", " ", "test");
 
-                void Test(string a, string b, string c)
+                static void Test(string a, string b, string c)
                 {
-                    Throw.IfNull(() => a);
-                    Throw.IfWhitespace(() => a);
+                    _ = Throw.IfNull(a);
+                    _ = Throw.IfWhitespace(a);
 
-                    Throw.IfWhitespace(() => b);
-                    Throw.IfNull(() => c);
+                    _ = Throw.IfWhitespace(b);
+                    _ = Throw.IfNull(c);
                 }
             });
 
@@ -191,11 +191,11 @@ namespace Argument.Check.Test.Special
             {
                 Test(2, "test", new object());
 
-                void Test(int a, string b, object c)
+                static void Test(int a, string b, object c)
                 {
-                    Throw.IfLessThan(() => a, 5);
-                    Throw.IfNull(() => b);
-                    Throw.IfNull(() => c);
+                    _ = Throw.IfLessThan(a, 5);
+                    _ = Throw.IfNull(b);
+                    _ = Throw.IfNull(c);
                 }
             });
 
@@ -209,11 +209,11 @@ namespace Argument.Check.Test.Special
             {
                 Test(10, null, new object());
 
-                void Test(int a, string b, object c)
+                static void Test(int a, string b, object c)
                 {
-                    Throw.IfLessThan(() => a, 5);
-                    Throw.IfNull(() => b);
-                    Throw.IfNull(() => c);
+                    _ = Throw.IfLessThan(a, 5);
+                    _ = Throw.IfNull(b);
+                    _ = Throw.IfNull(c);
                 }
             });
 
@@ -227,11 +227,11 @@ namespace Argument.Check.Test.Special
             {
                 Test(10, "test", null);
 
-                void Test(int a, string b, object c)
+                static void Test(int a, string b, object c)
                 {
-                    Throw.IfLessThan(() => a, 5);
-                    Throw.IfNull(() => b);
-                    Throw.IfNull(() => c);
+                    _ = Throw.IfLessThan(a, 5);
+                    _ = Throw.IfNull(b);
+                    _ = Throw.IfNull(c);
                 }
             });
 
@@ -245,12 +245,12 @@ namespace Argument.Check.Test.Special
             {
                 Test(7, 4, 15);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => a, 2);
-                    Throw.IfGreaterThan(() => a, 5);
+                    _ = Throw.IfLessThan(a, 2);
+                    _ = Throw.IfGreaterThan(a, 5);
 
-                    Throw.IfOutOfRange(() => c, 10, 20);
+                    _ = Throw.IfOutOfRange(c, 10, 20);
                 }
             });
 
@@ -264,16 +264,16 @@ namespace Argument.Check.Test.Special
             {
                 Test(7, 4, 15);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => a, 2);
-                    Throw.IfGreaterThan(() => a, 5);
+                    _ = Throw.IfLessThan(a, 2);
+                    _ = Throw.IfGreaterThan(a, 5);
 
-                    Throw.IfLessThan(() => b, 2);
-                    Throw.IfGreaterThan(() => b, 5);
+                    _ = Throw.IfLessThan(b, 2);
+                    _ = Throw.IfGreaterThan(b, 5);
 
-                    Throw.IfLessThan(() => c, 2);
-                    Throw.IfGreaterThan(() => c, 5);
+                    _ = Throw.IfLessThan(c, 2);
+                    _ = Throw.IfGreaterThan(c, 5);
                 }
             });
 
@@ -288,16 +288,16 @@ namespace Argument.Check.Test.Special
             {
                 Test(3, 7, 15);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => a, 2);
-                    Throw.IfGreaterThan(() => a, 5);
+                    _ = Throw.IfLessThan(a, 2);
+                    _ = Throw.IfGreaterThan(a, 5);
 
-                    Throw.IfLessThan(() => b, 2);
-                    Throw.IfGreaterThan(() => b, 5);
+                    _ = Throw.IfLessThan(b, 2);
+                    _ = Throw.IfGreaterThan(b, 5);
 
-                    Throw.IfLessThan(() => c, 2);
-                    Throw.IfGreaterThan(() => c, 5);
+                    _ = Throw.IfLessThan(c, 2);
+                    _ = Throw.IfGreaterThan(c, 5);
                 }
             });
 
@@ -311,16 +311,16 @@ namespace Argument.Check.Test.Special
             {
                 Test(3, 3, 7);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => a, 2);
-                    Throw.IfGreaterThan(() => a, 5);
+                    _ = Throw.IfLessThan(a, 2);
+                    _ = Throw.IfGreaterThan(a, 5);
 
-                    Throw.IfLessThan(() => b, 2);
-                    Throw.IfGreaterThan(() => b, 5);
+                    _ = Throw.IfLessThan(b, 2);
+                    _ = Throw.IfGreaterThan(b, 5);
 
-                    Throw.IfLessThan(() => c, 2);
-                    Throw.IfGreaterThan(() => c, 5);
+                    _ = Throw.IfLessThan(c, 2);
+                    _ = Throw.IfGreaterThan(c, 5);
                 }
             });
 
@@ -335,9 +335,9 @@ namespace Argument.Check.Test.Special
             {
                 Test(7, 0, 15);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => b, 2);
+                    _ = Throw.IfLessThan(b, 2);
                 }
             });
 
@@ -351,9 +351,9 @@ namespace Argument.Check.Test.Special
             {
                 Test(7, 3, 0);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => c, 2);
+                    _ = Throw.IfLessThan(c, 2);
                 }
             });
 
@@ -367,10 +367,10 @@ namespace Argument.Check.Test.Special
             {
                 Test(7, 3, 0);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => b, 2);
-                    Throw.IfLessThan(() => c, 2);
+                    _ = Throw.IfLessThan(b, 2);
+                    _ = Throw.IfLessThan(c, 2);
                 }
             });
 
@@ -384,20 +384,19 @@ namespace Argument.Check.Test.Special
             {
                 Test(1, 42, 42);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => a, 42);
-                    Throw.IfEqualsTo(() => a, 24);
-                    Throw.IfGreaterThan(() => a, 66);
+                    _ = Throw.IfLessThan(a, 42);
+                    _ = Throw.IfEqualsTo(a, 24);
+                    _ = Throw.IfGreaterThan(a, 66);
 
-                    Throw.IfLessThan(() => b, 42);
-                    Throw.IfEqualsTo(() => b, 24);
-                    Throw.IfGreaterThan(() => b, 66);
+                    _ = Throw.IfLessThan(b, 42);
+                    _ = Throw.IfEqualsTo(b, 24);
+                    _ = Throw.IfGreaterThan(b, 66);
 
-                    Throw.IfLessThan(() => c, 42);
-                    Throw.IfEqualsTo(() => c, 24);
-                    Throw.IfGreaterThan(() => c, 66);
-
+                    _ = Throw.IfLessThan(c, 42);
+                    _ = Throw.IfEqualsTo(c, 24);
+                    _ = Throw.IfGreaterThan(c, 66);
                 }
             });
 
@@ -411,20 +410,19 @@ namespace Argument.Check.Test.Special
             {
                 Test(24, 42, 42);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => a, 0);
-                    Throw.IfEqualsTo(() => a, 24);
-                    Throw.IfGreaterThan(() => a, 66);
+                    _ = Throw.IfLessThan(a, 0);
+                    _ = Throw.IfEqualsTo(a, 24);
+                    _ = Throw.IfGreaterThan(a, 66);
 
-                    Throw.IfLessThan(() => b, 42);
-                    Throw.IfEqualsTo(() => b, 24);
-                    Throw.IfGreaterThan(() => b, 66);
+                    _ = Throw.IfLessThan(b, 42);
+                    _ = Throw.IfEqualsTo(b, 24);
+                    _ = Throw.IfGreaterThan(b, 66);
 
-                    Throw.IfLessThan(() => c, 42);
-                    Throw.IfEqualsTo(() => c, 24);
-                    Throw.IfGreaterThan(() => c, 66);
-
+                    _ = Throw.IfLessThan(c, 42);
+                    _ = Throw.IfEqualsTo(c, 24);
+                    _ = Throw.IfGreaterThan(c, 66);
                 }
             });
 
@@ -438,19 +436,19 @@ namespace Argument.Check.Test.Special
             {
                 Test(67, 42, 1);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => c, 42);
-                    Throw.IfEqualsTo(() => c, 24);
-                    Throw.IfGreaterThan(() => c, 66);
+                    _ = Throw.IfLessThan(c, 42);
+                    _ = Throw.IfEqualsTo(c, 24);
+                    _ = Throw.IfGreaterThan(c, 66);
 
-                    Throw.IfLessThan(() => a, 0);
-                    Throw.IfEqualsTo(() => a, 24);
-                    Throw.IfGreaterThan(() => a, 66);
+                    _ = Throw.IfLessThan(a, 0);
+                    _ = Throw.IfEqualsTo(a, 24);
+                    _ = Throw.IfGreaterThan(a, 66);
 
-                    Throw.IfLessThan(() => b, 42);
-                    Throw.IfEqualsTo(() => b, 24);
-                    Throw.IfGreaterThan(() => b, 66);
+                    _ = Throw.IfLessThan(b, 42);
+                    _ = Throw.IfEqualsTo(b, 24);
+                    _ = Throw.IfGreaterThan(b, 66);
                 }
             });
 
@@ -464,19 +462,19 @@ namespace Argument.Check.Test.Special
             {
                 Test(67, 42, 24);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => c, 1);
-                    Throw.IfEqualsTo(() => c, 24);
-                    Throw.IfGreaterThan(() => c, 66);
+                    _ = Throw.IfLessThan(c, 1);
+                    _ = Throw.IfEqualsTo(c, 24);
+                    _ = Throw.IfGreaterThan(c, 66);
 
-                    Throw.IfLessThan(() => a, 0);
-                    Throw.IfEqualsTo(() => a, 24);
-                    Throw.IfGreaterThan(() => a, 66);
+                    _ = Throw.IfLessThan(a, 0);
+                    _ = Throw.IfEqualsTo(a, 24);
+                    _ = Throw.IfGreaterThan(a, 66);
 
-                    Throw.IfLessThan(() => b, 42);
-                    Throw.IfEqualsTo(() => b, 24);
-                    Throw.IfGreaterThan(() => b, 66);
+                    _ = Throw.IfLessThan(b, 42);
+                    _ = Throw.IfEqualsTo(b, 24);
+                    _ = Throw.IfGreaterThan(b, 66);
                 }
             });
 
@@ -490,19 +488,19 @@ namespace Argument.Check.Test.Special
             {
                 Test(24, 24, 24);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => c, 1);
-                    Throw.IfEqualsTo(() => c, 24);
-                    Throw.IfGreaterThan(() => c, 66);
+                    _ = Throw.IfLessThan(c, 1);
+                    _ = Throw.IfEqualsTo(c, 24);
+                    _ = Throw.IfGreaterThan(c, 66);
 
-                    Throw.IfLessThan(() => a, 0);
-                    Throw.IfEqualsTo(() => a, 24);
-                    Throw.IfGreaterThan(() => a, 66);
+                    _ = Throw.IfLessThan(a, 0);
+                    _ = Throw.IfEqualsTo(a, 24);
+                    _ = Throw.IfGreaterThan(a, 66);
 
-                    Throw.IfLessThan(() => b, 42);
-                    Throw.IfEqualsTo(() => b, 24);
-                    Throw.IfGreaterThan(() => b, 66);
+                    _ = Throw.IfLessThan(b, 42);
+                    _ = Throw.IfEqualsTo(b, 24);
+                    _ = Throw.IfGreaterThan(b, 66);
                 }
             });
 
@@ -516,19 +514,19 @@ namespace Argument.Check.Test.Special
             {
                 Test(24, 24, 24);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => b, 1);
-                    Throw.IfEqualsTo(() => b, 24);
-                    Throw.IfGreaterThan(() => b, 66);
+                    _ = Throw.IfLessThan(b, 1);
+                    _ = Throw.IfEqualsTo(b, 24);
+                    _ = Throw.IfGreaterThan(b, 66);
 
-                    Throw.IfLessThan(() => c, 1);
-                    Throw.IfEqualsTo(() => c, 24);
-                    Throw.IfGreaterThan(() => c, 66);
+                    _ = Throw.IfLessThan(c, 1);
+                    _ = Throw.IfEqualsTo(c, 24);
+                    _ = Throw.IfGreaterThan(c, 66);
 
-                    Throw.IfLessThan(() => a, 0);
-                    Throw.IfEqualsTo(() => a, 24);
-                    Throw.IfGreaterThan(() => a, 66);
+                    _ = Throw.IfLessThan(a, 0);
+                    _ = Throw.IfEqualsTo(a, 24);
+                    _ = Throw.IfGreaterThan(a, 66);
                 }
             });
 
@@ -542,16 +540,16 @@ namespace Argument.Check.Test.Special
             {
                 Test(24, 24, 24);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => b, 1);
-                    Throw.IfEqualsTo(() => b, 24);
-                    Throw.IfGreaterThan(() => b, 66);
+                    _ = Throw.IfLessThan(b, 1);
+                    _ = Throw.IfEqualsTo(b, 24);
+                    _ = Throw.IfGreaterThan(b, 66);
 
-                    Throw.IfEqualsTo(() => c, 24);
-                    Throw.IfGreaterThan(() => c, 66);
+                    _ = Throw.IfEqualsTo(c, 24);
+                    _ = Throw.IfGreaterThan(c, 66);
 
-                    Throw.IfLessThan(() => a, 0);
+                    _ = Throw.IfLessThan(a, 0);
                 }
             });
 
@@ -565,15 +563,15 @@ namespace Argument.Check.Test.Special
             {
                 Test(24, 24, 24);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => b, 1);
-                    Throw.IfEqualsTo(() => b, 24);
-                    Throw.IfGreaterThan(() => b, 66);
+                    _ = Throw.IfLessThan(b, 1);
+                    _ = Throw.IfEqualsTo(b, 24);
+                    _ = Throw.IfGreaterThan(b, 66);
 
-                    Throw.IfEqualsTo(() => c, 24);
+                    _ = Throw.IfEqualsTo(c, 24);
 
-                    Throw.IfLessThan(() => a, 0);
+                    _ = Throw.IfLessThan(a, 0);
                 }
             });
 
@@ -587,13 +585,13 @@ namespace Argument.Check.Test.Special
             {
                 Test(24, 24, 24);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfLessThan(() => b, 1);
-                    Throw.IfEqualsTo(() => b, 24);
-                    Throw.IfGreaterThan(() => b, 66);
+                    _ = Throw.IfLessThan(b, 1);
+                    _ = Throw.IfEqualsTo(b, 24);
+                    _ = Throw.IfGreaterThan(b, 66);
 
-                    Throw.IfEqualsTo(() => c, 24);
+                    _ = Throw.IfEqualsTo(c, 24);
                 }
             });
 
@@ -607,15 +605,15 @@ namespace Argument.Check.Test.Special
             {
                 Test(13, 12, 24);
 
-                void Test(int a, int b, int c)
+                static void Test(int a, int b, int c)
                 {
-                    Throw.IfEqualsTo(() => a, 13);
+                    _ = Throw.IfEqualsTo(a, 13);
 
-                    Throw.IfEqualsTo(() => b, 12);
-                    Throw.IfEqualsTo(() => b, 13);
-                    Throw.IfEqualsTo(() => b, 14);
+                    _ = Throw.IfEqualsTo(b, 12);
+                    _ = Throw.IfEqualsTo(b, 13);
+                    _ = Throw.IfEqualsTo(b, 14);
 
-                    Throw.IfEqualsTo(() => c, 24);
+                    _ = Throw.IfEqualsTo(c, 24);
                 }
             });
 

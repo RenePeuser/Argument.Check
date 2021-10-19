@@ -4,12 +4,12 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-  - master  
+  - master
+  - feature/*
+  - feat/*
   - dev/*
   - fix/*
-  - feat/*
-  - feature/*
-  - refs/tags/*
+
 pool:
   vmImage: 'ubuntu-latest'
 

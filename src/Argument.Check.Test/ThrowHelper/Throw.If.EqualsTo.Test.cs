@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelper
 {
@@ -7,12 +8,12 @@ namespace Argument.Check.Test.ThrowHelper
     public class ThrowIfEqualsToTest
     {
         private readonly bool _expectedValue = true;
-        private readonly object _nullArgument = null;
+        private readonly object _nullArgument;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Equal()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_expectedValue, _expectedValue));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_expectedValue, _expectedValue));
         }
 
         [TestMethod]
@@ -26,13 +27,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Value_Is_Not_Equal()
         {
-            Throw.IfEqualsTo(() => _expectedValue, false);
+            _ = Throw.IfEqualsTo(_expectedValue, false);
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_expectedValue, Throw.IfEqualsTo(() => _expectedValue, false));
+            Assert.AreEqual(_expectedValue, Throw.IfEqualsTo(_expectedValue, false));
         }
 
         [TestMethod]
@@ -41,9 +42,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfEqualsTo(NullHelper.GetNullOf<Func<int>>(), 5);
+                    _ = Throw.IfEqualsTo(NullHelper.GetNullOf<int>(), 5);
                 }
             });
 
@@ -53,12 +55,12 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Argument_Is_Null()
         {
-            Throw.IfEqualsTo(() => _nullArgument, _expectedValue);
+            _ = Throw.IfEqualsTo(_nullArgument, _expectedValue);
         }
 
         private void TestMethod<T>(T argument, T expected)
         {
-            Throw.IfEqualsTo(() => argument, expected);
+            _ = Throw.IfEqualsTo(argument, expected);
         }
     }
 }

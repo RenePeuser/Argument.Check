@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#pragma warning disable 649
+
 namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
@@ -13,12 +15,12 @@ namespace Argument.Check.Test.ThrowHelper
         private readonly string _emptyString = string.Empty;
         private readonly IEnumerable<string> _emptyStrings = Enumerable.Empty<string>();
         private readonly IEnumerable<string> _notEmptyStrings = new[] { SonGoku };
-        private readonly Func<IEnumerable<string>> _nullEnumerableFunc = null;
+        private readonly IEnumerable<string> _nullEnumerableFunc;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Empty()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyString));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyString));
         }
 
         [TestMethod]
@@ -38,13 +40,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_String_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(SonGoku, Throw.IfEmpty(() => SonGoku));
+            Assert.AreEqual(SonGoku, Throw.IfEmpty(SonGoku));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Strings_Are_Empty()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyStrings));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyStrings));
         }
 
         [TestMethod]
@@ -64,13 +66,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_String_Enumeration_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_notEmptyStrings, Throw.IfEmpty(() => _notEmptyStrings));
+            Assert.AreEqual(_notEmptyStrings, Throw.IfEmpty(_notEmptyStrings));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Enumerable_ArgumentFunc_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Throw.IfEmpty(_nullEnumerableFunc), ArgumentFuncName);
+            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfEmpty(_nullEnumerableFunc), ArgumentFuncName);
         }
 
         [TestMethod]
@@ -79,9 +81,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfEmpty(NullHelper.GetNullOf<Func<string>>());
+                    _ = Throw.IfEmpty(NullHelper.GetNullOf<string>());
                 }
             });
 
@@ -94,9 +97,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
-                void TestNullFunc()
+
+                static void TestNullFunc()
                 {
-                    Throw.IfEmpty(NullHelper.GetNullOf<Func<IEnumerable<string>>>());
+                    _ = Throw.IfEmpty(NullHelper.GetNullOf<IEnumerable<string>>());
                 }
             });
 
@@ -105,12 +109,12 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(string contains)
         {
-            Throw.IfEmpty(() => contains);
+            _ = Throw.IfEmpty(contains);
         }
 
         private void TestMethod<T>(IEnumerable<T> source)
         {
-            Throw.IfEmpty(() => source);
+            _ = Throw.IfEmpty(source);
         }
     }
 }

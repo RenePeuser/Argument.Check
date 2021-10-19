@@ -10,14 +10,14 @@ namespace Argument.Check.Test.ThrowHelper
         private const string ArgumentName = "contains";
         private const string Vegeta = "Vegeta";
         private readonly string _containedValue = Vegeta;
-        private readonly string _nullArgument = null;
+        private readonly string _nullArgument = null!;
         private readonly IEnumerable<string> _stringValues = new[] { Vegeta, "Beerus" };
         private readonly string _valueNotContained = "SonGoku";
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Not_In_Expected_Source()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_containedValue, _stringValues));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_containedValue, _stringValues));
         }
 
         [TestMethod]
@@ -46,9 +46,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
+
                 void TestNullFunc()
                 {
-                    Throw.IfContains(NullHelper.GetNullOf<Func<string>>(), _stringValues);
+                    _ = Throw.IfContains(NullHelper.GetNullOf<Func<string>>(), _stringValues);
                 }
             });
 
@@ -63,7 +64,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod<T>(T contains, IEnumerable<T> source)
         {
-            Throw.IfContains(() => contains, source);
+            _ = Throw.IfContains(contains, source);
         }
     }
 }

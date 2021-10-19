@@ -7,8 +7,9 @@ namespace Argument.Check.Test.Special
     public class NoCorrectUsageOfThrowHelpers
     {
         // here we need this func to simulate that it will not work if we have more Func<int> => for simulating mor methods than fields
-        private Func<int> Funcy = () => 42;
+        private readonly Func<int> _funcy = () => 42;
         private readonly int value = 42;
+
         private const string ExpectedMessage = @"Please check, that you only do argument checking with the 'Throw' helpers in the scope of an constructor or method. It will not work for outer scope stuff. Sample:
 
 
@@ -29,6 +30,7 @@ public Class(IService service)
     Throw.IfNull(() => result);
 }
 ";
+
         [TestMethod]
         public void Should_Detect_Correct_Argument_Also_With_Pre_Func_Usage()
         {
@@ -40,7 +42,7 @@ public Class(IService service)
         [TestMethod]
         public void Assert_Only_To_Simulate_Multiple_Methods_For_Argument_Check()
         {
-            Assert.AreEqual(42, Funcy());
+            Assert.AreEqual(42, _funcy());
         }
     }
 }
