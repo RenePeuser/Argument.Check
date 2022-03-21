@@ -37,10 +37,7 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration) /p:AssemblyVerison='$(GitVersion.SemVer)'
   displayName: 'dotnet build $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: './src/Argument.Check.sln'
+- script: dotnet test .
 
 - task: DotNetCoreCLI@2
   displayName: Pack
