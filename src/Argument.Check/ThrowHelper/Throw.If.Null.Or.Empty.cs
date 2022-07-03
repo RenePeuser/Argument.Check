@@ -19,7 +19,7 @@ namespace Argument.Check
         [DebuggerHidden]
 #endif
         [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNullOrEmpty(myArgument)", false)]
-        public static string IfNullOrEmpty([NotNull] Func<string> argumentFunc)
+        public static string IfNullOrEmpty([NotNull] Func<string>? argumentFunc)
         {
             IfNull(() => argumentFunc);
             IfNull(argumentFunc);
@@ -36,7 +36,7 @@ namespace Argument.Check
         [DebuggerHidden]
 #endif
         [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNullOrEmpty(myArgument)", false)]
-        public static IEnumerable<T> IfNullOrEmpty<T>([NotNull] Func<IEnumerable<T>> argumentFunc)
+        public static IEnumerable<T> IfNullOrEmpty<T>([NotNull] Func<IEnumerable<T>>? argumentFunc)
         {
             IfNull(() => argumentFunc);
             IfNull(argumentFunc);
@@ -54,7 +54,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static string IfNullOrEmpty([NotNull] string argument, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static string IfNullOrEmpty([NotNull] string? argument, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument, argumentName);
             IfEmpty(argument, argumentName);
@@ -70,7 +70,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static IEnumerable<T> IfNullOrEmpty<T>([NotNull] IEnumerable<T> argument, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static IEnumerable<T> IfNullOrEmpty<T>([NotNull] IEnumerable<T>? argument, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument, argumentName);
             IfEmpty(argument, argumentName);

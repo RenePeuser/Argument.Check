@@ -20,7 +20,7 @@ namespace Argument.Check
         [DebuggerHidden]
 #endif
         [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNullOrAnyItemIsNull(myArgument)", false)]
-        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>([NotNull] Func<IEnumerable<T>> argumentFunc)
+        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>([NotNull] Func<IEnumerable<T>>? argumentFunc)
         {
             IfNull(() => argumentFunc);
             IfNull(argumentFunc);
@@ -42,7 +42,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>([NotNull] IEnumerable<T> argument, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static IEnumerable<T> IfNullOrAnyItemIsNull<T>([NotNull] IEnumerable<T>? argument, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument);
 

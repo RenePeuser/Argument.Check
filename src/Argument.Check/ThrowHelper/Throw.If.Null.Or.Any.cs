@@ -22,10 +22,10 @@ namespace Argument.Check
         [DebuggerHidden]
 #endif
         [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNullOrAny(myArgument, arg => arg.MyCheck())", false)]
-        public static IEnumerable<T> IfNullOrAny<T>([NotNull] Func<IEnumerable<T>> argumentFunc, Func<T, bool> predicate)
+        public static IEnumerable<T> IfNullOrAny<T>([NotNull] Func<IEnumerable<T>>? argumentFunc, Func<T, bool> predicate)
         {
-            IfNull(() => argumentFunc);
-            IfNull(() => predicate);
+            IfNull(argumentFunc);
+            IfNull(predicate);
 
             var argument = argumentFunc();
             if (!argument.Any(predicate))

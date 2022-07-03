@@ -18,7 +18,7 @@ namespace Argument.Check
         [DebuggerHidden]
 #endif
         [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNullOrWhiteSpace(myArgument)", false)]
-        public static string IfNullOrWhiteSpace([NotNull] Func<string> argumentFunc)
+        public static string IfNullOrWhiteSpace([NotNull] Func<string>? argumentFunc)
         {
             IfNull(argumentFunc);
             IfEmpty(argumentFunc);
