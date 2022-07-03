@@ -29,6 +29,7 @@
             - No func need to check your arguments. "Throw.IfNull(myArgument)" instead of "Throw.IfNull(() =&gt; myArgument)"
             - The argument check is now as fast as throw expressions, no performance loss.
             - All func methods are tagged now with "obsolete" attribute.
+            - Activate nullable, that compiler knows which extension or arg checks already checked for NULL
         </PackageReleaseNotes>
         <PackageTags>C#;.Net;DotNet;Arg;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;IfNull;IfExists;ThrowHelper;Contract;IsNull;</PackageTags>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
