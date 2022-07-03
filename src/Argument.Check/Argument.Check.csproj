@@ -1,53 +1,64 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<EnableNETAnalyzers>true</EnableNETAnalyzers>
-		<AnalysisLevel>latest</AnalysisLevel>
-		<PackageId>Argument.Check</PackageId>
-		<Authors>Rene Peuser</Authors>
-		<Company>Rene Peuser Softwaresolutions</Company>
-		<Description>A library to check your arguments in a simple comfort way. This library do not use Expression or nameof. It is based on Func&lt;T&gt;. So no performance issue during positive argument check.</Description>
-		<Copyright>Copyright 2019 (c) Rene Peuser. All rights reserved.</Copyright>
-		<PackageLicenseFile></PackageLicenseFile>
-		<PackageProjectUrl>https://renepeuser.visualstudio.com/Argument.Check</PackageProjectUrl>
-		<RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
-		<PackageReleaseNotes>Changes:
-- Upgrade to Net6
-- Code analysis detect argument null check as a null check. No hint for "possible null reference exception.." any more.
-- No func need to check your arguments. "Throw.IfNull(myArgument)" instead of "Throw.IfNull(() =&gt; myArgument)"
-- The argument check is now as fast as throw expressions, no performance loss.
-- All func methods are tagged now with "obsolete" attribute.</PackageReleaseNotes>
-		<PackageTags>C#;.Net;DotNet;Arg;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;IfNull;IfExists;ThrowHelper;Contract;IsNull;</PackageTags>
-		<PackageLicenseFile>license.txt</PackageLicenseFile>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-		<DocumentationFile>D:\AzureDevOps\Argument.Check\src\Argument.Check\Argument.Check.xml</DocumentationFile>
-	</PropertyGroup>
+    <!-- Common settings !-->
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>latestmajor</LangVersion>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <Nullable>enable</Nullable>
+        <WarningsAsErrors>Nullable</WarningsAsErrors>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <DocumentationFile>D:\AzureDevOps\Argument.Check\src\Argument.Check\Argument.Check.xml</DocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup>
+        <PackageId>Argument.Check</PackageId>
+        <Authors>Rene Peuser</Authors>
+        <Company>Rene Peuser Softwaresolutions</Company>
+        <Description>A library to check your arguments in a simple comfort way. This library do not use Expression or nameof. It is based on Func&lt;T&gt;. So no performance issue during positive argument check.</Description>
+        <Copyright>Copyright 2019 (c) Rene Peuser. All rights reserved.</Copyright>
+        <PackageLicenseFile></PackageLicenseFile>
+        <PackageProjectUrl>https://renepeuser.visualstudio.com/Argument.Check</PackageProjectUrl>
+        <RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
+        <PackageReleaseNotes>
+            Changes:
+            - Upgrade to Net6
+            - Code analysis detect argument null check as a null check. No hint for "possible null reference exception.." any more.
+            - No func need to check your arguments. "Throw.IfNull(myArgument)" instead of "Throw.IfNull(() =&gt; myArgument)"
+            - The argument check is now as fast as throw expressions, no performance loss.
+            - All func methods are tagged now with "obsolete" attribute.
+        </PackageReleaseNotes>
+        <PackageTags>C#;.Net;DotNet;Arg;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;IfNull;IfExists;ThrowHelper;Contract;IsNull;</PackageTags>
+        <PackageLicenseFile>license.txt</PackageLicenseFile>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <DocumentationFile>D:\AzureDevOps\Argument.Check\src\Argument.Check\Argument.Check.xml</DocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+        <DocumentationFile>D:\AzureDevOps\Argument.Check\src\Argument.Check\Argument.Check.xml</DocumentationFile>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<None Include="..\..\license.txt">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DocumentationFile>D:\AzureDevOps\Argument.Check\src\Argument.Check\Argument.Check.xml</DocumentationFile>
+    </PropertyGroup>
 
-	<ItemGroup>
-	  <PackageReference Include="GitVersion.MsBuild" Version="5.7.0">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  </PackageReference>
-	</ItemGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <DocumentationFile>D:\AzureDevOps\Argument.Check\src\Argument.Check\Argument.Check.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\license.txt">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="GitVersion.MsBuild" Version="5.7.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
 
 </Project>

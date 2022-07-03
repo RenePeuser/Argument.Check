@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
+#if !DEBUG
 using System.Diagnostics;
-#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
+#endif
 using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
 

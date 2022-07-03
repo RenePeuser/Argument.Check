@@ -1,7 +1,7 @@
-using System;
-#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
+﻿using System;
+#if !DEBUG
 using System.Diagnostics;
-#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
+#endif
 using System.Linq;
 using System.Reflection;
 
@@ -14,7 +14,7 @@ namespace Argument.Check.Extensions
 #endif
         internal static FieldInfo GetFieldInfo<T>(this Func<T> func, Func<object, bool> predicate)
         {
-            Throw.IfNull(() => func);
+            Throw.IfNull(func);
 
             if (func.Target.IsNull())
             {
@@ -33,7 +33,8 @@ namespace Argument.Check.Extensions
 #endif
         internal static string GetParameterName<T>(this Func<T> func, Func<object, bool> predicate)
         {
-            Throw.IfNull(() => func);
+            Throw.IfNull(func);
+            Throw.IfNull(predicate);
 
             var result = GetFieldInfo(func, predicate);
             return result.Name;

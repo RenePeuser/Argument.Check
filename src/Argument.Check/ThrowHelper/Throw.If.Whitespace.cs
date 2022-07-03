@@ -1,7 +1,7 @@
 ﻿using System;
-#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
+#if !DEBUG
 using System.Diagnostics;
-#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
+#endif
 using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
 
@@ -18,9 +18,8 @@ namespace Argument.Check
         [DebuggerHidden]
 #endif
         [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfWhitespace(myArgument)", false)]
-        public static string IfWhitespace(Func<string> argumentFunc)
+        public static string? IfWhitespace(Func<string?> argumentFunc)
         {
-            IfNull(() => argumentFunc);
             IfNull(argumentFunc);
 
             var argument = argumentFunc();
@@ -42,7 +41,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static string IfWhitespace(string argument, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static string IfWhitespace(string? argument, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument);
 

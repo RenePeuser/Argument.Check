@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
+#if !DEBUG
 using System.Diagnostics;
-#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
+#endif
 
 namespace Argument.Check.Extensions
 {
@@ -11,7 +11,7 @@ namespace Argument.Check.Extensions
         private const double DefaultDoubleTolerance = 0.000001;
 
 #if !DEBUG
-        [DebuggerHidden] 
+        [DebuggerHidden]
 #endif
         internal static bool EqualsTo<T>(this T source, T? target)
         {
@@ -19,7 +19,7 @@ namespace Argument.Check.Extensions
         }
 
 #if !DEBUG
-        [DebuggerHidden] 
+        [DebuggerHidden]
 #endif
         internal static bool EqualsTo(this double source, double target, double tolerance = DefaultDoubleTolerance)
         {
@@ -27,9 +27,9 @@ namespace Argument.Check.Extensions
         }
 
 #if !DEBUG
-        [DebuggerHidden] 
+        [DebuggerHidden]
 #endif
-        internal static bool NotEqualsTo<T>(this T source, T target)
+        internal static bool NotEqualsTo<T>(this T? source, T? target)
         {
             return !source.EqualsTo(target);
         }

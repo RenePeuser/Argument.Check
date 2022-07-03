@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Argument.Check.Models
 {
@@ -6,8 +6,8 @@ namespace Argument.Check.Models
     {
         internal ILReconstructedMethod(MethodInfo methodInfo, FieldInfo returnValue)
         {
-            Throw.IfNull(() => methodInfo);
-            Throw.IfNull(() => returnValue);
+            Throw.IfNull(methodInfo);
+            Throw.IfNull(returnValue);
 
             MethodInfo = methodInfo;
             ReturnValue = returnValue;

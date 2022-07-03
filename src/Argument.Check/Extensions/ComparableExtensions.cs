@@ -1,7 +1,7 @@
 ﻿using System;
-#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
+#if !DEBUG
 using System.Diagnostics;
-#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
+#endif
 
 namespace Argument.Check.Extensions
 {
@@ -52,7 +52,7 @@ namespace Argument.Check.Extensions
 #endif
         internal static bool IsInRange<T>(this T source, T lowerLimit, T upperLimit) where T : IComparable
         {
-            Throw.IfLessThan(() => upperLimit, lowerLimit);
+            Throw.IfLessThan(upperLimit, lowerLimit);
 
             return source.IsLessOrEqual(upperLimit) && source.IsGreaterOrEqual(lowerLimit);
         }
@@ -62,7 +62,7 @@ namespace Argument.Check.Extensions
 #endif
         internal static bool IsOutOfRange<T>(this T source, T lowerLimit, T upperLimit) where T : IComparable
         {
-            Throw.IfLessThan(() => upperLimit, lowerLimit);
+            Throw.IfLessThan(upperLimit, lowerLimit);
 
             return !source.IsInRange(lowerLimit, upperLimit);
         }
