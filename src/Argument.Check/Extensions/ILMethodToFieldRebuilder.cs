@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
+#if !DEBUG
 using System.Diagnostics;
-#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
+#endif
 using System.Linq;
 using System.Reflection;
 using Argument.Check.Models;
@@ -39,7 +39,7 @@ public Class(IService service)
 ";
 
 #if !DEBUG
-        [DebuggerHidden] 
+        [DebuggerHidden]
 #endif
         internal static IEnumerable<ILReconstructedMethod> Rebuild<T>(this Func<T> func, IEnumerable<FieldInfo> fieldInfos, Func<object, bool> predicate)
         {
@@ -76,7 +76,7 @@ public Class(IService service)
         //     Throw.IfNull(() => c);
         // }
 #if !DEBUG
-        [DebuggerHidden] 
+        [DebuggerHidden]
 #endif
         private static IEnumerable<ILReconstructedMethod> FetchOneArgumentOneCheck(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
         {
@@ -96,7 +96,7 @@ public Class(IService service)
         //     Throw.IfNull(() => c);
         // }
 #if !DEBUG
-        [DebuggerHidden] 
+        [DebuggerHidden]
 #endif
         private static IEnumerable<ILReconstructedMethod> FetchMultiCheckForOneArgument<T>(this Func<T> func, IEnumerable<FieldInfo> fieldInfos, Func<object, bool> predicate)
         {

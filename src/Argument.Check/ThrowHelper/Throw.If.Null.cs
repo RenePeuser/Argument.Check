@@ -1,7 +1,7 @@
 ﻿using System;
-#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
+#if !DEBUG
 using System.Diagnostics;
-#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
+#endif
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
@@ -20,7 +20,7 @@ namespace Argument.Check
         [DebuggerHidden]
 #endif
         [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNull(myArgument)", false)]
-        public static T IfNull<T>([NotNull] Func<T> argumentFunc) where T : class
+        public static T IfNull<T>([NotNull] Func<T?>? argumentFunc) where T : class
         {
             if (argumentFunc == null)
             {
@@ -45,9 +45,9 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfNull<T>(T? argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : class
+        public static T IfNull<T>([NotNull] T? argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : class
         {
-            if (argument == null)
+            if (argument is null)
             {
                 throw new ArgumentNullException(argumentName);
             }

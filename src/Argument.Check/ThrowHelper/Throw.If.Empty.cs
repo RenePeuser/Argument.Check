@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-#pragma warning disable IDE0005 // It is used by the precompiler switch release !!
+using System.Diagnostics.CodeAnalysis;
+#if !DEBUG
 using System.Diagnostics;
-#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
+#endif
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
@@ -20,13 +21,13 @@ namespace Argument.Check
         [DebuggerHidden]
 #endif
         [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfEmpty(myArgument)", false)]
-        public static string IfEmpty(Func<string> argumentFunc)
+        public static string IfEmpty([NotNull] Func<string?> argumentFunc)
         {
-            IfNull(() => argumentFunc);
             IfNull(argumentFunc);
 
-
             var argument = argumentFunc();
+            IfNull(argument);
+
             if (!argument.IsEmpty())
             {
                 return argument;
