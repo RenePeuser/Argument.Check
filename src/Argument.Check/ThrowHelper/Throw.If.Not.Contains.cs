@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+#if !DEBUG
 using System.Diagnostics;
+#endif
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
 
 namespace Argument.Check
@@ -15,7 +18,10 @@ namespace Argument.Check
         /// <param name="source">The sequence which should contains the given argument.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, if the given argument is not part of the given sequence <c>source</c>.</exception>
+#if !DEBUG
         [DebuggerHidden]
+#endif
+        [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNotContains(myArgument, mySequence)", false)]
         public static T IfNotContains<T>(Func<T> argumentFunc, IEnumerable<T> source)
         {
             IfNull(() => source);
@@ -28,6 +34,28 @@ namespace Argument.Check
             }
 
             throw new ArgumentException($"The argument '{argument}' is not contained in the enumeration.", argumentFunc.GetParameterName(arg => arg.EqualsTo(argument) && !source.Contains(argument)));
+        }
+
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given argument is not part of the given sequence <c>source</c> .</summary>
+        /// <typeparam name="T">The type of the argument, which must be a type of <see cref="IComparable" />"/>.</typeparam>
+        /// <param name="argument">The argument, which has to be checked.</param>
+        /// <param name="argumentName">The argument name will be automatically detected by the <see cref="CallerArgumentExpressionAttribute"/>, so please do not enter any name, otherwise you will got the wrong parameter name.</param>
+        /// <param name="source">The sequence which should contains the given argument.</param>
+        /// <returns>The given argument, which was checked.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, if the given argument is not part of the given sequence <c>source</c>.</exception>
+#if !DEBUG
+        [DebuggerHidden]
+#endif
+        public static T IfNotContains<T>(T argument, IEnumerable<T> source, [CallerArgumentExpression("argument")] string argumentName = "")
+        {
+            IfNull(source);
+
+            if (source.Contains(argument))
+            {
+                return argument;
+            }
+
+            throw new ArgumentException($"The argument '{argument}' is not contained in the enumeration.", argumentName);
         }
     }
 }

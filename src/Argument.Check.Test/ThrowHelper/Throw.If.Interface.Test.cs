@@ -8,12 +8,12 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfInterfaceTest
     {
-        private readonly object _noInterface = new object();
+        private readonly object _noInterface = new();
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Type_Is_An_Interface()
         {
-            Assert.ThrowsException<ArgumentException>(Throw.IfInterface<ICloneable>);
+            _ = Assert.ThrowsException<ArgumentException>(Throw.IfInterface<ICloneable>);
         }
 
         [TestMethod]
@@ -41,33 +41,18 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Instance_Is_An_Interface()
         {
-            Throw.IfInterface<IEnumerable>(() => _noInterface);
+            _ = Throw.IfInterface<IEnumerable>(_noInterface);
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_noInterface, Throw.IfInterface<IEnumerable>(() => _noInterface));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-                void TestNullFunc()
-                {
-                    Throw.IfInterface<IEnumerable>(NullHelper.GetNullOf<Func<object>>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            Assert.AreEqual(_noInterface, Throw.IfInterface<IEnumerable>(_noInterface));
         }
 
         private void TestMethod(IEnumerable argument)
         {
-            Throw.IfInterface<IEnumerable>(() => argument);
+            _ = Throw.IfInterface<IEnumerable>(argument);
         }
     }
 }

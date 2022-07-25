@@ -9,7 +9,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Not_Equal()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(true, false));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(true, false));
         }
 
         [TestMethod]
@@ -29,27 +29,12 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(true, Throw.IfNotEqualsTo(() => true, true));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-                void TestNullFunc()
-                {
-                    Throw.IfNotEqualsTo(NullHelper.GetNullOf<Func<int>>(), 5);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            Assert.AreEqual(true, Throw.IfNotEqualsTo(true, true));
         }
 
         private void TestMethod(object argument, object expected)
         {
-            Throw.IfNotEqualsTo(() => argument, expected);
+            _ = Throw.IfNotEqualsTo(argument, expected);
         }
     }
 }

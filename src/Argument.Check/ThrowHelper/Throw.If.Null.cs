@@ -1,5 +1,9 @@
 ﻿using System;
+#if !DEBUG
 using System.Diagnostics;
+#endif
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
 
 namespace Argument.Check
@@ -12,8 +16,11 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the argument to validate.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentNullException">The exception, which will be thrown, if the argument is not valid.</exception>
+#if !DEBUG
         [DebuggerHidden]
-        public static T IfNull<T>(Func<T> argumentFunc) where T : class
+#endif
+        [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNull(myArgument)", false)]
+        public static T IfNull<T>([NotNull] Func<T?>? argumentFunc) where T : class
         {
             if (argumentFunc == null)
             {
@@ -27,6 +34,25 @@ namespace Argument.Check
             }
 
             throw new ArgumentNullException(argumentFunc.GetParameterName(arg => arg.IsNull()));
+        }
+
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given argument is <c>null</c>.</summary>
+        /// <param name="argument">The argument, which has to be checked.</param>
+        /// <param name="argumentName">The argument name will be automatically detected by the <see cref="CallerArgumentExpressionAttribute"/>, so please do not enter any name, otherwise you will got the wrong parameter name.</param>
+        /// <typeparam name="T">The type of the argument.</typeparam>
+        /// <returns>The given argument, which was checked.</returns>
+        /// <exception cref="ArgumentNullException">The exception, which will be thrown, if the argument is not valid.</exception>
+#if !DEBUG
+        [DebuggerHidden]
+#endif
+        public static T IfNull<T>([NotNull] T? argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : class
+        {
+            if (argument is null)
+            {
+                throw new ArgumentNullException(argumentName);
+            }
+
+            return argument;
         }
     }
 }

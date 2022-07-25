@@ -1,17 +1,26 @@
-﻿using System.Diagnostics;
+﻿#if !DEBUG
+using System.Diagnostics;
+#endif
+using System.Diagnostics.CodeAnalysis;
+
+#pragma warning restore IDE0005 // It is used by the precompiler switch release !!
 
 namespace Argument.Check.Extensions
 {
     internal static class StringExtensions
     {
+#if !DEBUG
         [DebuggerHidden]
-        internal static bool IsNullOrWhiteSpace(this string source)
+#endif
+        internal static bool IsNullOrWhiteSpace([NotNullWhen(true)] this string? source)
         {
             return string.IsNullOrWhiteSpace(source);
         }
 
+#if !DEBUG
         [DebuggerHidden]
-        internal static bool IsWhitespace(this string source)
+#endif
+        internal static bool IsWhitespace([NotNullWhen(true)] this string? source)
         {
             if (string.IsNullOrEmpty(source))
             {

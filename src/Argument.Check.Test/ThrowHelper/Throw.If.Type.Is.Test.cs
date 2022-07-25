@@ -1,19 +1,21 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+#pragma warning disable 649
+
 namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class IfTypeIsTest
     {
         private readonly int _notExpectedType = 4;
-        private readonly string _nullString = null;
+        private readonly string _nullString;
         private readonly string _sonGoku = "SonGoku";
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Expected_Type()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod<string>(_sonGoku));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod<string>(_sonGoku));
         }
 
         [TestMethod]
@@ -39,27 +41,12 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => TestMethod<string>(_nullString), nameof(_nullString));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-                void TestNullFunc()
-                {
-                    Throw.IfTypeIs<object>(NullHelper.GetNullOf<Func<object>>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod<string>(_nullString), nameof(_nullString));
         }
 
         private void TestMethod<T>(object argument) where T : class
         {
-            Throw.IfTypeIs<T>(() => argument);
+            _ = Throw.IfTypeIs<T>(argument);
         }
     }
 }

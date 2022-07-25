@@ -10,12 +10,12 @@ namespace Argument.Check.Test.ThrowHelper
     public class ThrowIfNotInterfaceTest
     {
         private readonly IEnumerable<string> _enumerable = Enumerable.Empty<string>();
-        private readonly object _noInterface = new object();
+        private readonly object _noInterface = new();
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Type_Is_Not_An_Interface()
         {
-            Assert.ThrowsException<ArgumentException>(Throw.IfNotInterface<object>);
+            _ = Assert.ThrowsException<ArgumentException>(Throw.IfNotInterface<object>);
         }
 
         [TestMethod]
@@ -43,39 +43,24 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Instance_Is_An_Interface()
         {
-            Throw.IfNotInterface<IEnumerable>(() => _enumerable);
+            _ = Throw.IfNotInterface<IEnumerable>(_enumerable);
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_enumerable, Throw.IfNotInterface<IEnumerable>(() => _enumerable));
+            Assert.AreEqual(_enumerable, Throw.IfNotInterface<IEnumerable>(_enumerable));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Instance_Is_Not_An_Interface()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_noInterface));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-                void TestNullFunc()
-                {
-                    Throw.IfNotInterface<IEnumerable>(NullHelper.GetNullOf<Func<object>>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_noInterface));
         }
 
         private void TestMethod(object argument)
         {
-            Throw.IfNotInterface<IEnumerable>(() => argument);
+            _ = Throw.IfNotInterface<IEnumerable>(argument);
         }
     }
 }

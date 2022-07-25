@@ -9,12 +9,12 @@ namespace Argument.Check.Test.ThrowHelper
     {
         private readonly IEnumerable<string> _listWithNullItem = new[] { "Vegeta", "Beerus", null };
         private readonly IEnumerable<string> _listWithoutNullItem = new[] { "Vegeta", "Beerus" };
-        private readonly IEnumerable<string> _nullArgument = null;
+        private readonly IEnumerable<string> _nullArgument = null!;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_In_The_Source_Match_The_Given_Predicate()
         {
-            Assert.ThrowsException<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.Contains("Vegeta")));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.Contains("Vegeta")));
         }
 
         [TestMethod]
@@ -28,7 +28,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument, x => x.Length == 1), nameof(_nullArgument));
+            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument, x => x.Length == 1), nameof(_nullArgument));
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrAny(() => _listWithoutNullItem, x => x == "ShenLong"));
+            Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrAny(_listWithoutNullItem, x => x == "ShenLong"));
         }
 
         [TestMethod]
@@ -49,9 +49,10 @@ namespace Argument.Check.Test.ThrowHelper
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 TestNullFunc();
+
                 static void TestNullFunc()
                 {
-                    Throw.IfNullOrAny(NullHelper.GetNullOf<Func<string>>(), _ => true);
+                    _ = Throw.IfNullOrAny(NullHelper.GetNullOf<Func<string>>(), _ => true);
                 }
             });
 
@@ -60,7 +61,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private void TestMethod(IEnumerable<string> values, Func<string, bool> anyFunc)
         {
-            Throw.IfNullOrAny(() => values, anyFunc);
+            _ = Throw.IfNullOrAny(values, anyFunc);
         }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using System;
+#if !DEBUG
 using System.Diagnostics;
+#endif
+using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
 
 namespace Argument.Check
@@ -9,7 +12,9 @@ namespace Argument.Check
     {
         /// <summary>Throws an <see cref="ArgumentException" />, when the given type is not an interface.</summary>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
+#if !DEBUG
         [DebuggerHidden]
+#endif
         public static void IfNotInterface<T>() where T : class
         {
             var type = typeof(T);
@@ -24,7 +29,10 @@ namespace Argument.Check
         /// <param name="argumentFunc">A function, which returns the string to validate.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
+#if !DEBUG
         [DebuggerHidden]
+#endif
+        [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfNotInterface(myArgument)", false)]
         public static object IfNotInterface<T>(Func<object> argumentFunc) where T : class
         {
             IfNull(() => argumentFunc);
@@ -37,6 +45,28 @@ namespace Argument.Check
             }
 
             throw new ArgumentException($"Argument: '{argumentFunc.GetParameterName(arg => arg.Is<T>().IsNot())}' must be an interface.");
+        }
+
+
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given type is not an interface.</summary>
+        /// <typeparam name="T">The type of the argument.</typeparam>
+        /// <param name="argument">The argument, which has to be checked.</param>
+        /// <param name="argumentName">The argument name will be automatically detected by the <see cref="CallerArgumentExpressionAttribute"/>, so please do not enter any name, otherwise you will got the wrong parameter name.</param>
+        /// <returns>The given argument, which was checked.</returns>
+        /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is not an interface.</exception>
+#if !DEBUG
+        [DebuggerHidden]
+#endif
+        public static object IfNotInterface<T>(object argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : class
+        {
+            IfNull(argument);
+
+            if (argument is T)
+            {
+                return argument;
+            }
+
+            throw new ArgumentException($"Argument: '{argumentName}' must be an interface.");
         }
     }
 }

@@ -13,12 +13,12 @@ namespace Argument.Check.Test.Special
             {
                 Test("songoku");
 
-                void Test(object songoku)
+                static void Test(object songoku)
                 {
-                    Throw.IfNull(() => songoku);
+                    _ = Throw.IfNull(songoku);
 
                     object nullObject = null;
-                    Throw.IfNull(() => nullObject);
+                    _ = Throw.IfNull(nullObject);
                 }
             });
 

@@ -1,5 +1,8 @@
 ﻿using System;
+#if !DEBUG
 using System.Diagnostics;
+#endif
+using System.Runtime.CompilerServices;
 using Argument.Check.Extensions;
 
 namespace Argument.Check
@@ -13,7 +16,10 @@ namespace Argument.Check
         /// <param name="expectedValue">The value which the argument must equals.</param>
         /// <returns>The given argument, which was checked.</returns>
         /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is equals to the <c>expectedValue</c>.</exception>
+#if !DEBUG
         [DebuggerHidden]
+#endif
+        [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfEqualsTo(myArgument, myExpectedValue)", false)]
         public static T IfEqualsTo<T>(Func<T> argumentFunc, T expectedValue)
         {
             IfNull(() => argumentFunc);
@@ -25,6 +31,26 @@ namespace Argument.Check
             }
 
             throw new ArgumentException($"The argument value: '{argument}' was equal to: '{expectedValue}'.", argumentFunc.GetParameterName(arg => arg.EqualsTo(expectedValue)));
+        }
+
+        /// <summary>Throws an <see cref="ArgumentException" />, when the given argument is equals to the <c>expectedValue</c>.</summary>
+        /// <typeparam name="T">The type of the argument.</typeparam>
+        /// <param name="argument">The argument, which has to be checked.</param>
+        /// <param name="argumentName">The argument name will be automatically detected by the <see cref="CallerArgumentExpressionAttribute"/>, so please do not enter any name, otherwise you will got the wrong parameter name.</param>
+        /// <param name="expectedValue">The value which the argument must equals.</param>
+        /// <returns>The given argument, which was checked.</returns>
+        /// <exception cref="ArgumentException">The exception, which will be thrown, if the argument is equals to the <c>expectedValue</c>.</exception>
+#if !DEBUG
+        [DebuggerHidden]
+#endif
+        public static T IfEqualsTo<T>(T argument, T expectedValue, [CallerArgumentExpression("argument")] string argumentName = "")
+        {
+            if (argument.NotEqualsTo(expectedValue))
+            {
+                return argument;
+            }
+
+            throw new ArgumentException($"The argument value: '{argument}' was equal to: '{expectedValue}'.", argumentName);
         }
     }
 }
