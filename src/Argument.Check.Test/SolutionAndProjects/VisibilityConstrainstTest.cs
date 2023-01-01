@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Extensions.Pack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Solution.Parser.CSharp;
 
 namespace Argument.Check.Test.SolutionAndProjects
 {
@@ -12,12 +13,11 @@ namespace Argument.Check.Test.SolutionAndProjects
         [TestMethod]
         public void All_Not_Throw_Helpers_Must_Not_Be_Public()
         {
-            var publicMethods = from cSharpFileInfo in CSharpFileInfos
-                                where !cSharpFileInfo.FileInfo.FullName.Contains("Throw.")
-                                from @class in cSharpFileInfo.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
-                                from method in @class.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                                where method.Modifiers.Any(m => m.Text.Contains("public"))
-                                select new AnalyzeResult(cSharpFileInfo.FileInfo, method.Identifier.ToString());
+            var publicMethods = from syntaxTree in SyntaxTrees
+                                from @class in syntaxTree.Classes
+                                from method in @class.Methods
+                                where method.Modifiers.Contains(Modifier.Public) && syntaxTree.FileName.DoesNotContain("Throw")
+                                select new AnalyzeResult(syntaxTree.FileName, method.Name);
 
             Assert.IsFalse(publicMethods.Any(), ToMessage("Not allowed public methods detected, only Throw.xxx helpers must be public", publicMethods));
         }
@@ -25,19 +25,19 @@ namespace Argument.Check.Test.SolutionAndProjects
         [TestMethod]
         public void All_Throw_Helpers_Must_Be_Public()
         {
-            var publicMethods = from cSharpFileInfo in CSharpFileInfos
-                                where cSharpFileInfo.FileInfo.FullName.Contains("Throw.")
-                                from @class in cSharpFileInfo.SyntaxTree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
-                                from method in @class.DescendantNodes().OfType<MethodDeclarationSyntax>()
-                                where method.Modifiers.All(m => !m.Text.Contains("public"))
-                                select new AnalyzeResult(cSharpFileInfo.FileInfo, method.Identifier.ToString());
+            var publicMethods = from syntaxTree in SyntaxTrees
+                                from @class in syntaxTree.Classes
+                                where @class.Name == "Throw"
+                                from method in @class.Methods
+                                where method.Modifiers.All(m => m.NotEqualsTo(Modifier.Public))
+                                select new AnalyzeResult(syntaxTree.FileName, method.Name);
 
             Assert.IsFalse(publicMethods.Any(), ToMessage("Throw.xxx helpers must be public", publicMethods));
         }
 
         private string ToMessage(string title, IEnumerable<AnalyzeResult> analyzeResults)
         {
-            var groups = analyzeResults.GroupBy(result => result.CSharpFileInfo.FullName);
+            var groups = analyzeResults.GroupBy(result => result.FileName);
             var stringBuilder = new StringBuilder();
 
             _ = stringBuilder.AppendLine(title);
@@ -47,7 +47,7 @@ namespace Argument.Check.Test.SolutionAndProjects
                 _ = stringBuilder.AppendLine(group.Key);
                 foreach (var analyzeResult in group)
                 {
-                    _ = stringBuilder.AppendLine($"- {analyzeResult.MethodName}");
+                    _ = stringBuilder.AppendLine($"- {analyzeResult.Method}");
                 }
 
                 _ = stringBuilder.AppendLine();
@@ -56,4 +56,6 @@ namespace Argument.Check.Test.SolutionAndProjects
             return stringBuilder.ToString();
         }
     }
+
+    public record AnalyzeResult(string FileName, string Method);
 }

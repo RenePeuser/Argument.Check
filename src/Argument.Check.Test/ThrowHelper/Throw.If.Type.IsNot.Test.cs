@@ -8,7 +8,7 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class IfTypeIsNot
     {
-        private readonly string _nullString;
+        private readonly string? _nullString;
         private readonly string _sonGoku = "SonGoku";
         private readonly int _unexpectedType = 4;
 
@@ -44,7 +44,7 @@ namespace Argument.Check.Test.ThrowHelper
             _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod<string>(_nullString), nameof(_nullString));
         }
 
-        private void TestMethod<T>(object argument) where T : class
+        private void TestMethod<T>(object? argument) where T : class
         {
             _ = Throw.IfTypeIsNot<T>(argument);
         }

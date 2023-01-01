@@ -33,28 +33,12 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_validValue, Throw.IfGreaterThan(() => _validValue, _limit));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfGreaterThan(NullHelper.GetNullOf<Func<int>>(), 5);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            Assert.AreEqual(_validValue, Throw.IfGreaterThan(_validValue, _limit));
         }
 
         private void TestMethod(int current, int limit)
         {
-            _ = Throw.IfGreaterThan(() => current, limit);
+            _ = Throw.IfGreaterThan(current, limit);
         }
     }
 }

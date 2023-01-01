@@ -8,10 +8,8 @@ namespace Argument.Check.Test.ThrowHelperFunc
     [TestClass]
     public class ThrowIfLengthIsTest
     {
-        private const string ArgumentFuncName = "argumentFunc";
         private readonly int _expectedLength = 5;
-        private readonly Func<string> _nullArgumentFunc;
-        private readonly string _nullString;
+        private readonly string? _nullString;
         private readonly string _sonGoku = "SonGoku";
         private readonly string _stringHasExpectedLength = "abcde";
 
@@ -27,12 +25,6 @@ namespace Argument.Check.Test.ThrowHelperFunc
             var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_stringHasExpectedLength, _expectedLength));
 
             Assert.AreEqual($"String length: '{_stringHasExpectedLength}' must not be equals to to a length of: '{_expectedLength}'. (Parameter 'argument')", exception.Message);
-        }
-
-        [TestMethod]
-        public void Should_Throw_Exception_If_ArgumentFunc_Is_Null()
-        {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfLengthIs(_nullArgumentFunc, _expectedLength), ArgumentFuncName);
         }
 
         [TestMethod]
@@ -56,28 +48,12 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_sonGoku, Throw.IfLengthIs(() => _sonGoku, 10));
+            Assert.AreEqual(_sonGoku, Throw.IfLengthIs(_sonGoku, 10));
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
+        private void TestMethod(string? argument, int length)
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfLengthIs(NullHelper.GetNullOf<Func<string>>(), 5);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
-        private void TestMethod(string argument, int length)
-        {
-            _ = Throw.IfLengthIs(() => argument, length);
+            _ = Throw.IfLengthIs(argument, length);
         }
     }
 }

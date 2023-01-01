@@ -9,11 +9,9 @@ namespace Argument.Check.Test.ThrowHelperFunc
     [TestClass]
     public class ThrowIfNullOrAnyItemIsNullTest
     {
-        private const string ArgumentFuncName = "argumentFunc";
-        private readonly IEnumerable<string> _listWithNullItem = new[] {"Vegeta", "Beerus", null};
-        private readonly IEnumerable<string> _listWithoutNullItem = new[] {"Vegeta", "Beerus"};
-        private readonly IEnumerable<string> _nullArgument;
-        private readonly Func<IEnumerable<string>> _nullArgumentFunc;
+        private readonly IEnumerable<string?> _listWithNullItem = new[] { "Vegeta", "Beerus", null };
+        private readonly IEnumerable<string> _listWithoutNullItem = new[] { "Vegeta", "Beerus" };
+        private readonly IEnumerable<string>? _nullArgument;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_In_The_Source_Is_Null()
@@ -44,34 +42,12 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrAnyItemIsNull(() => _listWithoutNullItem));
+            Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrAnyItemIsNull(_listWithoutNullItem));
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
+        private void TestMethod(IEnumerable<string?>? values)
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(_nullArgumentFunc), ArgumentFuncName);
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_Enumeration_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfNullOrAnyItemIsNull(NullHelper.GetNullOf<Func<string>>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
-        private void TestMethod(IEnumerable<string> values)
-        {
-            _ = Throw.IfNullOrAnyItemIsNull(() => values);
+            _ = Throw.IfNullOrAnyItemIsNull(values);
         }
     }
 }

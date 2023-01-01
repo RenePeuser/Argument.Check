@@ -17,7 +17,7 @@ namespace Argument.Check.Test.Special
                 {
                     _ = Throw.IfNull(songoku);
 
-                    object nullObject = null;
+                    object? nullObject = null;
                     _ = Throw.IfNull(nullObject);
                 }
             });

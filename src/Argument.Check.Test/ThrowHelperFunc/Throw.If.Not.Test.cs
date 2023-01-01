@@ -26,7 +26,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One_Wihtout_Message()
         {
-            Assert.AreEqual(_falseValue, Throw.IfNot(() => _falseValue, item => !item));
+            Assert.AreEqual(_falseValue, Throw.IfNot(_falseValue, item => !item, "The argument does not full filled your custom predicate."));
         }
 
         [TestMethod]
@@ -60,33 +60,17 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_falseValue, Throw.IfNot(() => _falseValue, item => !item, _message));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfNot(NullHelper.GetNullOf<Func<object>>(), _ => true);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            Assert.AreEqual(_falseValue, Throw.IfNot(_falseValue, item => !item, _message));
         }
 
         private void TestMethod(bool argument, Func<bool, bool> predicate)
         {
-            _ = Throw.IfNot(() => argument, predicate);
+            _ = Throw.IfNot(argument, predicate, "Does not match given predicate");
         }
 
         private void TestMethod(bool argument, Func<bool, bool> predicate, string message)
         {
-            _ = Throw.IfNot(() => argument, predicate, message);
+            _ = Throw.IfNot(argument, predicate, message);
         }
     }
 }

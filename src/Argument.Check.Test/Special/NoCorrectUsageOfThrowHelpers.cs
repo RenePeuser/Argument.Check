@@ -8,7 +8,7 @@ namespace Argument.Check.Test.Special
     {
         // here we need this func to simulate that it will not work if we have more Func<int> => for simulating mor methods than fields
         private readonly Func<int> _funcy = () => 42;
-        private readonly int value = 42;
+        private const int Value = 42;
 
         private const string ExpectedMessage = @"Please check, that you only do argument checking with the 'Throw' helpers in the scope of an constructor or method. It will not work for outer scope stuff. Sample:
 
@@ -34,7 +34,7 @@ public Class(IService service)
         [TestMethod]
         public void Should_Detect_Correct_Argument_Also_With_Pre_Func_Usage()
         {
-            var exception = Assert.ThrowsException<InvalidOperationException>(() => Throw.IfLessThan(() => value, 100));
+            var exception = Assert.ThrowsException<InvalidOperationException>(() => Throw.IfLessThan(Value, 100));
 
             Assert.AreEqual(ExpectedMessage, exception.Message);
         }

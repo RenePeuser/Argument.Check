@@ -8,7 +8,7 @@ namespace Argument.Check.Test.ThrowHelper
     public class ThrowIfEqualsToTest
     {
         private readonly bool _expectedValue = true;
-        private readonly object _nullArgument;
+        private readonly object? _nullArgument;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Equal()

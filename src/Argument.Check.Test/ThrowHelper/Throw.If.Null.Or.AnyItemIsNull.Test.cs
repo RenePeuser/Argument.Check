@@ -10,10 +10,10 @@ namespace Argument.Check.Test.ThrowHelper
     public class ThrowIfNullOrAnyItemIsNullTest
     {
         private const string ArgumentFuncName = "argumentFunc";
-        private readonly IEnumerable<string> _listWithNullItem = new[] { "Vegeta", "Beerus", null };
+        private readonly IEnumerable<string?> _listWithNullItem = new[] { "Vegeta", "Beerus", null };
         private readonly IEnumerable<string> _listWithoutNullItem = new[] { "Vegeta", "Beerus" };
-        private readonly IEnumerable<string> _nullArgument;
-        private readonly IEnumerable<string> _nullArgumentFunc;
+        private readonly IEnumerable<string>? _nullArgument;
+        private readonly IEnumerable<string>? _nullArgumentFunc;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_In_The_Source_Is_Null()
@@ -53,7 +53,7 @@ namespace Argument.Check.Test.ThrowHelper
             _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(_nullArgumentFunc), ArgumentFuncName);
         }
 
-        private void TestMethod(IEnumerable<string> values)
+        private void TestMethod(IEnumerable<string?>? values)
         {
             _ = Throw.IfNullOrAnyItemIsNull(values);
         }

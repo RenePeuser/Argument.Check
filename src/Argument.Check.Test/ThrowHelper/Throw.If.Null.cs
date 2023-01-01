@@ -10,8 +10,8 @@ namespace Argument.Check.Test.ThrowHelper
     {
         private const string ArgumentFunc = "argumentFunc";
         private readonly string _notNullString = "SonGoku";
-        private readonly string _nullArgumentFunc;
-        private readonly string _nullString;
+        private readonly string? _nullArgumentFunc;
+        private readonly string? _nullString;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null_New_Version()
@@ -20,7 +20,7 @@ namespace Argument.Check.Test.ThrowHelper
             {
                 return TestNull(null);
 
-                static object TestNull(object argument)
+                static object TestNull(object? argument)
                 {
                     return Throw.IfNull(argument);
                 }
@@ -67,7 +67,7 @@ namespace Argument.Check.Test.ThrowHelper
             Assert.AreEqual("Value cannot be null. (Parameter 'argument')", exception.Message);
         }
 
-        private void TestMethod(string argument)
+        private void TestMethod(string? argument)
         {
             _ = Throw.IfNull(argument);
         }

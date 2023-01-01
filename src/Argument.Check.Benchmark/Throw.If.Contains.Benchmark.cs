@@ -53,17 +53,6 @@ namespace Argument.Check.Benchmark
         }
 
         [Benchmark]
-        public object Throw_If_Null_Func()
-        {
-            return ThrowIfContains("z", new List<string> { "a" });
-
-            static string ThrowIfContains(string argument, IEnumerable<string> sequence)
-            {
-                return Throw.IfContains(() => argument, sequence);
-            }
-        }
-
-        [Benchmark]
         public object Throw_If_Null()
         {
             return ThrowIfContains("z", new List<string> { "a" });

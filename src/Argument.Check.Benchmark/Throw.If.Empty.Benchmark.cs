@@ -46,17 +46,6 @@ namespace Argument.Check.Benchmark
         }
 
         [Benchmark]
-        public object Throw_If_Null_Func()
-        {
-            return ThrowIfEmpty(new List<string> { "a" });
-
-            static IEnumerable<string> ThrowIfEmpty(IEnumerable<string> arg)
-            {
-                return Throw.IfEmpty(() => arg);
-            }
-        }
-
-        [Benchmark]
         public object Throw_If_Null()
         {
             return ThrowIfEmpty(new List<string> { "a" });

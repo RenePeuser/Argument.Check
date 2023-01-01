@@ -7,9 +7,9 @@ namespace Argument.Check.Test.ThrowHelperFunc
     [TestClass]
     public class ThrowIfNotExistsTest
     {
-        private readonly DirectoryInfo _existingDirectoryInfo = new DirectoryInfo(Environment.CurrentDirectory);
-        private readonly DirectoryInfo _notExistingDirectioryInfo = new DirectoryInfo(@"s:\SonGoku\");
-        private readonly FileInfo _notExistingFileInfo = new FileInfo(@"s:\SonGoku.db");
+        private readonly DirectoryInfo _existingDirectoryInfo = new(Environment.CurrentDirectory);
+        private readonly DirectoryInfo _notExistingDirectioryInfo = new(@"s:\SonGoku\");
+        private readonly FileInfo _notExistingFileInfo = new(@"s:\SonGoku.db");
         private readonly FileSystemInfo _nullArgument = null!;
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_existingDirectoryInfo, Throw.IfNotExists(() => _existingDirectoryInfo));
+            Assert.AreEqual(_existingDirectoryInfo, Throw.IfNotExists(_existingDirectoryInfo));
         }
 
         [TestMethod]
@@ -58,25 +58,9 @@ namespace Argument.Check.Test.ThrowHelperFunc
             _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument));
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfNotExists(NullHelper.GetNullOf<Func<FileSystemInfo>>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
         private void TestMethod(FileSystemInfo argument)
         {
-            _ = Throw.IfNotExists(() => argument);
+            _ = Throw.IfNotExists(argument);
         }
     }
 }

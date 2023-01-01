@@ -78,7 +78,7 @@ namespace Argument.Check.Test.Special
             {
                 _ = Combine(null);
 
-                static string Combine(params string[] paths)
+                static string Combine(params string[]? paths)
                 {
                     _ = Throw.IfNull(paths);
                     _ = Throw.IfAnyItemIsNullOrWhitespace(paths);

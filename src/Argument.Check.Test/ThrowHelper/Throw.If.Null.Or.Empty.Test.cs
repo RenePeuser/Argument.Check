@@ -17,10 +17,9 @@ namespace Argument.Check.Test.ThrowHelper
 
         private readonly string _emptyString = string.Empty;
         private readonly IEnumerable<string> _listWithoutNullItem = new[] { "Vegeta", "Beerus" };
-        private readonly IEnumerable<string> _nullArgument;
-        private readonly Func<IEnumerable<string>> _nullArgumentFunc;
-        private readonly string _nullStringArgument;
-        private readonly string _nullStringArgumentFunc;
+        private readonly IEnumerable<string>? _nullArgument;
+        private readonly string? _nullStringArgument;
+        private readonly string? _nullStringArgumentFunc;
         private readonly string _sonGoku = "SonGoku";
 
 
@@ -54,12 +53,6 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Return_The_Same_Enumeration_Like_The_Checked_One()
         {
             Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrEmpty(_listWithoutNullItem));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_Source_ArgumentFunc_Is_Null()
-        {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrEmpty(_nullArgumentFunc), ArgumentFuncName);
         }
 
         [TestMethod]
@@ -100,12 +93,12 @@ namespace Argument.Check.Test.ThrowHelper
             _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrEmpty(_nullStringArgumentFunc), ArgumentFuncName);
         }
 
-        private void TestMethod(string value)
+        private void TestMethod(string? value)
         {
             _ = Throw.IfNullOrEmpty(value);
         }
 
-        private void TestMethod(IEnumerable<string> values)
+        private void TestMethod(IEnumerable<string>? values)
         {
             _ = Throw.IfNullOrEmpty(values);
         }

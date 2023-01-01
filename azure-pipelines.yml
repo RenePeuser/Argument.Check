@@ -4,40 +4,26 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-  - '*'
+  - master
+  - develop
 
 pool:
   vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
-  GitVersion.SemVer: ''
 
 steps:
-
-- task: gitversion/setup@0
-  displayName: Setup GitVersion Tool
-  inputs:
-    versionSpec: '5.7.0'
-    includePrerelease: true
-
-- task: gitversion/execute@0
-  displayName: Run GitVersion
-  inputs:
-    useConfigFile: true
-    configFilePath: "./GitVersion.yml"
-
 - task: UseDotNet@2
-  displayName: 'Use .NET 6 Preview'
   inputs:
     packageType: 'sdk'
-    version: '6.0.x'
-    includePreviewVersions: true
+    version: '7.x'
 
-- script: dotnet build --configuration $(buildConfiguration) /p:AssemblyVerison='$(GitVersion.SemVer)'
+- script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: dotnet test .
+- script: dotnet test
+  displayName: 'dotnet test'
 
 - task: DotNetCoreCLI@2
   displayName: Pack
@@ -47,6 +33,6 @@ steps:
     versioningScheme: 'off'
 
 - task: PublishBuildArtifacts@1
-  displayName: Publish artifacts
+  displayName: Publish Artifacts
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(build.artifactstagingdirectory)'

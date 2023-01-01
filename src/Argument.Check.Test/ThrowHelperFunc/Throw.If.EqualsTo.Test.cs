@@ -9,7 +9,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
     public class ThrowIfEqualsToTest
     {
         private readonly bool _expectedValue = true;
-        private readonly object _nullArgument;
+        private readonly object? _nullArgument;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Equal()
@@ -28,40 +28,24 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Value_Is_Not_Equal()
         {
-            _ = Throw.IfEqualsTo(() => _expectedValue, false);
+            _ = Throw.IfEqualsTo(_expectedValue, false);
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_expectedValue, Throw.IfEqualsTo(() => _expectedValue, false));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfEqualsTo(NullHelper.GetNullOf<Func<int>>(), 5);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            Assert.AreEqual(_expectedValue, Throw.IfEqualsTo(_expectedValue, false));
         }
 
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Argument_Is_Null()
         {
-            _ = Throw.IfEqualsTo(() => _nullArgument, _expectedValue);
+            _ = Throw.IfEqualsTo(_nullArgument, _expectedValue);
         }
 
         private void TestMethod<T>(T argument, T expected)
         {
-            _ = Throw.IfEqualsTo(() => argument, expected);
+            _ = Throw.IfEqualsTo(argument, expected);
         }
     }
 }

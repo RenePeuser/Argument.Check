@@ -39,7 +39,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_LowerLimit_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_lowerLimit, Throw.IfOutOfRange(() => _lowerLimit, _lowerLimit, _upperLimit));
+            Assert.AreEqual(_lowerLimit, Throw.IfOutOfRange(_lowerLimit, _lowerLimit, _upperLimit));
         }
 
         [TestMethod]
@@ -51,28 +51,12 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_UpperLimit_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_upperLimit, Throw.IfOutOfRange(() => _upperLimit, _lowerLimit, _upperLimit));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfOutOfRange(NullHelper.GetNullOf<Func<int>>(), 5, 7);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            Assert.AreEqual(_upperLimit, Throw.IfOutOfRange(_upperLimit, _lowerLimit, _upperLimit));
         }
 
         private void TestMethod(int value, int lower, int upper)
         {
-            _ = Throw.IfOutOfRange(() => value, lower, upper);
+            _ = Throw.IfOutOfRange(value, lower, upper);
         }
     }
 }

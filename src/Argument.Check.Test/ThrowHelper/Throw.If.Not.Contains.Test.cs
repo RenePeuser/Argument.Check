@@ -11,8 +11,8 @@ namespace Argument.Check.Test.ThrowHelper
     {
         private const string Vegeta = "Vegeta";
         private readonly string _containedValue = Vegeta;
-        private readonly string _nullArgument;
-        private readonly IEnumerable<string> _stringValues = new[] { Vegeta, "Beerus", null };
+        private readonly string? _nullArgument;
+        private readonly IEnumerable<string?> _stringValues = new[] { Vegeta, "Beerus", null };
         private readonly string _valueNotContained = "SonGoku";
 
         [TestMethod]

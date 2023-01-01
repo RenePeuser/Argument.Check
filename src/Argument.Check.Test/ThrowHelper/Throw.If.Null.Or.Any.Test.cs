@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Extensions.Pack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.ThrowHelper
@@ -7,20 +8,22 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfNullOrAnyTest
     {
-        private readonly IEnumerable<string> _listWithNullItem = new[] { "Vegeta", "Beerus", null };
+        private readonly IEnumerable<string?> _listWithNullItem = new[] { "Vegeta", "Beerus", null };
         private readonly IEnumerable<string> _listWithoutNullItem = new[] { "Vegeta", "Beerus" };
-        private readonly IEnumerable<string> _nullArgument = null!;
+#pragma warning disable CS0649
+        private readonly IEnumerable<string>? _nullArgument;
+#pragma warning restore CS0649
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_In_The_Source_Match_The_Given_Predicate()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.Contains("Vegeta")));
+            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.IsNotNull() && x.Contains("Vegeta")));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Any_Item_In_The_Source_Is_Null()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.Contains("Vegeta")));
+            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.IsNotNull() && x.Contains("Vegeta")));
 
             Assert.IsTrue(exception.Message.Contains("The sequence must not contain any items that satisfy the given predicate:"));
         }
@@ -28,7 +31,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument, x => x.Length == 1), nameof(_nullArgument));
+            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument, x => x?.Length == 1), nameof(_nullArgument));
         }
 
         [TestMethod]
@@ -43,23 +46,7 @@ namespace Argument.Check.Test.ThrowHelper
             Assert.AreEqual(_listWithoutNullItem, Throw.IfNullOrAny(_listWithoutNullItem, x => x == "ShenLong"));
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_Enumeration_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfNullOrAny(NullHelper.GetNullOf<Func<string>>(), _ => true);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
-        private void TestMethod(IEnumerable<string> values, Func<string, bool> anyFunc)
+        private void TestMethod(IEnumerable<string?>? values, Func<string?, bool> anyFunc)
         {
             _ = Throw.IfNullOrAny(values, anyFunc);
         }

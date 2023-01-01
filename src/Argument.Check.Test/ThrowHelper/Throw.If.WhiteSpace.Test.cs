@@ -8,7 +8,7 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfWhiteSpaceTest
     {
-        private readonly string _nullStringArgument;
+        private readonly string? _nullStringArgument;
         private readonly string _sonGoku = "SonGoku";
         private readonly string _whiteSpace = " ";
 
@@ -45,23 +45,7 @@ namespace Argument.Check.Test.ThrowHelper
             Assert.AreEqual(_sonGoku, Throw.IfWhitespace(_sonGoku));
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_String_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfWhitespace(NullHelper.GetNullOf<Func<string>>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
-        private void TestMethod(string contains)
+        private void TestMethod(string? contains)
         {
             _ = Throw.IfWhitespace(contains);
         }

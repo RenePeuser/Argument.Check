@@ -13,7 +13,7 @@ namespace Argument.Check.Test.SpecialFunc
             {
                 Test(null);
 
-                void Test(object songoku)
+                void Test(object? songoku)
                 {
                     object ReturnSomething()
                     {
@@ -23,47 +23,6 @@ namespace Argument.Check.Test.SpecialFunc
                     Assert.AreEqual("Hello", ReturnSomething());
 
                     _ = Throw.IfNull(() => songoku);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'songoku')", exception.Message);
-        }
-
-        [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_With_Post_Func_Usage()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                Test(null);
-
-                void Test(object songoku)
-                {
-                    _ = Throw.IfNull(() => songoku);
-
-                    Func<object> returnSomething = () => "Hello";
-                    Assert.AreEqual("Hello", returnSomething());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'songoku')", exception.Message);
-        }
-
-        [TestMethod]
-        public void Should_Detect_Correct_Argument_Also_With_Pre_And_Post_Func_Usage()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                Test(null);
-
-                void Test(object songoku)
-                {
-                    Func<object> returnSomething0 = () => "Hello";
-                    Assert.AreEqual("Hello", returnSomething0());
-
-                    _ = Throw.IfNull(() => songoku);
-
-                    Func<object> returnSomething1 = () => "Hello";
-                    Assert.AreEqual("Hello", returnSomething1());
                 }
             });
 

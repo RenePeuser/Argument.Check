@@ -37,23 +37,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_valueNotContained, Throw.IfContains(() => _valueNotContained, _stringValues));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                void TestNullFunc()
-                {
-                    _ = Throw.IfContains(NullHelper.GetNullOf<Func<string>>(), _stringValues);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            Assert.AreEqual(_valueNotContained, Throw.IfContains(_valueNotContained, _stringValues));
         }
 
         [TestMethod]

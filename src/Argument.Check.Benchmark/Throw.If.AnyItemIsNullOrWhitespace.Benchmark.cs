@@ -47,17 +47,6 @@ namespace Argument.Check.Benchmark
         }
 
         [Benchmark]
-        public object Throw_If_Null_Func()
-        {
-            return IfAnyItemIsNullOrWhitespace(new List<string> { "a" });
-
-            static IEnumerable<string> IfAnyItemIsNullOrWhitespace(IEnumerable<string> arg)
-            {
-                return Throw.IfAnyItemIsNullOrWhitespace(() => arg);
-            }
-        }
-
-        [Benchmark]
         public object Throw_If_Null()
         {
             return IfAnyItemIsNullOrWhitespace(new List<string> { "a" });

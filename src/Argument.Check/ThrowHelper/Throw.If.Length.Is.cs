@@ -11,34 +11,6 @@ namespace Argument.Check
     public static partial class Throw
     {
         /// <summary>Throws an <see cref="ArgumentException" />, when the given string equals to an expected length of <c>length</c>.</summary>
-        /// <param name="argumentFunc">A function, which returns the string to validate.</param>
-        /// <param name="length">The length which the string argument must have.</param>
-        /// <returns>The given string, which was checked.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">The exception, which will be thrown, if the given string equals to an expected length of <c>length</c>.</exception>
-#if !DEBUG
-        [DebuggerHidden]
-#endif
-        [Obsolete("This method is obsolete use the new version without func to check your arguments  Throw.IfLengthIs(myArgument, myLength)", false)]
-        public static string IfLengthIs(Func<string> argumentFunc, int length)
-        {
-            IfNull(() => argumentFunc);
-            IfNull(argumentFunc);
-
-            var argument = argumentFunc();
-            if (argument.Length.NotEqualsTo(length))
-            {
-                return argument;
-            }
-
-            throw new ArgumentOutOfRangeException(argumentFunc.GetParameterName(Predicate), $"String length: '{argument}' must not be equals to to a length of: '{length}'.");
-
-            bool Predicate(object arg)
-            {
-                return arg.Is<string>() && arg.Cast<string>().Length.EqualsTo(length);
-            }
-        }
-
-        /// <summary>Throws an <see cref="ArgumentException" />, when the given string equals to an expected length of <c>length</c>.</summary>
         /// <param name="argument">The argument, which has to be checked.</param>
         /// <param name="argumentName">The argument name will be automatically detected by the <see cref="CallerArgumentExpressionAttribute"/>, so please do not enter any name, otherwise you will got the wrong parameter name.</param>
         /// <param name="length">The length which the string argument must have.</param>
@@ -47,7 +19,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static string IfLengthIs(string argument, int length, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static string IfLengthIs(string? argument, int length, [CallerArgumentExpression("argument")] string argumentName = "")
         {
             IfNull(argument);
 

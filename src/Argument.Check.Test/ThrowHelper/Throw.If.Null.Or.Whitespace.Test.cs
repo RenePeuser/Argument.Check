@@ -9,7 +9,7 @@ namespace Argument.Check.Test.ThrowHelper
     public class ThrowIfNullOrWhiteSpaceTest
     {
         private readonly string _emptyString = " ";
-        private readonly string _nullStringArgument;
+        private readonly string? _nullStringArgument;
         private readonly string _sonGoku = "SonGoku";
 
 
@@ -44,7 +44,7 @@ namespace Argument.Check.Test.ThrowHelper
         {
             Assert.AreEqual(_sonGoku, Throw.IfNullOrWhiteSpace(_sonGoku));
         }
-        private void TestMethod(string value)
+        private void TestMethod(string? value)
         {
             _ = Throw.IfNullOrWhiteSpace(value);
         }

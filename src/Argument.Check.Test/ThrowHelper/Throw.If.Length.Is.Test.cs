@@ -10,8 +10,8 @@ namespace Argument.Check.Test.ThrowHelper
     {
         private const string ArgumentFuncName = "argumentFunc";
         private readonly int _expectedLength = 5;
-        private readonly string _nullArgumentFunc;
-        private readonly string _nullString;
+        private readonly string? _nullArgumentFunc;
+        private readonly string? _nullString;
         private readonly string _sonGoku = "SonGoku";
         private readonly string _stringHasExpectedLength = "abcde";
 
@@ -59,7 +59,7 @@ namespace Argument.Check.Test.ThrowHelper
             Assert.AreEqual(_sonGoku, Throw.IfLengthIs(_sonGoku, 10));
         }
 
-        private void TestMethod(string argument, int length)
+        private void TestMethod(string? argument, int length)
         {
             _ = Throw.IfLengthIs(argument, length);
         }

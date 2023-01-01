@@ -15,7 +15,6 @@ namespace Argument.Check.Test.ThrowHelper
         private readonly string _emptyString = string.Empty;
         private readonly IEnumerable<string> _emptyStrings = Enumerable.Empty<string>();
         private readonly IEnumerable<string> _notEmptyStrings = new[] { SonGoku };
-        private readonly IEnumerable<string> _nullEnumerableFunc;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Empty()
@@ -72,7 +71,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Enumerable_ArgumentFunc_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfEmpty(_nullEnumerableFunc), ArgumentFuncName);
+            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfEmpty(_emptyStrings), ArgumentFuncName);
         }
 
         private void TestMethod(string contains)

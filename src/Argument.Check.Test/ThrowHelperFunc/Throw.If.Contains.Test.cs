@@ -11,7 +11,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         private const string Vegeta = "Vegeta";
         private readonly string _containedValue = Vegeta;
         private readonly string _nullArgument = null!;
-        private readonly IEnumerable<string> _stringValues = new[] {Vegeta, "Beerus"};
+        private readonly IEnumerable<string> _stringValues = new[] { Vegeta, "Beerus" };
         private readonly string _valueNotContained = "SonGoku";
 
         [TestMethod]
@@ -37,23 +37,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_valueNotContained, Throw.IfContains(() => _valueNotContained, _stringValues));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                void TestNullFunc()
-                {
-                    _ = Throw.IfContains(NullHelper.GetNullOf<Func<string>>(), _stringValues);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
+            Assert.AreEqual(_valueNotContained, Throw.IfContains(_valueNotContained, _stringValues));
         }
 
         [TestMethod]
@@ -64,7 +48,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
 
         private void TestMethod<T>(T contains, IEnumerable<T> source)
         {
-            _ = Throw.IfContains(() => contains, source);
+            _ = Throw.IfContains(contains, source);
         }
     }
 }

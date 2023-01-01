@@ -63,22 +63,6 @@ namespace Argument.Check.Test.ThrowHelper
             Assert.AreEqual(_falseValue, Throw.IfNot(_falseValue, item => !item, _message));
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
-        {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfNot(NullHelper.GetNullOf<Func<object>>(), _ => true);
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
         private void TestMethod(bool argument, Func<bool, bool> predicate, string message)
         {
             _ = Throw.IfNot(argument, predicate, message);

@@ -9,7 +9,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
     public class IfTypeIsTest
     {
         private readonly int _notExpectedType = 4;
-        private readonly string _nullString;
+        private readonly string? _nullString;
         private readonly string _sonGoku = "SonGoku";
 
         [TestMethod]
@@ -44,25 +44,9 @@ namespace Argument.Check.Test.ThrowHelperFunc
             _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod<string>(_nullString), nameof(_nullString));
         }
 
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
+        private void TestMethod<T>(object? argument) where T : class
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                TestNullFunc();
-
-                static void TestNullFunc()
-                {
-                    _ = Throw.IfTypeIs<object>(NullHelper.GetNullOf<Func<object>>());
-                }
-            });
-
-            Assert.AreEqual("Value cannot be null. (Parameter 'argumentFunc')", exception.Message);
-        }
-
-        private void TestMethod<T>(object argument) where T : class
-        {
-            _ = Throw.IfTypeIs<T>(() => argument);
+            _ = Throw.IfTypeIs<T>(argument);
         }
     }
 }

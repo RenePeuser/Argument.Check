@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.Special
@@ -13,7 +14,7 @@ namespace Argument.Check.Test.Special
             {
                 Test(null);
 
-                static void Test(params string[] paths)
+                static void Test(params string[]? paths)
                 {
                     // This should throw only.
                     _ = Throw.IfNull(paths);
@@ -31,7 +32,7 @@ namespace Argument.Check.Test.Special
             {
                 Test(null, new[] { "test" });
 
-                static void Test(string[] test, string[] a)
+                static void Test(string[]? test, string[] a)
                 {
                     _ = Throw.IfNull(test);
                     _ = Throw.IfAnyItemIsNullOrWhitespace(test);
@@ -49,9 +50,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Test(new string[] { null }, new[] { "test" });
+                Test(new List<string?>() { null }, new[] { "test" });
 
-                static void Test(string[] test, string[] a)
+                static void Test(IEnumerable<string?>? test, string[] a)
                 {
                     _ = Throw.IfNull(test);
                     _ = Throw.IfAnyItemIsNullOrWhitespace(test);
@@ -69,9 +70,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                Test(new[] { "a" }, null);
+                Test(new List<string> { "a" }, null);
 
-                static void Test(string[] test, string[] a)
+                static void Test(List<string> test, string[]? a)
                 {
                     _ = Throw.IfNull(test);
                     _ = Throw.IfAnyItemIsNullOrWhitespace(test);
@@ -88,9 +89,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Test(new[] { "a" }, new string[] { null });
+                Test(new[] { "a" }, new string?[] { null });
 
-                static void Test(string[] test, string[] a)
+                static void Test(string[] test, string?[]? a)
                 {
                     _ = Throw.IfNull(test);
                     _ = Throw.IfAnyItemIsNullOrWhitespace(test);
@@ -108,9 +109,9 @@ namespace Argument.Check.Test.Special
         {
             var exception = Assert.ThrowsException<ArgumentException>(() =>
             {
-                Test(new[] { "a" }, new string[] { null });
+                Test(new[] { "a" }, new string?[] { null });
 
-                static void Test(string[] test, string[] a)
+                static void Test(string[] test, string?[] a)
                 {
                     _ = Throw.IfNull(test);
                     _ = Throw.IfAnyItemIsNullOrWhitespace(test);
@@ -130,7 +131,7 @@ namespace Argument.Check.Test.Special
             {
                 Test(null, "test", "test");
 
-                static void Test(string a, string b, string c)
+                static void Test(string? a, string? b, string? c)
                 {
                     _ = Throw.IfNull(a);
                     _ = Throw.IfWhitespace(a);
@@ -209,7 +210,7 @@ namespace Argument.Check.Test.Special
             {
                 Test(10, null, new object());
 
-                static void Test(int a, string b, object c)
+                static void Test(int a, string? b, object c)
                 {
                     _ = Throw.IfLessThan(a, 5);
                     _ = Throw.IfNull(b);
@@ -227,7 +228,7 @@ namespace Argument.Check.Test.Special
             {
                 Test(10, "test", null);
 
-                static void Test(int a, string b, object c)
+                static void Test(int a, string b, object? c)
                 {
                     _ = Throw.IfLessThan(a, 5);
                     _ = Throw.IfNull(b);

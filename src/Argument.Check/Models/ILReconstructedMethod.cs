@@ -2,7 +2,7 @@
 
 namespace Argument.Check.Models
 {
-    internal class ILReconstructedMethod
+    internal sealed class ILReconstructedMethod
     {
         internal ILReconstructedMethod(MethodInfo methodInfo, FieldInfo returnValue)
         {

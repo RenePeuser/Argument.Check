@@ -13,7 +13,7 @@ namespace Argument.Check.Test.ThrowHelper
 
         private readonly IEnumerable<string> _validStrings = new[] { SonGoku };
         private readonly IEnumerable<string> _valuesWithAnEmptyString = new[] { SonGoku, string.Empty };
-        private readonly IEnumerable<string> _valuesWithOneNull = new[] { SonGoku, null };
+        private readonly IEnumerable<string?> _valuesWithOneNull = new[] { SonGoku, null };
         private readonly IEnumerable<string> _valuesWithOneWhitespace = new[] { SonGoku, " ", Vegeta };
 
         [TestMethod]
@@ -53,7 +53,7 @@ namespace Argument.Check.Test.ThrowHelper
 
             Assert.IsTrue(exception.Message.Contains($"At least one string in the enumeration '{SonGoku}, ,{Vegeta}' was null or a whitespace."));
         }
-        private void TestMethod(IEnumerable<string> strings)
+        private void TestMethod(IEnumerable<string?> strings)
         {
             _ = Throw.IfAnyItemIsNullOrWhitespace(strings);
         }

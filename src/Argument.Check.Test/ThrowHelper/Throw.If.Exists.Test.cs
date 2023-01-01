@@ -13,7 +13,7 @@ namespace Argument.Check.Test.ThrowHelper
         private readonly DirectoryInfo _existingDirectoryInfo = new(Environment.CurrentDirectory);
         private readonly FileInfo _existingFileInfo = new DirectoryInfo(Environment.CurrentDirectory).EnumerateFiles().First();
         private readonly FileInfo _notExistingFileInfo = new(@"s:\SonGoku.db");
-        private readonly FileSystemInfo _nullArgument;
+        private readonly FileSystemInfo? _nullArgument;
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Directory_Info_Exist()
@@ -62,7 +62,7 @@ namespace Argument.Check.Test.ThrowHelper
             _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
         }
 
-        private void TestMethod(FileSystemInfo argument)
+        private void TestMethod(FileSystemInfo? argument)
         {
             _ = Throw.IfExists(argument);
         }
