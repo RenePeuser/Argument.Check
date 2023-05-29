@@ -21,7 +21,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfNotContains<T>(T argument, IEnumerable<T> source, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static T IfNotContains<T>(T argument, IEnumerable<T> source, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
             IfNull(source);
 

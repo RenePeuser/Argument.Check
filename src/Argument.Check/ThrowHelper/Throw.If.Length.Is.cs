@@ -19,7 +19,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static string IfLengthIs(string? argument, int length, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static string IfLengthIs(string? argument, int length, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
             IfNull(argument);
 

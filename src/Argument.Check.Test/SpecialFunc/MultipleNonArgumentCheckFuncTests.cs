@@ -13,16 +13,16 @@ namespace Argument.Check.Test.SpecialFunc
             {
                 Test(null);
 
-                void Test(object? songoku)
+                static void Test(object? songoku)
                 {
-                    object ReturnSomething()
+                    static object ReturnSomething()
                     {
                         return "Hello";
                     }
 
                     Assert.AreEqual("Hello", ReturnSomething());
 
-                    _ = Throw.IfNull(() => songoku);
+                    _ = Throw.IfNull(songoku);
                 }
             });
 

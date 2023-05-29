@@ -17,7 +17,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static object IfTypeIs<T>(object? argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : class
+        public static object IfTypeIs<T>(object? argument, [CallerArgumentExpression(nameof(argument))] string argumentName = "") where T : class
         {
             IfNull(argument);
 

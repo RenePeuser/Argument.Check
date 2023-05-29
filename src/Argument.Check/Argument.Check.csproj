@@ -10,13 +10,10 @@
         <PackageProjectUrl>https://renepeuser.visualstudio.com/Argument.Check</PackageProjectUrl>
         <RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
         <PackageReleaseNotes>
-            Changes:
-            - Upgrade to Net6
-            - Code analysis detect argument null check as a null check. No hint for "possible null reference exception.." any more.
-            - No func need to check your arguments. "Throw.IfNull(myArgument)" instead of "Throw.IfNull(() =&gt; myArgument)"
-            - The argument check is now as fast as throw expressions, no performance loss.
-            - All func methods are tagged now with "obsolete" attribute.
-            - Activate nullable, that compiler knows which extension or arg checks already checked for NULL
+Changes:
+- Upgrade to Net7
+- Remove obsolete argument checks based on Func&lt;T&gt;
+
         </PackageReleaseNotes>
         <PackageTags>C#;.Net;DotNet;Arg;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;IfNull;IfExists;ThrowHelper;Contract;IsNull;</PackageTags>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
@@ -43,7 +40,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="GitVersion.MsBuild" Version="5.11.1">
+        <PackageReference Include="GitVersion.MsBuild" Version="5.12.0">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

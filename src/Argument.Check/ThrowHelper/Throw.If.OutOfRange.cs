@@ -21,7 +21,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfOutOfRange<T>(T argument, T min, T max, [CallerArgumentExpression("argument")] string argumentName = "") where T : IComparable
+        public static T IfOutOfRange<T>(T argument, T min, T max, [CallerArgumentExpression(nameof(argument))] string argumentName = "") where T : IComparable
         {
             if (!argument.IsOutOfRange(min, max))
             {

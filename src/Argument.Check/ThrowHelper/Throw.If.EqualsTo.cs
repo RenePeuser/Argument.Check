@@ -20,7 +20,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfEqualsTo<T>(T argument, T expectedValue, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static T IfEqualsTo<T>(T argument, T expectedValue, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
             if (argument.NotEqualsTo(expectedValue))
             {

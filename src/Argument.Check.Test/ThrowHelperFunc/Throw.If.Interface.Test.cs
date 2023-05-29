@@ -41,18 +41,18 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Not_Throw_An_Exception_If_Instance_Is_An_Interface()
         {
-            _ = Throw.IfInterface<IEnumerable>(() => _noInterface);
+            _ = Throw.IfInterface<IEnumerable>(_noInterface);
         }
 
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_noInterface, Throw.IfInterface<IEnumerable>(() => _noInterface));
+            Assert.AreEqual(_noInterface, Throw.IfInterface<IEnumerable>(_noInterface));
         }
 
         private void TestMethod(IEnumerable argument)
         {
-            _ = Throw.IfInterface<IEnumerable>(() => argument);
+            _ = Throw.IfInterface<IEnumerable>(argument);
         }
     }
 }

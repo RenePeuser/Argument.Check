@@ -18,7 +18,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static FileSystemInfo IfNotExists(FileSystemInfo argument, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static FileSystemInfo IfNotExists(FileSystemInfo argument, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
             IfNull(argument);
 

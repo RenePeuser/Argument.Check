@@ -19,7 +19,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfNull<T>([NotNull] T? argument, [CallerArgumentExpression("argument")] string argumentName = "") where T : class
+        public static T IfNull<T>([NotNull] T? argument, [CallerArgumentExpression(nameof(argument))] string argumentName = "") where T : class
         {
             if (argument is null)
             {

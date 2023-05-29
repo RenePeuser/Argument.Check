@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
+using ConsoleTables;
 using Extensions.Pack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Solution.Parser.CSharp;
@@ -13,13 +16,13 @@ namespace Argument.Check.Test.SolutionAndProjects
         [TestMethod]
         public void All_Not_Throw_Helpers_Must_Not_Be_Public()
         {
-            var publicMethods = from syntaxTree in SyntaxTrees
-                                from @class in syntaxTree.Classes
-                                from method in @class.Methods
-                                where method.Modifiers.Contains(Modifier.Public) && syntaxTree.FileName.DoesNotContain("Throw")
-                                select new AnalyzeResult(syntaxTree.FileName, method.Name);
+            var publicMethods = (from syntaxTree in SyntaxTrees
+                                 from @class in syntaxTree.Classes
+                                 from method in @class.Methods
+                                 where method.Modifiers.Contains(Modifier.Public) && @class.FullQualifiedName.DoesNotContain("Throw")
+                                 select new AnalyzeResult(syntaxTree.FileName, method.Name)).ToImmutableList();
 
-            Assert.IsFalse(publicMethods.Any(), ToMessage("Not allowed public methods detected, only Throw.xxx helpers must be public", publicMethods));
+            Assert.IsFalse(publicMethods.Any(), $"Not allowed public methods detected, only Throw.xxx helpers must be public.{Environment.NewLine}{Environment.NewLine}{ConsoleTable.From(publicMethods)}");
         }
 
         [TestMethod]

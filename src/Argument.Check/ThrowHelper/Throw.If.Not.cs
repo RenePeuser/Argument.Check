@@ -20,7 +20,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static T IfNot<T>(T argument, Func<T, bool> validationPredicate, string exceptionMessage, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static T IfNot<T>(T argument, Func<T, bool> validationPredicate, string exceptionMessage, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
             IfNull(validationPredicate);
 

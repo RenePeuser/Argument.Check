@@ -10,7 +10,6 @@ namespace Argument.Check.Test.ThrowHelper
     [TestClass]
     public class ThrowIfEmpty
     {
-        private const string ArgumentFuncName = "argumentFunc";
         private const string SonGoku = "SonGoku";
         private readonly string _emptyString = string.Empty;
         private readonly IEnumerable<string> _emptyStrings = Enumerable.Empty<string>();
@@ -66,12 +65,6 @@ namespace Argument.Check.Test.ThrowHelper
         public void Should_Return_The_Same_String_Enumeration_Reference_Like_The_Checked_One()
         {
             Assert.AreEqual(_notEmptyStrings, Throw.IfEmpty(_notEmptyStrings));
-        }
-
-        [TestMethod]
-        public void Should_Throw_An_Exception_If_Enumerable_ArgumentFunc_Is_Null()
-        {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfEmpty(_emptyStrings), ArgumentFuncName);
         }
 
         private void TestMethod(string contains)

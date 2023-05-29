@@ -35,7 +35,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_notExpectedType, Throw.IfTypeIs<string>(() => _notExpectedType));
+            Assert.AreEqual(_notExpectedType, Throw.IfTypeIs<string>(_notExpectedType));
         }
 
         [TestMethod]

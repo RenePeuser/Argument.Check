@@ -34,7 +34,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
 
         private void TestMethod(object argument, object expected)
         {
-            _ = Throw.IfNotEqualsTo(() => argument, expected);
+            _ = Throw.IfNotEqualsTo(argument, expected);
         }
     }
 }

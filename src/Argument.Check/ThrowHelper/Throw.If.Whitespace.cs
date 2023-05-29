@@ -18,7 +18,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static string IfWhitespace(string? argument, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static string IfWhitespace(string? argument, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
             IfNull(argument);
 

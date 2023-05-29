@@ -21,7 +21,7 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static IEnumerable<T> IfNullOrAny<T>([NotNull] IEnumerable<T?>? argument, Func<T?, bool> predicate, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static IEnumerable<T> IfNullOrAny<T>([NotNull] IEnumerable<T?>? argument, Func<T?, bool> predicate, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
             var checkArguments = IfNull(argument);
             IfNull(predicate);

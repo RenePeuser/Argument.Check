@@ -35,7 +35,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(_sonGoku, Throw.IfTypeIsNot<string>(() => _sonGoku));
+            Assert.AreEqual(_sonGoku, Throw.IfTypeIsNot<string>(_sonGoku));
         }
 
         [TestMethod]
@@ -46,7 +46,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
 
         private void TestMethod<T>(object? argument) where T : class
         {
-            _ = Throw.IfTypeIsNot<T>(() => argument);
+            _ = Throw.IfTypeIsNot<T>(argument);
         }
     }
 }

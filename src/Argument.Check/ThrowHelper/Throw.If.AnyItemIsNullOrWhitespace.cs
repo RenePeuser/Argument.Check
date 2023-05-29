@@ -19,9 +19,9 @@ namespace Argument.Check
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        public static IEnumerable<string> IfAnyItemIsNullOrWhitespace(IEnumerable<string?>? argument, [CallerArgumentExpression("argument")] string argumentName = "")
+        public static IEnumerable<string> IfAnyItemIsNullOrWhitespace(IEnumerable<string?>? argument, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
-            var checkedArgument = IfNull(argument);
+            var checkedArgument = Throw.IfNull(argument);
 
             if (checkedArgument!.IsAnyItemNullOrWhitespace().IsFalse())
             {
