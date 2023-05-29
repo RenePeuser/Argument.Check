@@ -1,40 +1,18 @@
 # Argument.Check
 
-A library to check your arguments in a simple comfort way. This library do not use 'Expression' or 'nameof(arg)'. 
-It is based on Func<T>. So no performance issue during positive argument check.
+Argument.Check is a very simple library which makes it very easy to check your arguments or variables for different conditions like 'Null'.
+It is super fast it is using the new [[CallerMemberNameAttribute]](https://learn.microsoft.com/de-de/dotnet/api/system.runtime.compilerservices.callermembernameattribute?view=net-7.0)
 
+## Getting started
+
+### Prerequisites
+* [.Net 7](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+
+### Install the package
+
+```dotnetcli
+dotnet add package Argument.Check
 ```
-This argument check was made for checking the parameter of a method or constructor. You can not check states on
-any object directly.
-```
-
-## Install
-
-You can install this package over your NugetPack-Manager in your Visual Studio
-
-![](./assets/nuget-pack-manager.png)
-
-or use the .NET-CLI
-
-```bash
-dotnet add package Argument.Check --version 1.0.1
-```
-
-## Configure Resharper (Optional)
-
-If you use this package you can configure your default null check with a custom expression in your
-Resharper settings.
-
-![](./assets/resharper-settings.png)
-
-This setting has following effect:
-
-![](./assets/resharper-agrument-null-check.gif)
-
-
-## The debugger will break where the exception happened
-![](./assets/exception-breaks.png)
-
 
 ## Samples
 
@@ -44,7 +22,7 @@ Each Throw helper could also be used like a "Throw Expression".
 ```csharp
 public MyClass(object arg)
 {
-    Throw.IfNull(() =>  arg);
+    Throw.IfNull(arg);
 }
 ```
 
@@ -52,7 +30,7 @@ public MyClass(object arg)
 ```csharp
 public MyClass(IService service)
 {
-    _service = Throw.IfNull(() =>  service);
+    _service = Throw.IfNull(service);
 }
 ```
 
@@ -60,10 +38,10 @@ public MyClass(IService service)
 ```csharp
 public MyClass(IService service)
 {
-    Throw.IfNull(() => service);
+    Throw.IfNull(service);
 
     var result = service.GetSomething();
-    Throw.IfNull(() => result);
+    Throw.IfNull(result);
 }
 ```
 
@@ -71,7 +49,7 @@ public MyClass(IService service)
 ```csharp
 public MyClass(FileInfo fileInfo)
 {
-    Throw.IfExists(() =>  fileInfo);
+    Throw.IfExists(fileInfo);
 }
 ```
 
@@ -79,7 +57,7 @@ public MyClass(FileInfo fileInfo)
 ```csharp
 public MyClass(DirectoryInfo directoryInfo)
 {
-    Throw.IfExists(() => directoryInfo);
+    Throw.IfExists(directoryInfo);
 }
 ```
 
@@ -87,7 +65,7 @@ public MyClass(DirectoryInfo directoryInfo)
 ```csharp
 public MyClass(int value)
 {
-    Throw.IfGreaterThan(() => value, 10);
+    Throw.IfGreaterThan(value, 10);
 }
 ```
 
@@ -95,7 +73,7 @@ public MyClass(int value)
 ```csharp
 public MyClass(int value)
 {
-    Throw.IfLessThan(() => value, 10);
+    Throw.IfLessThan(value, 10);
 }
 ```
 
@@ -103,7 +81,7 @@ public MyClass(int value)
 ```csharp
 public MyClass(int value)
 {
-    Throw.IfOutOfRange(() => value, 10, 100);
+    Throw.IfOutOfRange(value, 10, 100);
 }
 ```
 
@@ -111,7 +89,7 @@ public MyClass(int value)
 ```csharp
 public MyClass(string value)
 {
-    Throw.If(() => value, v => v.Length > 10 && v.Contains("abc"), "The given string length must not be longer than 10, and must not contain 'abc'");
+    Throw.If(value, v => v.Length > 10 && v.Contains("abc"), "The given string length must not be longer than 10, and must not contain 'abc'");
 }
 ```
 
@@ -119,7 +97,7 @@ public MyClass(string value)
 ```csharp
 public MyClass(object value)
 {
-    Throw.IfNotInterface(() => value); 
+    Throw.IfNotInterface(value); 
 }
 ```
 
@@ -127,7 +105,7 @@ public MyClass(object value)
 ```csharp
 public MyClass(object value)
 {
-    Throw.IfNotEqualsTo(() => value, new object()); 
+    Throw.IfNotEqualsTo(value, new object()); 
 }
 ```
 
