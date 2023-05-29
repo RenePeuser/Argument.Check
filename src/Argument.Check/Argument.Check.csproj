@@ -10,14 +10,15 @@
         <PackageProjectUrl>https://renepeuser.visualstudio.com/Argument.Check</PackageProjectUrl>
         <RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
         <PackageReleaseNotes>
-Changes:
-- Upgrade to Net7
-- Remove obsolete argument checks based on Func&lt;T&gt;
+            Changes:
+            - Upgrade to Net7
+            - Remove obsolete argument checks based on Func&lt;T&gt;
 
         </PackageReleaseNotes>
         <PackageTags>C#;.Net;DotNet;Arg;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;IfNull;IfExists;ThrowHelper;Contract;IsNull;</PackageTags>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageReadmeFile>readme.md</PackageReadmeFile>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
@@ -37,6 +38,7 @@ Changes:
             <Pack>True</Pack>
             <PackagePath></PackagePath>
         </None>
+        <None Include="..\..\readme.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
