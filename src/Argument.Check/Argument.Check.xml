@@ -173,12 +173,6 @@
             <returns>The given argument, which was checked.</returns>
             <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the argument is not valid.</exception>
         </member>
-        <member name="M:Argument.Check.Throw.IfNotEmpty``1(System.Func{System.Collections.Generic.IEnumerable{``0}})">
-            <summary>Throws an <see cref="T:System.ArgumentException" />, when the given sequence is not empty.</summary>
-            <param name="argumentFunc">A function, which returns the sequence to validate.</param>
-            <returns>The given sequence, which was checked.</returns>
-            <exception cref="T:System.ArgumentException">The exception, which will be thrown, if the sequence is not empty.</exception>
-        </member>
         <member name="M:Argument.Check.Throw.IfNotEmpty(System.String,System.String)">
             <summary>Throws an <see cref="T:System.ArgumentException" />, when the given argument string is not empty.</summary>
             <param name="argument">The argument, which has to be checked.</param>
