@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-#if !DEBUG
+﻿#if !DEBUG
 using System.Diagnostics;
 #endif
-using System.Linq;
 using System.Reflection;
 using Argument.Check.Models;
 
@@ -18,6 +15,8 @@ namespace Argument.Check.Extensions
     // This is only a helper class for trying reconstruct what il is generation, ONLY for our case of argument checking !!!!!
     internal static class IlMethodToFieldRebuilder
     {
+        private static readonly string[] Separator = new[] { "__" };
+
         private const string Sample = @"
 
 Simple usage:
@@ -80,7 +79,7 @@ public Class(IService service)
 #endif
         private static IEnumerable<ILReconstructedMethod> FetchOneArgumentOneCheck(IEnumerable<MethodInfo> declaredMethods, IEnumerable<FieldInfo> fieldInfos)
         {
-            var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(new[] { "__" }, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
+            var orderedMethods = declaredMethods.Select(m => new { m, index = m.Name.Split(Separator, StringSplitOptions.RemoveEmptyEntries).Last() }).OrderBy(x => x.index).Select(x => x.m).ToList();
             var ilMethods = fieldInfos.Select((field, index) => new ILReconstructedMethod(orderedMethods[index], field));
             return ilMethods;
         }

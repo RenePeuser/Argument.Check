@@ -1,8 +1,6 @@
-﻿using System;
-#if !DEBUG
+﻿#if !DEBUG
 using System.Diagnostics;
 #endif
-using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace Argument.Check

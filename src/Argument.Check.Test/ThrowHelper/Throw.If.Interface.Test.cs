@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
+﻿using System.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.ThrowHelper

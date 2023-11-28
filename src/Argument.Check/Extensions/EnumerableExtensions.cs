@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-#if !DEBUG
+﻿#if !DEBUG
 using System.Diagnostics;
 #endif
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace Argument.Check.Extensions
 {
