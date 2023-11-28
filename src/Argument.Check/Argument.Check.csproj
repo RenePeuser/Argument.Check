@@ -11,9 +11,7 @@
         <RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
         <PackageReleaseNotes>
             Changes:
-            - Upgrade to Net7
-            - Remove obsolete argument checks based on Func&lt;T&gt;
-
+            - Upgrade to Net8
         </PackageReleaseNotes>
         <PackageTags>C#;.Net;DotNet;Arg;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;IfNull;IfExists;ThrowHelper;Contract;IsNull;</PackageTags>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
