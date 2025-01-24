@@ -92,6 +92,7 @@ end_of_line = crlf
 dotnet_diagnostic.CA1510.severity = suggestion
 dotnet_diagnostic.CA1861.severity = suggestion
 dotnet_diagnostic.CA1860.severity = suggestion
+dotnet_diagnostic.MSTEST0016.severity = suggestion
 ###############################
 # C# Coding Conventions       #
 ###############################
@@ -168,6 +169,7 @@ dotnet_diagnostic.IDE0304.severity = suggestion
 dotnet_diagnostic.IDE0305.severity = suggestion
 dotnet_diagnostic.IDE0005.severity = suggestion
 dotnet_diagnostic.IDE0055.severity = suggestion
+csharp_prefer_system_threading_lock = true:suggestion
 ###############################
 # VB Coding Conventions       #
 ###############################

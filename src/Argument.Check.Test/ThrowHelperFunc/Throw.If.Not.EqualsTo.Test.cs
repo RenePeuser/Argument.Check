@@ -28,7 +28,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Return_The_Same_Argument_Reference_Like_The_Checked_One()
         {
-            Assert.AreEqual(true, Throw.IfNotEqualsTo(true, true));
+            Assert.IsTrue(Throw.IfNotEqualsTo(true, true));
         }
 
         private void TestMethod(object argument, object expected)
