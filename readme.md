@@ -6,7 +6,7 @@ It is super fast it is using the new [[CallerMemberNameAttribute]](https://learn
 ## Getting started
 
 ### Prerequisites
-* [.Net 7](https://dotnet.microsoft.com/en-us/download/dotnet/7.0)
+* [.Net 9](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 
 ### Install the package
 
