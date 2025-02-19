@@ -11,7 +11,7 @@ namespace Argument.Check.Extensions
 #if !DEBUG
         [DebuggerHidden]
 #endif
-        internal static bool EqualsTo<T>(this T source, T? target)
+        internal static bool EqualsTo<T>(this T source, T target)
         {
             return EqualityComparer<T>.Default.Equals(source, target);
         }

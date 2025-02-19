@@ -11,7 +11,7 @@
         <RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
         <PackageReleaseNotes>
             Changes:
-            - Upgrade to Net8
+            - Package is now ported to .Net Standard 2.1
         </PackageReleaseNotes>
         <PackageTags>C#;.Net;DotNet;Arg;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;IfNull;IfExists;ThrowHelper;Contract;IsNull;</PackageTags>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
