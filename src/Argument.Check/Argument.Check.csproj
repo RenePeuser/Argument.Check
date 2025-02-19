@@ -19,18 +19,6 @@
         <PackageReadmeFile>readme.md</PackageReadmeFile>
     </PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-        <DocumentationFile>D:\AzureDevOps\Argument.Check\src\Argument.Check\Argument.Check.xml</DocumentationFile>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <DocumentationFile>D:\AzureDevOps\Argument.Check\src\Argument.Check\Argument.Check.xml</DocumentationFile>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <DocumentationFile>D:\AzureDevOps\Argument.Check\src\Argument.Check\Argument.Check.xml</DocumentationFile>
-    </PropertyGroup>
-
     <ItemGroup>
         <None Include="..\..\license.txt">
             <Pack>True</Pack>
@@ -40,10 +28,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="GitVersion.MsBuild" Version="5.12.0">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
+        <PackageReference Include="GitVersion.MsBuild" Version="5.12.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
 </Project>
