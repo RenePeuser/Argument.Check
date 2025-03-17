@@ -4,6 +4,8 @@
         <OutputType>Exe</OutputType>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <TargetFramework>net9.0</TargetFramework>
+        <IsPackable>false</IsPackable>
+        <IsPublishable>false</IsPublishable>
     </PropertyGroup>
 
     <ItemGroup>
