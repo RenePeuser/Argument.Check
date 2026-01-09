@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.ThrowHelperFunc
+﻿namespace Argument.Check.Test.ThrowHelperFunc
 {
     [TestClass]
     public class ThrowIfNotEqualsToTest
@@ -8,13 +6,13 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Not_Equal()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(true, false));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(true, false));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Value_Is__Not_Equal()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(true, false));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(true, false));
 
             Assert.AreEqual("The argument value: 'True' is not equal to: 'False'. (Parameter 'argument')", exception.Message);
         }

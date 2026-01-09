@@ -1,5 +1,4 @@
 ﻿using System.Collections.Immutable;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Solution.Parser.CSharp;
 using Solution.Parser.Solution;
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.ThrowHelper
+﻿namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class ThrowIfNotExistsTest
@@ -13,13 +11,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_DirectoryInfo_Not_Exist()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notExistingDirectioryInfo));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notExistingDirectioryInfo));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_CorrectMessage_If_DirectoryInfo_Not_Exist()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notExistingDirectioryInfo));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notExistingDirectioryInfo));
 
             Assert.AreEqual($"The directory: '{_notExistingDirectioryInfo.FullName}' does not exists. (Parameter 'argument')", exception.Message);
         }
@@ -27,15 +25,15 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_FileInfo_Not_Exist()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notExistingFileInfo));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notExistingFileInfo));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_CorrectMessage_If_FileInfo_Not_Exist()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notExistingFileInfo));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notExistingFileInfo));
 
-            Assert.IsTrue(exception.Message.Contains($"The file: '{_notExistingFileInfo.FullName}' does not exists."));
+            Assert.Contains($"The file: '{_notExistingFileInfo.FullName}' does not exists.", exception.Message);
         }
 
         [TestMethod]
@@ -53,7 +51,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullArgument));
         }
 
         private void TestMethod(FileSystemInfo argument)

@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelperFunc
 {
@@ -14,19 +12,19 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Equal_To_Expected_Limit()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Smaller_To_Expected_Limit()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_With_Correct_Message_If_Value_Is_Equal_To_Expected_Limit()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
 
             Assert.AreEqual($"Value: '{_smallerValue}' must not be less than or equal to: '{_limit}'. (Parameter 'value')", exception.Message);
         }

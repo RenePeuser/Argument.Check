@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelperFunc
 {
@@ -15,13 +13,13 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Not_Empty()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyString));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notEmptyString));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_String_Is_Not_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyString));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notEmptyString));
 
             Assert.AreEqual("The string must be empty. (Parameter 'contains')", exception.Message);
         }
@@ -41,13 +39,13 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Strings_Are_Empty()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyStrings));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notEmptyStrings));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Strings_Are_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyStrings));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notEmptyStrings));
 
             Assert.AreEqual("The enumerable must be empty. (Parameter 'source')", exception.Message);
         }

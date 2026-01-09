@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.ThrowHelper
+﻿namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class ThrowIfContainsTest
@@ -15,15 +13,15 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Not_In_Expected_Source()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_containedValue, _stringValues));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_containedValue, _stringValues));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Expected_Message_If_Value_Is_Not_In_Expected_Source()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_containedValue, _stringValues), nameof(_containedValue));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_containedValue, _stringValues), nameof(_containedValue));
 
-            Assert.IsTrue(exception.Message.Contains($"The argument '{Vegeta}' is contained in the enumeration. (Parameter '{ArgumentName}')"));
+            Assert.Contains($"The argument '{Vegeta}' is contained in the enumeration. (Parameter '{ArgumentName}')", exception.Message);
         }
 
         [TestMethod]

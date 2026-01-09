@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.ThrowHelperFunc
 {
@@ -12,13 +11,13 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Type_Is_Not_An_Interface()
         {
-            _ = Assert.ThrowsException<ArgumentException>(Throw.IfNotInterface<object>);
+            _ = Assert.ThrowsExactly<ArgumentException>(Throw.IfNotInterface<object>);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Type_Is_Not_An_Interface()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(Throw.IfNotInterface<object>);
+            var exception = Assert.ThrowsExactly<ArgumentException>(Throw.IfNotInterface<object>);
 
             Assert.AreEqual("Type: 'System.Object' must be an interface.", exception.Message);
         }
@@ -26,7 +25,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Type_Instance_Is_Not_An_Interface()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(new object()));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(new object()));
 
             Assert.AreEqual("Argument: 'argument' must be an interface.", exception.Message);
         }
@@ -52,7 +51,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Instance_Is_Not_An_Interface()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_noInterface));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_noInterface));
         }
 
         private void TestMethod(object argument)

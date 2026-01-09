@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.ThrowHelper
+﻿namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class ThrowIfOutOfRangeTest
@@ -14,13 +12,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Higher_Than_Upper_Limit()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_valueHigherThanUpperLimit, _lowerLimit, _upperLimit));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_valueHigherThanUpperLimit, _lowerLimit, _upperLimit));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Lower_Than_Lower_Limit()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_valueLowerThanLowerLimit, _lowerLimit, _upperLimit));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_valueLowerThanLowerLimit, _lowerLimit, _upperLimit));
         }
 
         [TestMethod]

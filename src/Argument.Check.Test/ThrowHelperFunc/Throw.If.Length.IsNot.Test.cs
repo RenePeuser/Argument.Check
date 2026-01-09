@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelperFunc
 {
@@ -16,19 +14,19 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_Exception_If_String_Length_Is_Too_Small()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_stringIsToSmall, _expectedLength));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_stringIsToSmall, _expectedLength));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_If_String_Length_Is_Too_Large()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_stringToLarge, _expectedLength));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_stringToLarge, _expectedLength));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_With_Correct_Message_If_String_Length_Is_Too_Large()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_stringToLarge, _expectedLength));
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_stringToLarge, _expectedLength));
 
             Assert.AreEqual($"String length: '{_stringToLarge}' is not as expected. Expected value: '{_expectedLength}'. (Parameter 'argument')", exception.Message);
         }
@@ -36,7 +34,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_Exception_If_Argument_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullString, _expectedLength), nameof(_nullString));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullString, _expectedLength), nameof(_nullString));
         }
 
         [TestMethod]

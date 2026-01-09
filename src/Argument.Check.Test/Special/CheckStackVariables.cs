@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.Special
+﻿namespace Argument.Check.Test.Special
 {
     [TestClass]
     public class CheckStackVariables
@@ -8,7 +6,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Also_With_Pre_Func_Usage()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Test("songoku");
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelper
 {
@@ -14,13 +12,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Not_Expected_Type()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod<string>(_unexpectedType));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod<string>(_unexpectedType));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Expected_Message_If_Argument_Is_Not_Expected_Type()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod<string>(_unexpectedType));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod<string>(_unexpectedType));
 
             Assert.AreEqual($"The given type: '{_unexpectedType.GetType()}' is not the expected type: '{typeof(string)}'. (Parameter 'argument')", exception.Message);
         }
@@ -40,7 +38,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod<string>(_nullString), nameof(_nullString));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod<string>(_nullString), nameof(_nullString));
         }
 
         private void TestMethod<T>(object? argument) where T : class

@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelper
 {
@@ -17,13 +16,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Not_Empty()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyString));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notEmptyString));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_String_Is_Not_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyString));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notEmptyString));
 
             Assert.AreEqual("The string must be empty. (Parameter 'contains')", exception.Message);
         }
@@ -43,13 +42,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Strings_Are_Empty()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyStrings));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notEmptyStrings));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Strings_Are_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_notEmptyStrings));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_notEmptyStrings));
 
             Assert.AreEqual("The enumerable must be empty. (Parameter 'source')", exception.Message);
         }
@@ -69,7 +68,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Enumerable_ArgumentFunc_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNull(_nullEnumerableFunc), ArgumentFuncName);
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => Throw.IfNull(_nullEnumerableFunc), ArgumentFuncName);
         }
 
         private void TestMethod(string contains)

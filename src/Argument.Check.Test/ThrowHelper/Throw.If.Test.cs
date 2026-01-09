@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.ThrowHelper
+﻿namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class ThrowIfTest
@@ -11,7 +9,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Predicate_Is_True()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_trueValue, item => item, "The value must be not true"));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_trueValue, item => item, "The value must be not true"));
         }
 
         [TestMethod]
@@ -29,21 +27,21 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Predicate_Is_True_With_The_Given_Message()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_trueValue, item => item, _message));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_trueValue, item => item, _message));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_The_Correct_Message_If_Predicate_Is_True()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_trueValue, item => item, _message));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_trueValue, item => item, _message));
 
-            Assert.IsTrue(exception.Message.Contains(_message));
+            Assert.Contains(_message, exception.Message);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_The_Correct_Message_Which_Contains_The_Correct_ArgumentName_If_Predicate_Is_True()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_trueValue, item => item, _message));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_trueValue, item => item, _message));
 
             Assert.AreEqual("You can call Shenlong only once a year. (Parameter 'argument')", exception.Message);
         }

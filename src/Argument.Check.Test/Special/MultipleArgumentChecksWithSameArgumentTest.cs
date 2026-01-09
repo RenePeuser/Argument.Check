@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.Special
+﻿namespace Argument.Check.Test.Special
 {
     [TestClass]
     public class MultipleArgumentChecksWithSameArgumentTest
@@ -8,7 +6,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_01()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Test(null);
 
@@ -26,7 +24,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_02()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Test(null, new[] { "test" });
 
@@ -46,7 +44,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_03()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(new List<string?>() { null }, new[] { "test" });
 
@@ -66,7 +64,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_04()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Test(new List<string> { "a" }, null);
 
@@ -85,7 +83,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_05()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(new[] { "a" }, new string?[] { null });
 
@@ -105,7 +103,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_06()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(new[] { "a" }, new string?[] { null });
 
@@ -125,7 +123,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_07()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Test(null, "test", "test");
 
@@ -146,7 +144,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_08()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(" ", "test", "test");
 
@@ -166,7 +164,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_09()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test("abc", " ", "test");
 
@@ -186,7 +184,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_10()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(2, "test", new object());
 
@@ -204,7 +202,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_11()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Test(10, null, new object());
 
@@ -222,7 +220,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_12()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Test(10, "test", null);
 
@@ -240,7 +238,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_13()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(7, 4, 15);
 
@@ -259,7 +257,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_14()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(7, 4, 15);
 
@@ -283,7 +281,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_15()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(3, 7, 15);
 
@@ -306,7 +304,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_16()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(3, 3, 7);
 
@@ -330,7 +328,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_17()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(7, 0, 15);
 
@@ -346,7 +344,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_18()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(7, 3, 0);
 
@@ -362,7 +360,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_19()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(7, 3, 0);
 
@@ -379,7 +377,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_20()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(1, 42, 42);
 
@@ -405,7 +403,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_21()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(24, 42, 42);
 
@@ -431,7 +429,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_22()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(67, 42, 1);
 
@@ -457,7 +455,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_23()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(67, 42, 24);
 
@@ -483,7 +481,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_24()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(24, 24, 24);
 
@@ -509,7 +507,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_25()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(24, 24, 24);
 
@@ -535,7 +533,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_26()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(24, 24, 24);
 
@@ -558,7 +556,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_27()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(24, 24, 24);
 
@@ -580,7 +578,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_28()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(24, 24, 24);
 
@@ -600,7 +598,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Should_Detect_Correct_Argument_Secenario_29()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(13, 12, 24);
 

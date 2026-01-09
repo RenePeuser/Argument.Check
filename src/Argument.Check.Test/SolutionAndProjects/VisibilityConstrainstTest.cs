@@ -2,7 +2,6 @@
 using System.Text;
 using ConsoleTables;
 using Extensions.Pack;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Solution.Parser.CSharp;
 
 namespace Argument.Check.Test.SolutionAndProjects

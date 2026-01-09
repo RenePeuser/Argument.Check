@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.ThrowHelper
+﻿namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class ThrowIfAnyItemIsNullOrWhitespace
@@ -17,19 +15,19 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_Is_Empty()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_valuesWithOneNull), ArgumentName);
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_valuesWithOneNull), ArgumentName);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_Is_A_Whitespace()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_valuesWithOneWhitespace), ArgumentName);
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_valuesWithOneWhitespace), ArgumentName);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_Is_A_Null()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_valuesWithOneNull), ArgumentName);
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_valuesWithOneNull), ArgumentName);
         }
 
         [TestMethod]
@@ -47,9 +45,9 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Information()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_valuesWithOneWhitespace), nameof(_valuesWithAnEmptyString));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_valuesWithOneWhitespace), nameof(_valuesWithAnEmptyString));
 
-            Assert.IsTrue(exception.Message.Contains($"At least one string in the enumeration '{SonGoku}, ,{Vegeta}' was null or a whitespace."));
+            Assert.Contains($"At least one string in the enumeration '{SonGoku}, ,{Vegeta}' was null or a whitespace.", exception.Message);
         }
         private void TestMethod(IEnumerable<string?> strings)
         {

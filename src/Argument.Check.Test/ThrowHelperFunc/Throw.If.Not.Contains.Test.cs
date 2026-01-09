@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelperFunc
 {
@@ -16,13 +14,13 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Not_In_Expected_Source()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_valueNotContained, _stringValues));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_valueNotContained, _stringValues));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Expected_Message_If_Value_Is_Not_In_Expected_Source()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_valueNotContained, _stringValues));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_valueNotContained, _stringValues));
 
             Assert.AreEqual($"The argument '{_valueNotContained}' is not contained in the enumeration. (Parameter 'contains')", exception.Message);
         }

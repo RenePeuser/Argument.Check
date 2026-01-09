@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.ThrowHelper
 {
@@ -11,13 +10,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Type_Is_An_Interface()
         {
-            _ = Assert.ThrowsException<ArgumentException>(Throw.IfInterface<ICloneable>);
+            _ = Assert.ThrowsExactly<ArgumentException>(Throw.IfInterface<ICloneable>);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Type_Is_An_Interface()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(Throw.IfInterface<ICloneable>);
+            var exception = Assert.ThrowsExactly<ArgumentException>(Throw.IfInterface<ICloneable>);
 
             Assert.AreEqual($"Type: '{typeof(ICloneable)}' must not be an interface.", exception.Message);
         }
@@ -25,7 +24,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Type_Instance_Is_An_Interface()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(Enumerable.Empty<string>()));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(Enumerable.Empty<string>()));
 
             Assert.AreEqual("Argument: 'argument' must not be an interface.", exception.Message);
         }

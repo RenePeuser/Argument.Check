@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.Special
+﻿namespace Argument.Check.Test.Special
 {
     [Ignore]
     [TestClass]
@@ -9,7 +7,7 @@ namespace Argument.Check.Test.Special
         [TestMethod]
         public void Not_Able_To_Handle_Scenario_01()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentException>(() =>
             {
                 Test(12, 12, 24);
 

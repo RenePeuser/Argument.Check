@@ -1,5 +1,4 @@
 ﻿using Extensions.Pack;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Argument.Check.Test.ThrowHelper
 {
@@ -15,21 +14,21 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_In_The_Source_Match_The_Given_Predicate()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.IsNotNull() && x.Contains("Vegeta")));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.IsNotNull() && x.Contains("Vegeta")));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Any_Item_In_The_Source_Is_Null()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.IsNotNull() && x.Contains("Vegeta")));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_listWithNullItem, x => x.IsNotNull() && x.Contains("Vegeta")));
 
-            Assert.IsTrue(exception.Message.Contains("The sequence must not contain any items that satisfy the given predicate:"));
+            Assert.Contains("The sequence must not contain any items that satisfy the given predicate:", exception.Message);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument, x => x?.Length == 1), nameof(_nullArgument));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullArgument, x => x?.Length == 1), nameof(_nullArgument));
         }
 
         [TestMethod]

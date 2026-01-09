@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.SpecialFunc
+﻿namespace Argument.Check.Test.SpecialFunc
 {
     [TestClass]
     public class MultipleParameterTypeWithSameTypesCheckTest
@@ -8,7 +6,7 @@ namespace Argument.Check.Test.SpecialFunc
         [TestMethod]
         public void Should_Detect_Last_Argument_Also_With_Multiple_Equal_Parameter_Types()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(3, 4, 5, 6);
 
@@ -29,7 +27,7 @@ namespace Argument.Check.Test.SpecialFunc
         [TestMethod]
         public void Should_Detect_Third_Argument_Also_With_Multiple_Equal_Parameter_Types()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(3, 4, 5, 6);
 
@@ -51,7 +49,7 @@ namespace Argument.Check.Test.SpecialFunc
         [TestMethod]
         public void Should_Detect_First_Argument_Also_With_Multiple_Equal_Parameter_Types()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() =>
             {
                 Test(3, 4, 5, 6);
 
@@ -72,7 +70,7 @@ namespace Argument.Check.Test.SpecialFunc
         [TestMethod]
         public void Should_Detect_Correct_Argument_Also_When_Argument_Is_Checked_With_Multiple_Different_Helpers()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 _ = Combine(null);
 

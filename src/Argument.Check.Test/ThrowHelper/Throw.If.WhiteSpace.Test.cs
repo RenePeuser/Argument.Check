@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelper
 {
@@ -15,21 +13,21 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_WhiteSpace()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_whiteSpace));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_whiteSpace));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_String_Is_WhiteSpace()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_whiteSpace));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_whiteSpace));
 
-            Assert.IsTrue(exception.Message.Contains("The string must not be only whitespace."));
+            Assert.Contains("The string must not be only whitespace.", exception.Message);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullStringArgument), nameof(_nullStringArgument));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullStringArgument), nameof(_nullStringArgument));
         }
 
         [TestMethod]

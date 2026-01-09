@@ -2,6 +2,7 @@
 using System.Diagnostics;
 #endif
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace Argument.Check.Extensions
 {

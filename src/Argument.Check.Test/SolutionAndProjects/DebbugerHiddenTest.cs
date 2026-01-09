@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Text;
 using Extensions.Pack;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+[assembly: Parallelize(Scope = ExecutionScope.ClassLevel)]
 
 namespace Argument.Check.Test.SolutionAndProjects
 {

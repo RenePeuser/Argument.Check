@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelper
 {
@@ -23,13 +21,13 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Source_Is_Empty()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyList));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_emptyList));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Source_Is_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyList));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_emptyList));
 
             Assert.AreEqual("The enumerable must not be empty. (Parameter 'values')", exception.Message);
         }
@@ -37,7 +35,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Source_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
         }
 
         [TestMethod]
@@ -55,21 +53,21 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Empty()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyString), nameof(_emptyString));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_emptyString), nameof(_emptyString));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_String_Is_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyString), nameof(_emptyString));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_emptyString), nameof(_emptyString));
 
-            Assert.IsTrue(exception.Message.Contains("The string must not be empty."));
+            Assert.Contains("The string must not be empty.", exception.Message);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullStringArgument), nameof(_nullStringArgument));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullStringArgument), nameof(_nullStringArgument));
         }
 
         [TestMethod]
@@ -87,7 +85,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_ArgumentFunc_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrEmpty(_nullStringArgumentFunc), ArgumentFuncName);
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => Throw.IfNullOrEmpty(_nullStringArgumentFunc), ArgumentFuncName);
         }
 
         private void TestMethod(string? value)

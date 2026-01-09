@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelperFunc
 {
@@ -15,13 +13,13 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Directory_Info_Exist()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_existingDirectoryInfo), nameof(_existingDirectoryInfo));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_existingDirectoryInfo), nameof(_existingDirectoryInfo));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_CorrectMessage_If_DirectoryInfo_Exist()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_existingDirectoryInfo), nameof(_existingDirectoryInfo));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_existingDirectoryInfo), nameof(_existingDirectoryInfo));
 
             Assert.AreEqual($"The directory: '{_existingDirectoryInfo.FullName}' already exists. (Parameter 'argument')", exception.Message);
         }
@@ -30,13 +28,13 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_FileInfo_Exist()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_existingFileInfo), nameof(_existingFileInfo));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_existingFileInfo), nameof(_existingFileInfo));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_CorrectMessage_If_FileInfo_Exist()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_existingFileInfo), nameof(_existingFileInfo));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_existingFileInfo), nameof(_existingFileInfo));
 
             Assert.AreEqual($"The file: '{_existingFileInfo.FullName}' already exists. (Parameter 'argument')", exception.Message);
         }
@@ -56,7 +54,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
         }
 
         private void TestMethod(FileSystemInfo? argument)

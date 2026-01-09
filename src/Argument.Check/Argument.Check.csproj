@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.1;net6.0</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0</TargetFrameworks>
         <PackageId>Argument.Check</PackageId>
         <Authors>Rene Peuser</Authors>
         <Company>Rene Peuser Softwaresolutions</Company>
@@ -12,7 +12,7 @@
         <RepositoryUrl>https://renepeuser.visualstudio.com/Argument.Check</RepositoryUrl>
         <PackageReleaseNotes>
             Changes:
-            - Package is now ported to .Net Standard 2.1
+            - Package is now ported to .Net Standard 2.0 as well
         </PackageReleaseNotes>
         <PackageTags>C#;.Net;DotNet;Arg;Argument;ArgumentCheck;Argument.Check;Throw;Throw.If;Throw.IfNull;IfNull;IfExists;ThrowHelper;Contract;IsNull;</PackageTags>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
@@ -29,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="GitVersion.MsBuild" Version="5.12.0">
+        <PackageReference Include="GitVersion.MsBuild" Version="6.5.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

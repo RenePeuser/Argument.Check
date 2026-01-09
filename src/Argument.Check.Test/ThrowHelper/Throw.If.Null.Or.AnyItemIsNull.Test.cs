@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelper
 {
@@ -16,21 +14,21 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_Any_Item_In_The_Source_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_listWithNullItem));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_listWithNullItem));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Any_Item_In_The_Source_Is_Null()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_listWithNullItem));
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_listWithNullItem));
 
-            Assert.IsTrue(exception.Message.Contains("At least one item in the enumeration 'values' was null. (Parameter 'values')"));
+            Assert.Contains("At least one item in the enumeration 'values' was null. (Parameter 'values')", exception.Message);
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullArgument), nameof(_nullArgument));
         }
 
         [TestMethod]
@@ -48,7 +46,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_An_Exception_If_ArgumentFunc_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(_nullArgumentFunc), ArgumentFuncName);
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => Throw.IfNullOrAnyItemIsNull(_nullArgumentFunc), ArgumentFuncName);
         }
 
         private void TestMethod(IEnumerable<string?>? values)

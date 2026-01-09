@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.ThrowHelper
+﻿namespace Argument.Check.Test.ThrowHelper
 {
     [TestClass]
     public class ThrowIfGreaterOrEqualTest
@@ -12,19 +10,19 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Equal_To_Expected_Limit()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Greater_To_Expected_Limit()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_greaterValue, _limit));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_greaterValue, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_With_Correct_Message_If_Value_Is_Equal_To_Expected_Limit()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_greaterValue, _limit));
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_greaterValue, _limit));
 
             Assert.AreEqual($"Value: '{_greaterValue}' must not be greater than or equal to: '{_limit}'. (Parameter 'current')", exception.Message);
         }

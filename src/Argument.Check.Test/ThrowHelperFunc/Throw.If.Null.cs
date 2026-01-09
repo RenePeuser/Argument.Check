@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelperFunc
 {
@@ -13,7 +11,7 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null_New_Version()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() =>
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 return TestNull(null);
 
@@ -27,13 +25,13 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Argument_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullString));
+            _ = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullString));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Exception_Message_If_Argument_Is_Null()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() => TestMethod(_nullString));
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() => TestMethod(_nullString));
 
             Assert.AreEqual("Value cannot be null. (Parameter 'argument')", exception.Message);
         }

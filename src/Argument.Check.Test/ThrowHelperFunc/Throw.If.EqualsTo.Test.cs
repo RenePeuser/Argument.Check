@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelperFunc
 {
@@ -13,15 +11,15 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Value_Is_Equal()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_expectedValue, _expectedValue));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_expectedValue, _expectedValue));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Value_Is_Equal()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_expectedValue, _expectedValue));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_expectedValue, _expectedValue));
 
-            Assert.IsTrue(exception.Message.Contains($"The argument value: '{_expectedValue}' was equal to: '{_expectedValue}'."));
+            Assert.Contains($"The argument value: '{_expectedValue}' was equal to: '{_expectedValue}'.", exception.Message);
         }
 
         [TestMethod]

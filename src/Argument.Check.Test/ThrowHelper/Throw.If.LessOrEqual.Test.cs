@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelper
 {
@@ -16,19 +14,19 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Equal_To_Expected_Limit()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_limit, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_If_Value_Is_Smaller_To_Expected_Limit()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
         }
 
         [TestMethod]
         public void Should_Throw_Exception_With_Correct_Message_If_Value_Is_Equal_To_Expected_Limit()
         {
-            var exception = Assert.ThrowsException<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
+            var exception = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => TestMethod(_smallerValue, _limit));
 
             Assert.AreEqual($"Value: '{_smallerValue}' must not be less than or equal to: '{_limit}'. (Parameter 'value')", exception.Message);
         }
@@ -48,7 +46,7 @@ namespace Argument.Check.Test.ThrowHelper
         [TestMethod]
         public void Should_Throw_Exception_If_ArgumentFunc_Is_Null()
         {
-            _ = Assert.ThrowsException<ArgumentOutOfRangeException>(() => Throw.IfLessOrEqual(_nullArgumentFunc, _limit), nameof(ArgumentFuncName));
+            _ = Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => Throw.IfLessOrEqual(_nullArgumentFunc, _limit), nameof(ArgumentFuncName));
         }
 
         private void TestMethod(int value, int limit)

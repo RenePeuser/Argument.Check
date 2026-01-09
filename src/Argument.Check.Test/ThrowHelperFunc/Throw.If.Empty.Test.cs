@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-#pragma warning disable 649
+﻿#pragma warning disable 649
 
 namespace Argument.Check.Test.ThrowHelperFunc
 {
@@ -15,15 +13,15 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_String_Is_Empty()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyString));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_emptyString));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_String_Is_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyString));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_emptyString));
 
-            Assert.IsTrue(exception.Message.Contains($"The string must not be empty. (Parameter 'contains')"));
+            Assert.Contains($"The string must not be empty. (Parameter 'contains')", exception.Message);
         }
 
         [TestMethod]
@@ -41,15 +39,15 @@ namespace Argument.Check.Test.ThrowHelperFunc
         [TestMethod]
         public void Should_Throw_An_Exception_If_Strings_Are_Empty()
         {
-            _ = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyStrings));
+            _ = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_emptyStrings));
         }
 
         [TestMethod]
         public void Should_Throw_An_Exception_With_Correct_Message_If_Strings_Are_Empty()
         {
-            var exception = Assert.ThrowsException<ArgumentException>(() => TestMethod(_emptyStrings));
+            var exception = Assert.ThrowsExactly<ArgumentException>(() => TestMethod(_emptyStrings));
 
-            Assert.IsTrue(exception.Message.Contains("The enumerable must not be empty. (Parameter 'source')"));
+            Assert.Contains("The enumerable must not be empty. (Parameter 'source')", exception.Message);
         }
 
         [TestMethod]

@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Argument.Check.Test.SpecialFunc
+﻿namespace Argument.Check.Test.SpecialFunc
 {
     [TestClass]
     public class MultipleNonArgumentCheckFuncTests
@@ -8,7 +6,7 @@ namespace Argument.Check.Test.SpecialFunc
         [TestMethod]
         public void Should_Detect_Correct_Argument_Also_With_Pre_Func_Usage()
         {
-            var exception = Assert.ThrowsException<ArgumentNullException>(() =>
+            var exception = Assert.ThrowsExactly<ArgumentNullException>(() =>
             {
                 Test(null);
 
