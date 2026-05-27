@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net8.0</TargetFrameworks>
         <PackageId>Argument.Check</PackageId>
         <Authors>Rene Peuser</Authors>
         <Company>Rene Peuser Softwaresolutions</Company>
@@ -18,6 +18,8 @@
         <PackageLicenseFile>license.txt</PackageLicenseFile>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageReadmeFile>readme.md</PackageReadmeFile>
+        <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
+        <EnableAotAnalyzer Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</EnableAotAnalyzer>
     </PropertyGroup>
 
     <ItemGroup>
