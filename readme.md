@@ -1,9 +1,6 @@
 ﻿# Argument.Check
 
-[![Build](https://github.com/RenePeuser/Argument.Check/actions/workflows/build.yml/badge.svg)](https://github.com/RenePeuser/Argument.Check/actions/workflows/build.yml)
-[![NuGet](https://img.shields.io/nuget/v/Argument.Check.svg)](https://www.nuget.org/packages/Argument.Check/)
-[![Downloads](https://img.shields.io/nuget/dt/Argument.Check.svg)](https://www.nuget.org/packages/Argument.Check/)
-[![Build](https://github.com/RenePeuser/Argument.Check/actions/workflows/build.yml/badge.svg)](https://github.com/RenePeuser/Argument.Check/actions/workflows/build.yml)
+[![Build](https://github.com/RenePeuser/Argument.Check/actions/workflows/build-and-publish.yml/badge.svg)](https://github.com/RenePeuser/Argument.Check/actions/workflows/build-and-publish.yml)
 [![NuGet](https://img.shields.io/nuget/v/Argument.Check.svg)](https://www.nuget.org/packages/Argument.Check/)
 [![Downloads](https://img.shields.io/nuget/dt/Argument.Check.svg)](https://www.nuget.org/packages/Argument.Check/)
 Argument.Check is a very simple library which makes it very easy to check your arguments or variables for different conditions like 'Null'.
