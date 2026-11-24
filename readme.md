@@ -22,6 +22,31 @@ The package targets `netstandard2.0`, `netstandard2.1`, `net6.0` and `net8.0`, s
 dotnet add package Argument.Check
 ```
 
+## Performance
+
+Guard clauses run on every call, so they have to be cheap. Since version 5.0.8, Argument.Check
+allocates nothing on the happy path and is in the same league as the built-in .NET throw helpers.
+
+Measured side by side in one BenchmarkDotNet run (0.15.8, Intel Core i9-13980HX, happy path, each
+check in its own non-inlined method):
+
+| Check | Built-in, .NET 10 | Argument.Check, .NET 10 | Built-in, .NET 9 | Argument.Check, .NET 9 |
+| --- | ---: | ---: | ---: | ---: |
+| Null | 1.49 ns | 1.26 ns | 1.47 ns | 1.25 ns |
+| String null or whitespace | 0.52 ns | 0.92 ns | 2.42 ns | 1.96 ns |
+| Greater than 100 | 1.06 ns | 1.13 ns | 0.35 ns | 0.77 ns |
+| Range 1–100 | 0.11 ns (two calls) | 1.32 ns | 0.46 ns (two calls) | 1.32 ns |
+| Allocated | 0 B | 0 B | 0 B | 0 B |
+
+Everything is below 2.5 ns, and the standard deviation is 0.3–0.9 ns, so most rows are a tie. The
+built-in range check stays about a nanosecond ahead, because two comparisons against constants are
+almost free for the JIT. On .NET Framework, where the built-in helpers don't exist, the
+`netstandard2.0` build is allocation-free as well.
+
+The full story, including what changed in 5.0.8, is on the blog:
+[What a guard clause costs](https://renepeuser.github.io/blog/2026-argument-check-what-a-guard-costs/)
+and [Argument.Check vs. ThrowIfNull and friends](https://renepeuser.github.io/blog/2026-argument-check-vs-built-in-guards/).
+
 ## Samples
 
 Each Throw helper could also be used like a "Throw Expression".
