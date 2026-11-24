@@ -22,12 +22,12 @@ namespace Argument.Check
         {
             IfNull(argument);
 
-            if (!argument.IsAnyItemNull())
+            if (argument.IsAnyItemNull())
             {
-                return argument!;
+                ThrowHelpers.AnyItemIsNull(argumentName);
             }
 
-            throw new ArgumentNullException(argumentName, $"At least one item in the enumeration '{argumentName}' was null.");
+            return argument!;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Diagnostics;
 #endif
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using Argument.Check.Extensions;
 
 namespace Argument.Check
 {
@@ -23,12 +24,12 @@ namespace Argument.Check
             var checkArguments = IfNull(argument);
             IfNull(predicate);
 
-            if (!checkArguments.Any(predicate))
+            if (checkArguments.IsAnyItem(predicate))
             {
-                return checkArguments!;
+                ThrowHelpers.NullOrAny(predicate, argumentName);
             }
 
-            throw new ArgumentException($"The sequence must not contain any items that satisfy the given predicate: '{predicate.Method.Name}'.", argumentName);
+            return checkArguments!;
         }
     }
 }

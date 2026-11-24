@@ -21,12 +21,12 @@ namespace Argument.Check
         {
             var checkedArgument = Throw.IfNull(argument);
 
-            if (checkedArgument!.IsAnyItemNullOrWhitespace().IsFalse())
+            if (checkedArgument!.IsAnyItemNullOrWhitespace())
             {
-                return checkedArgument!;
+                ThrowHelpers.AnyItemIsNullOrWhitespace(checkedArgument, argumentName);
             }
 
-            throw new ArgumentException($"At least one string in the enumeration '{string.Join(",", argument)}' was null or a whitespace.", argumentName);
+            return checkedArgument!;
         }
     }
 }
