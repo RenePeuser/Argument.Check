@@ -3,6 +3,7 @@ using System.Diagnostics;
 #endif
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using Argument.Check.Extensions;
 
 namespace Argument.Check
 {
@@ -19,8 +20,10 @@ namespace Argument.Check
 #endif
         public static string IfNullOrEmpty([NotNull] string? argument, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
-            IfNull(argument, argumentName);
-            IfEmpty(argument, argumentName);
+            if (argument is null || argument.Length == 0)
+            {
+                ThrowHelpers.NullOrEmpty(argument, argumentName);
+            }
 
             return argument;
         }
@@ -35,8 +38,15 @@ namespace Argument.Check
 #endif
         public static IEnumerable<T> IfNullOrEmpty<T>([NotNull] IEnumerable<T>? argument, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
-            IfNull(argument, argumentName);
-            IfEmpty(argument, argumentName);
+            if (argument is null)
+            {
+                ThrowHelpers.ArgumentNull(argumentName);
+            }
+
+            if (argument.IsEmpty())
+            {
+                ThrowHelpers.Argument("The enumerable must not be empty.", argumentName);
+            }
 
             return argument;
         }

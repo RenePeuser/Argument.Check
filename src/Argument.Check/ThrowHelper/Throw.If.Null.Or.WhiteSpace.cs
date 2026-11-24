@@ -19,9 +19,11 @@ namespace Argument.Check
 #endif
         public static string IfNullOrWhiteSpace([NotNull] string? argument, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
-            IfNull(argument, argumentName);
-            IfEmpty(argument, argumentName);
-            IfWhitespace(argument, argumentName);
+            // One check on the happy path. Which exception it is gets decided on the cold path.
+            if (argument is null || string.IsNullOrWhiteSpace(argument))
+            {
+                ThrowHelpers.NullOrWhiteSpace(argument, argumentName);
+            }
 
             return argument;
         }

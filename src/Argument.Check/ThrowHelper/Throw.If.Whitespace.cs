@@ -21,12 +21,12 @@ namespace Argument.Check
         {
             IfNull(argument);
 
-            if (!argument.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(argument))
             {
-                return argument;
+                ThrowHelpers.Argument("The string must not be only whitespace.", argumentName);
             }
 
-            throw new ArgumentException("The string must not be only whitespace.", argumentName);
+            return argument;
         }
     }
 }

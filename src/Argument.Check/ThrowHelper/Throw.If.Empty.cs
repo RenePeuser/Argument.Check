@@ -21,12 +21,12 @@ namespace Argument.Check
         {
             IfNull(argument);
 
-            if (!argument.IsEmpty())
+            if (argument.Length == 0)
             {
-                return argument;
+                ThrowHelpers.Argument("The string must not be empty.", argumentName);
             }
 
-            throw new ArgumentException("The string must not be empty.", argumentName);
+            return argument;
         }
 
         /// <summary>Throws an <see cref="ArgumentException" />, when the given sequence is empty.</summary>
@@ -41,12 +41,12 @@ namespace Argument.Check
         {
             IfNull(argument);
 
-            if (argument.Any())
+            if (argument.IsEmpty())
             {
-                return argument;
+                ThrowHelpers.Argument("The enumerable must not be empty.", argumentName);
             }
 
-            throw new ArgumentException("The enumerable must not be empty.", argumentName);
+            return argument;
         }
 
     }
