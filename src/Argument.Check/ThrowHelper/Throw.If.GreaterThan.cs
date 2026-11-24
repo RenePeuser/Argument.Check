@@ -21,12 +21,12 @@ namespace Argument.Check
 #endif
         public static T IfGreaterThan<T>(T argument, T limit, [CallerArgumentExpression(nameof(argument))] string argumentName = "") where T : IComparable
         {
-            if (!argument.IsGreaterThan(limit))
+            if (argument.IsGreaterThan(limit))
             {
-                return argument;
+                ThrowHelpers.GreaterThan(argument, limit, argumentName);
             }
 
-            throw new ArgumentOutOfRangeException(argumentName, $"Value: '{argument}' must not be greater than: '{limit}'.");
+            return argument;
         }
     }
 }

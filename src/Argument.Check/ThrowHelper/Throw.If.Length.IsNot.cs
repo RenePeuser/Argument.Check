@@ -22,12 +22,12 @@ namespace Argument.Check
         {
             IfNull(argument);
 
-            if (!argument.Length.NotEqualsTo(length))
+            if (argument.Length != length)
             {
-                return argument;
+                ThrowHelpers.LengthIsNot(argument, length, argumentName);
             }
 
-            throw new ArgumentOutOfRangeException(argumentName, $"String length: '{argument}' is not as expected. Expected value: '{length}'.");
+            return argument;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Argument.Check
         {
             if (argument is null)
             {
-                throw new ArgumentNullException(argumentName);
+                ThrowHelpers.ArgumentNull(argumentName);
             }
 
             return argument;

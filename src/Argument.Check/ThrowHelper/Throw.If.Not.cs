@@ -24,12 +24,12 @@ namespace Argument.Check
             IfNull(validationPredicate);
 
             var isMatching = validationPredicate(argument);
-            if (isMatching)
+            if (!isMatching)
             {
-                return argument;
+                ThrowHelpers.Argument(exceptionMessage, argumentName);
             }
 
-            throw new ArgumentException(exceptionMessage, argumentName);
+            return argument;
         }
     }
 }

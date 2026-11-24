@@ -23,12 +23,12 @@ namespace Argument.Check
         {
             IfNull(source);
 
-            if (source.Contains(argument).IsFalse())
+            if (source.Contains(argument))
             {
-                return argument;
+                ThrowHelpers.Contains(argument, argumentName);
             }
 
-            throw new ArgumentException($"The argument '{argument}' is contained in the enumeration.", argumentName);
+            return argument;
         }
     }
 }

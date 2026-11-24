@@ -22,12 +22,12 @@ namespace Argument.Check
 #endif
         public static T IfOutOfRange<T>(T argument, T min, T max, [CallerArgumentExpression(nameof(argument))] string argumentName = "") where T : IComparable
         {
-            if (!argument.IsOutOfRange(min, max))
+            if (argument.IsOutOfRange(min, max))
             {
-                return argument;
+                ThrowHelpers.OutOfRange(argument, min, max, argumentName);
             }
 
-            throw new ArgumentOutOfRangeException(argumentName, $"Value: '{argument}' is not in expected range from '{min}' to '{max}'.");
+            return argument;
         }
     }
 }

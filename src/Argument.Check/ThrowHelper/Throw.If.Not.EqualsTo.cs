@@ -21,12 +21,12 @@ namespace Argument.Check
 #endif
         public static T? IfNotEqualsTo<T>(T? argument, T? expectedValue, [CallerArgumentExpression(nameof(argument))] string argumentName = "")
         {
-            if (argument.EqualsTo(expectedValue))
+            if (argument.NotEqualsTo(expectedValue))
             {
-                return argument;
+                ThrowHelpers.NotEqualsTo(argument, expectedValue, argumentName);
             }
 
-            throw new ArgumentException($"The argument value: '{argument}' is not equal to: '{expectedValue}'.", argumentName);
+            return argument;
         }
     }
 }

@@ -21,12 +21,12 @@ namespace Argument.Check
         {
             IfNull(argument);
 
-            if (argument.IsTypeOf<T>())
+            if (!argument.IsTypeOf<T>())
             {
-                return argument;
+                ThrowHelpers.TypeIsNot<T>(argument, argumentName);
             }
 
-            throw new ArgumentException($"The given type: '{argument.GetType()}' is not the expected type: '{typeof(T)}'.", argumentName);
+            return argument;
         }
     }
 }
