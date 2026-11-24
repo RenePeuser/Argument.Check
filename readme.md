@@ -4,12 +4,17 @@
 [![NuGet](https://img.shields.io/nuget/v/Argument.Check.svg)](https://www.nuget.org/packages/Argument.Check/)
 [![Downloads](https://img.shields.io/nuget/dt/Argument.Check.svg)](https://www.nuget.org/packages/Argument.Check/)
 Argument.Check is a very simple library which makes it very easy to check your arguments or variables for different conditions like 'Null'.
-It is super fast it is using the new [[CallerMemberNameAttribute]](https://learn.microsoft.com/de-de/dotnet/api/system.runtime.compilerservices.callermembernameattribute?view=net-7.0)
+It is super fast, because it uses the [CallerArgumentExpressionAttribute](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute): the compiler passes the argument's name as a string literal, so there is no delegate, no expression tree and no reflection involved.
 
 ## Getting started
 
+### Supported platforms
+The package targets `netstandard2.0`, `netstandard2.1`, `net6.0` and `net8.0`, so it runs on
+* .NET 6 and newer
+* .NET Framework 4.6.1 and newer, Unity, Xamarin and everything else that supports .NET Standard 2.0
+
 ### Prerequisites
-* [.Net 9](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+* A C# 10 (or newer) compiler, which any current .NET SDK and Visual Studio 2022 provide. It is needed for `CallerArgumentExpression`, which fills in the argument name for you.
 
 ### Install the package
 
@@ -96,11 +101,11 @@ public MyClass(string value)
 }
 ```
 
-### Argument must be an interface
+### Argument must implement an interface
 ```csharp
 public MyClass(object value)
 {
-    Throw.IfNotInterface(value); 
+    Throw.IfNotInterface<IMyService>(value);
 }
 ```
 
@@ -108,7 +113,7 @@ public MyClass(object value)
 ```csharp
 public MyClass(object value)
 {
-    Throw.IfNotEqualsTo(value, new object()); 
+    Throw.IfNotEqualsTo(value, new object());
 }
 ```
 
